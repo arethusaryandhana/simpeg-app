@@ -3,14 +3,15 @@
     <name>Simpeg App</name>
     <icon density="mdpi" height="57" platform="android" src="www/img/favicon.ico" width="57" />
     <description>
-        Hello World sample application that responds to the deviceready event.
+        Made By Arethusa Aryandhana
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+        Arethusa Aryandhana
     </author>
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
-    <preference name="android-minSdkVersion" value="14" />
+    <preference name="android-minSdkVersion" value="21" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.2.4" />
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.4.1" />
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.4.3" />
@@ -29,18 +30,6 @@
         <icon density="xhdpi" src="www/img/favicon.ico" />
         <icon density="xxhdpi" src="www/img/favicon.ico" />
         <icon density="xxxhdpi" src="www/img/favicon.ico" />
-        <splash density="land-ldpi" src="www/img/favicon.ico" />
-        <splash density="land-mdpi" src="www/img/favicon.ico" />
-        <splash density="land-hdpi" src="www/img/favicon.ico" />
-        <splash density="land-xhdpi" src="www/img/favicon.ico" />
-        <splash density="land-xxhdpi" src="www/img/favicon.ico" />
-        <splash density="land-xxxhdpi" src="www/img/favicon.ico" />
-        <splash density="port-ldpi" src="www/img/favicon.ico" />
-        <splash density="port-mdpi" src="www/img/favicon.ico" />
-        <splash density="port-hdpi" src="www/img/favicon.ico" />
-        <splash density="port-xhdpi" src="www/img/favicon.ico" />
-        <splash density="port-xxhdpi" src="www/img/favicon.ico" />
-        <splash density="port-xxxhdpi" src="www/img/favicon.ico" />
     </platform>
     <platform name="ios">
         <icon height="57" platform="ios" src="www/img/favicon.ico" width="57" />
