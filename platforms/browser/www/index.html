@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="theme-color" content="#2196f3">
+    <title>Simpeg</title>
+    <!-- Font embedding link goes here -->
+    <link href="css/roboto.css" rel="stylesheet" type="text/css">
+    <link href='css/oswald.css' rel='stylesheet' type='text/css'>
+
+    <!-- CSS link goes here -->
+    <link rel="stylesheet" href="css/framework7.material.min.css">
+    <link rel="stylesheet" href="css/framework7.material.colors.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/swipebox.min.css">
+    <link rel="stylesheet" href="css/maxframes.css">
+    <link rel="stylesheet" href="css/cssku.css">
+    <link rel="stylesheet" href="css/own.css">
+    <link rel="stylesheet" href="css/Chart.css">
+    <link rel="stylesheet" href="css/Chart.min.css">
+    <!-- Punya Ananta ---->
+    <link rel="stylesheet" href="css/ownAnanta.css">
+    <!-- --------------------------------------- ---->
+
+    <!-- <link rel="stylesheet" href="ol.css" type="text/css">
+    <script src="ol.js" type="text/javascript"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flickity/1.0.0/flickity.css">
+    <script type="text/javascript" src="jquery/jquery-2.1.4.min.js"></script>
+
+
+<!--     <link href="assets/datatable/datatable-bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="assets/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />  -->
+</head>
+<body class="theme-lightblue">
+<div class="statusbar-overlay"></div>
+<div class="panel-overlay"></div>
+<div class="panel panel-left panel-cover sidebar">
+    <div class="buttonbar row no-gutter">
+        <a href="#" class=" button color2 col-100  close-panel" id="btnlogout">Logout</a>
+    </div>
+    <div class="view font-menu">
+        <div class=" ">
+            <div data-page="panel-left" class="sidemenu leftmenusmall gradient">
+                <div class="item-content userprofile">
+                    <div class="item-inner" style="padding:0 15px;">
+                        <div class="item-title-row hundred-percent">
+                            <div class="item-title hundred-ten-percent" style="z-index:100;">
+                                <img src="img/etc/logo-dark.png" width="40%" alt="" style="vertical-align:middle"/>
+                                <span>&nbsp;&nbsp;&nbsp;Selamat datang&nbsp;&nbsp;</span>
+                                <!-- <img id="close-side-panel" src="img/menu_icon/icon_tab_menu_color.svg" width="10%" alt="" style="vertical-align:middle;"/> -->
+                            </div>
+                        </div>
+                        <div class="item-subtitle" id=""></div>
+                    </div>
+                </div>
+                <div class="item-content userprofile">
+                    <div class="item-media"><img src="img/menu_icon/photo_profile_color.svg" width="50" id="imghome2"
+                                                 alt=""/></div>
+                    <div class="item-inner" style="">
+                        <div class="item-title-row" style="">
+                            <div class="item-title" id="greeting2">Nama Profil</div>
+                        </div>
+                        <div class="item-subtitle" id="userlogin" style="color:black;font-size:12px;">Lokasi :
+                            Surabaya<br/>Member sejak Maret 2019
+                        </div><br><br>
+                    </div>
+                </div>
+                <center>
+                    <div class="ninety-percent border-bottom-black padding-top-10">&nbsp;</div>
+                </center>
+                <div class="page-content">
+                    <div class="list-block accordion-list">
+                        <ul class="menu font-color-standard">
+
+                            <!-- <li class="accordion-item umum"><a href="halaman/home.php" class="item-content" >
+                              <div class="item-inner">
+                                <div class="item-title no-transform"><i class="icon-contact"></i>Home</div>
+                              </div></a>
+                            </li> -->
+
+
+                            <li class="accordion-item"><a href="view/home.html" class="item-content close-panel" id="linkmarket">
+                                    <div class="item-inner">
+                                        <div class="item-title no-transform"><i class="icon-dashboard"></i>Dashboard
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <center>
+                                <div class="ninety-percent border-bottom-black"></div>
+                            </center>
+                            <li class="accordion-item"><a href="#" class="item-content item-link">
+                                    <div class="item-inner">
+                                        <div class="item-title"><i class="icon-pegawai"></i>Pegawai</div>
+                                    </div>
+                                </a>
+                                <div class="accordion-item-content">
+                                    <div class="content-block">
+                                        <ul>
+                                            <li><a href="#"
+                                                   class="item-link close-panel" id="link-bio">
+                                                    <i class="icon-biodatapns"></i>Biodata Pns</li>
+                                    </div>
+                                </div>
+                            </li>
+
+
+                            <center>
+                                <div class="ninety-percent border-bottom-black"></div>
+                            </center>
+                            <li id="nav_penjagaan" class="accordion-item"><a href="#" class="item-content item-link">
+                                    <div class="item-inner">
+                                        <div class="item-title"><i class="icon-penjagaan"></i>Penjagaan</div>
+                                    </div>
+                                </a>
+                                <div class="accordion-item-content">
+                                
+                                        <ul>
+                                            <li style="border-bottom: 1px solid #69A771;"><a href="view/menu_penjagaan/kenaikan_pangkat_reguler.html"
+                                            class="item-link close-panel">
+                                            <i class="icon-p1"></i>Kenaikan Pangkat Reguler</li>
+
+                                            <li style="border-bottom: 1px solid #69A771;"><a href="view/menu_penjagaan/kenaikan_pangkat_pilihan.html"
+                                            class="item-link close-panel">
+                                            <i class="icon-p2"></i>Kenaikan Pangkat Pilihan</li>
+
+                                            <li style="border-bottom: 1px solid #69A771;"><a href="view/menu_penjagaan/kenaikan_gaji_berkala.html"
+                                            class="item-link close-panel">
+                                            <i class="icon-p3"></i>Kenaikan Gaji Berkala</li>
+
+                                            <li style="border-bottom: 1px solid #69A771;"><a href="view/menu_penjagaan/satyalancana10tahun.html"
+                                            class="item-link close-panel">
+                                            <i class="icon-p4"></i>Satyalancana K. S. 10 th</li>
+
+                                            <li style="border-bottom: 1px solid #69A771;"><a href="view/menu_penjagaan/satyalancana20tahun.html"
+                                            class="item-link close-panel">
+                                            <i class="icon-p5"></i>Satyalancana K. S. 20 th</li>
+
+                                            <li style="border-bottom: 1px solid #69A771;"><a href="view/menu_penjagaan/satyalancana30tahun.html"
+                                            class="item-link close-panel">
+                                            <i class="icon-p6"></i>Satyalancana K. S. 30 th</li>
+
+                                            <li style="border-bottom: 1px solid #69A771;"><a href="view/menu_penjagaan/usia_pensiun.html"
+                                            class="item-link close-panel">
+                                            <i class="icon-p7"></i>Usia Pensiun</li>
+
+                                        </ul>
+                                    
+                                </div>
+                            </li>
+
+                            <center>
+                                <div class="ninety-percent border-bottom-black"></div>
+                            </center>
+                            <li id="nav_proses" class="accordion-item"><a href="#" class="item-content item-link">
+                                    <div class="item-inner">
+                                        <div class="item-title"><i class="icon-proses"></i>Proses</div>
+                                    </div>
+                                </a>
+                                <div class="accordion-item-content">
+                                    <div class="content-block">
+                                        <ul>
+                                            
+                                            <li style="border-bottom: 1px solid #69A771;"><a href="view/menu_penjagaan/biodata_pns.html"
+                                            class="item-link close-panel">
+                                            <i class="icon-mutasi1"></i>Proses Mutasi</li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <center>
+                                <div class="ninety-percent border-bottom-black"></div>
+                            </center>
+                            <li id="nav_masterdata" class="accordion-item"><a href="#" class="item-content item-link">
+                                    <div class="item-inner">
+                                        <div class="item-title"><i class="icon-master_data"></i>Master Data</div>
+                                    </div>
+                                </a>
+                                <div class="accordion-item-content">
+                                    <div class="content-block">
+                                        <ul>
+                                           <!-- isi masterdata -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <center>
+                                <div class="ninety-percent border-bottom-black"></div>
+                            </center>
+                        </ul>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="views pageview">
+    <div class="view view-main">
+        <div class="pages">
+            <div data-page="index" class="page">
+                <div class="page-content landingpage own-landingpage"
+                     style="background-image: url('img/etc/bg-ox.jpg');">
+                    <div class="logo main col12">
+                        <center>
+                            <img src="img/custom/logo.png" alt="">
+                        </center>
+                    </div>
+                    <div class="introtext">
+                        <br/>
+                        <div class="m-t-30"><img class="zmdi-hc-spin" src="img/logo.svg" width="48" height="48" alt="Oreo"></div> 
+                        <p class="my-bold" style="padding: 30px;">Sistem yang mampu memberikan informasi data-data pegawai pada suatu
+                            perusahaan<br/>maupun instansi yang saling berinteraksi<br/> untuk mencapai tujuan yang
+                            telah ditargetkan.</p>
+                    </div>
+                    <div class="introtext main own-landingpage">
+                        <center>
+                            <p class="my-bold" style="color:#EBDA13">Silahkan Login Untuk Melanjutkan</p><br/>
+                            <a href="view/sign-in.html" class="button button-raised my-bold"
+                               style="width:50%;border:2px solid #EBDA13;border-radius:50px;color:#EBDA13;">LOGIN
+                                SIM-AKU!</a>
+                        </center>
+                    </div>
+                    <div class="introtext main own-bawah"></div>
+                    <div class="buttonbar main row" style="position:fixed;">
+                        <a class="button col-50 no-transform" style="color:white;font-size:70%;text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;©Kutim
+                            2019. All right reserved</a>
+                        <a href="view/sign-in.html" class="button col-50 no-transform"
+                           style="color:white;font-size:70%;text-align:right;">Login masuk&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- JS link goes here -->
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/framework7.min.js"></script>
+<script type="text/javascript" src="js/jquery.swipebox.js"></script>
+<script type="text/javascript" src="js/masonry.pkgd.min.js"></script>
+<script type="text/javascript" src="js/maxframes.js"></script>
+<script type="text/javascript" src="js/jsprofile.js"></script>
+<script type="text/javascript" src="js/jskedua.js"></script>
+<script type="text/javascript" src="js/Chart.js"></script>
+<script type="text/javascript" src="js/Chart.min.js"></script>
+<script type="text/javascript" src="js/Chart.bundle.js"></script>
+<script type="text/javascript" src="js/Chart.bundle.min.js"></script>
+<!-- <script type="text/javascript" src="js/jsrencanajual.js"></script>
+<script type="text/javascript" src="js/jsarea.js"></script>
+<script type="text/javascript" src="js/jsmarket.js"></script>
+<script type="text/javascript" src="js/jspetani.js"></script>
+<script type="text/javascript" src="js/jsproduct.js"></script>
+ -->
+<!-- Punya Ananta ---->
+
+<!-- --------------------------------------- ---->
+
+<script type="text/javascript" src="cordova.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flickity/1.0.0/flickity.pkgd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.7.0/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.7.0/js/anychart-cartesian.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.7.0/js/anychart-base.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script> 
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+<!-- 
+  <script type="text/javascript" src="js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>
+  <script type="text/javascript" src="cordova.js"></script>
+ -->
+
+        <!-- DATATABLES --> 
+        <script src="assets/datatable/jquery.dataTables.min.js"></script>
+        <script src="assets/datatable/dataTables.bootstrap4.min.js"></script> 
+        <script type="text/javascript"> 
+            // START SCRIPT TABEL
+            $.extend( $.fn.dataTable.defaults, {
+                autoWidth: false,
+                columnDefs: [{ 
+                    orderable: false,
+                    width: '100px' 
+                }], 
+                dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
+                language: {
+                    search: '<span>Filter:</span> _INPUT_',
+                    // searchPlaceholder: 'Type to filter...',
+                    lengthMenu: '',
+                    paginate: { 'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;' }
+                },
+                drawCallback: function () {
+                    $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').addClass('dropup');
+                },
+                preDrawCallback: function() {
+                    $(this).find('tbody tr').slice(-3).find('.dropdown, .btn-group').removeClass('dropup');
+                }
+            }); 
+            $('.datatable-basic').DataTable();
+            // END SCRIPT TABEL
+        </script>
+    </body>
+</html>

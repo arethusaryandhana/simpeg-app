@@ -1,0 +1,18 @@
+Biar kompak dan rapih :
+1.semua file untuk UI tampilan aplikasi ditaruh di folder www/view aja ham
+2.folder halaman itu bekas projectku biarno sek ae nnti akhir2 tak hapus
+3.tambah css baru masukin ae di file folder css terus stiap kita mau nmbah class baru kasih nama awal inisial e bedain biar gk tabrakan 
+misal ak bkin css class table km bkin table juga nnti kan tabrakan tablenya nah supaya gk gitu stiap kalo mau bkin css baru nama cssmua di kasih awalan ham-, nama cssku dav-
+contoh: - class="dav-tabelku"
+		- class="ham-tabelku"
+4.nanti tak kabarin lagi kalo udah bkin loginnya dan halaman homenya
+
+setiap mau commit dikasih judul tanggal dan jam commitnya biar nnti ktauan terakhir komitnya kapan misal git commit -am "25 Juni 2019 08:00"
+
+kalau mau update project pull dlu dari source master yang terbaru :
+1. git pull origin master
+habis itu baru mulai ngoding
+kalau sudah ngoding di commit lagi:
+1. git add . / git add -A (kalau ada tambah file baru)
+2. git commit -am "judulcomit"
+3. git push -u origin master

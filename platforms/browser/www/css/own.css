@@ -1,0 +1,428 @@
+.my-center{
+	text-align:center;
+}
+.content-hide-first{
+	display:none;
+}
+.content-show-first{
+	display:block;
+}
+.table-users{
+	border: 1px solid #c0c0c0;
+	border-radius: 10px;
+	box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+	max-width: calc(100% - 2em);
+	margin: 1em auto;
+	overflow: hidden;
+	width: 800px;
+}
+.my-bold{
+	font-weight:500;
+}
+.font-white{
+	color:white;
+}
+.my-bottom{
+	bottom:0;
+}
+.base-terra{
+	color:#088378;
+	font-family: 'Uni Sans', sans-serif;
+	font-weight: 600;
+}
+.eighty-percent{
+	width:80%;
+}
+.ninety-percent{
+	width:90%;
+}
+.margin-5{
+	margin-top:5%;
+}
+
+/*----------- Width-size -----------*/
+.seventy-percent{
+	width:70%;
+}
+.eighty-percent{
+	width:80%;
+}
+.ninety-percent{
+	width:90%;
+}
+.hundred-percent{
+	width:90%;
+}
+.hundred-percent{
+	width:100%;
+}
+.hundred-ten-percent{
+	width:110%;
+}
+.hundred-twenty-percent{
+	width:120%;
+}
+.hundred-thirty-percent{
+	width:130%;
+}
+.hundred-forty-percent{
+	width:140%;
+}
+.hundred-fifty-percent{
+	width:150%;
+}
+
+
+/*----------- No-style-text -----------*/
+.no-transform{
+	text-transform: none;
+}
+.no-margin{
+	margin:0;
+}
+.no-padding{
+	padding:0;
+}
+
+
+/*----------- Border-style -----------*/
+.my-radius-20{
+	border-radius:20px;
+}
+.my-top-radius-20{
+	border-radius:20px 20px 0px 0px;
+}
+/*----------- Layouting-Menu -----------*/
+.my-menu{
+	border-radius: 0px 20px 0px 0px;
+	margin-top:2%;
+	height:95%;
+}
+
+/*----------- Setting-width -----------*/
+.width-50{
+	width:50%;
+}
+.width-60{
+	width:60%;
+}
+.width-70{
+	width:70%;
+}
+.width-80{
+	width:80%;
+}
+.width-90{
+	width:90%;
+}
+.width-100{
+	width:100%;
+}
+.width-110{
+	width:110%;
+}
+.width-120{
+	width:120%;
+}
+.width-130{
+	width:130%;
+}
+.width-140{
+	width:140%;
+}
+
+/*----------- Background Basic-color -----------*/
+.back-abu-terang{
+	background-color:#EEEEEF;
+}
+.back-abu-gelap{
+	background-color:#E6E6E6;
+}
+.back-hijau-basic{
+	background-color:#088378;
+}
+.back-hijau-kedua{
+	background-color:#009B4C;
+}
+.back-hijau-daun{
+	background-color:#7DBB37;
+}
+.back-hijau-muda{
+	background-color:#A2CB38;
+}
+.back-kuning{
+	background-color:#EBDA13;
+}
+.back-orange{
+	background-color:#EBBC0D;
+}
+
+/*----------- Font-Type  -----------*/
+.font-menu{
+	font-family: 'Uni Sans', sans-serif;
+	font-weight:normal;
+	font-size:0.75em;
+	color:#5F5D5D;
+}
+.font-tipis{
+	font-family: 'Uni Sans Light', sans-serif;
+	font-weight:normal;
+}
+.font-standard{
+	font-family: 'Uni Sans Book', sans-serif;
+	font-weight:normal;
+}
+.font-color-standard{
+	color:#5F5D5D;
+}
+.font-color-light{
+	color:#EEEEEF;
+}
+.font-10{
+	font-size:0.667em;
+}
+.font-12{
+	font-size:0.75em;
+}
+
+
+/*----------- Padding-Style  -----------*/
+.padding-left-5{
+	padding-left:5%;
+}
+.padding-left-10{
+	padding-left:10%;
+}
+.padding-left-20{
+	padding-left:20%;
+}
+.padding-right-5{
+	padding-right:5%;
+}
+.padding-right-10{
+	padding-right:10%;
+}
+.padding-top-5{
+	padding-top:5%;
+}
+.padding-top-10{
+	padding-top:10%;
+}
+.padding-bottom-5{
+	padding-bottom:5%;
+}
+.padding-bottom-10{
+	padding-bottom:10%;
+}
+
+
+/*----------- Border-Style  -----------*/
+.border-bottom-black{
+	border-bottom:1px solid black;
+}
+.border-top-black{
+	border-top:1px solid black;
+}
+
+
+/*----------- SVG Icon -----------*/
+.logo-menu-terra{
+	background-image:url('../img/custom/logo_menu_TERRA_gray.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-user-profile{
+	background-image:url('../img/custom/icon_profile_color.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-contact{
+	background-image:url('../img/menu_icon/icon_tab_contact_color.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-favorit{
+	background-image:url('../img/menu_icon/icon_tab_favourite_color.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-favorit-kosong{
+	background-image:url('../img/menu_icon/icon_menu_favourite_light.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-last-update{
+	background-image:url('../img/menu_icon/icon_tab_last_update_color.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-galeri-stiker{
+	background-image:url('../img/menu_icon/icon_tab_galery_sticker_color.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-setting{
+	background-image:url('../img/menu_icon/icon_tab_setting_color.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-close{
+	background-image:url('../img/menu_icon/icon_tab_close_color.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-photo{
+	background-image:url('../img/menu_icon/photo_profile_color.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-mymenu{
+	background:url('../img/menu_icon/icon_tab_menu_color.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-plant{
+	background:url('../img/menu_icon/icon tab planting color.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-contractor{
+	background:url('../img/menu_icon/icon tab logistic color.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-feed{
+	background:url('../img/menu_icon/feed.png'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-penjualan{
+	background:url('../img/menu_icon/penjualan.png'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-store{
+	background:url('../img/menu_icon/store.png'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-rating{
+	background:url('../img/menu_icon/rating.png'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-product{
+	background:url('../img/menu_icon/product.png'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-dashboard{
+	background:url('../img/etc/m_dashboard.png'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-pegawai{
+	background:url('../img/etc/m_pegawai.png'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-penjagaan{
+	background:url('../img/etc/m_penjagaan.png'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-proses{
+	background:url('../img/etc/m_proses.png'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-master_data{
+	background:url('../img/etc/m_master_data.png'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-biodatapns{
+	background:url('../img/etc/m_biodata.png'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-p1{
+	background:url('../img/etc/icons8-up-right-48.png'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-p2{
+	background:url('../img/etc/icons8-double-up-48.png'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-p3{
+	background:url('../img/etc/icons8-stairs-up-48.png'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-p4{
+	background:url('../img/etc/icons8-10-48.png'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-p5{
+	background:url('../img/etc/icons8-20-48.png'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-p6{
+	background:url('../img/etc/icons8-30-48.png'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-p7{
+	background:url('../img/etc/pensiun.png'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+
+.icon-mutasi1{
+	background:url('../img/etc/mutasi.png'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+
+
+
+@media screen and (max-width: 1500px){
+	
+	.own-landingpage{
+		padding-top:10%;
+	}
+	.own-signup{
+		padding-top:10%;
+	}
+	.own-bawah{
+		padding-top:20%;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.header{
+		background-color: transparent;
+		color: white;
+		font-size: 2em;
+		font-weight: 700;
+		padding: 0;
+		text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+	}
+	.own-landingpage{
+		padding-top:15%;
+	}
+	.own-signup{
+		padding-top:15%;
+	}
+	.own-bawah{
+		padding-top:5%;
+	}
+}
+
+.bg-satu{
+	background-color: #f3ecec;
+}

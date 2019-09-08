@@ -1,0 +1,470 @@
+.my-center{
+	text-align:center;
+}
+.content-hide-first{
+	display:none;
+}
+.content-show-first{
+	display:block;
+}
+.table-users{
+	border: 1px solid #c0c0c0;
+	border-radius: 10px;
+	box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+	max-width: calc(100% - 2em);
+	margin: 1em auto;
+	overflow: hidden;
+	width: 800px;
+}
+.my-bold{
+	font-weight:500;
+}
+.my-bottom{
+	bottom:0;
+}
+.base-terra{
+	color:#088378;
+	font-family: 'Uni Sans', sans-serif;
+	font-weight: 600;
+}
+.margin-5{
+	margin-top:5%;
+}
+.margin-20{
+	margin:10%;
+}
+
+
+/*----------- Width-size sama seperti Setting-width dibawah, perlu pengecekan-----------*/
+.fifty-percent{
+	width:50%;
+}
+.sixty-percent{
+	width:60%;
+}
+.seventy-percent{
+	width:70%;
+}
+.eighty-percent{
+	width:80%;
+}
+.ninety-percent{
+	width:90%;
+}
+.hundred-percent{
+	width:90%;
+}
+.hundred-percent{
+	width:100%;
+}
+.hundred-ten-percent{
+	width:110%;
+}
+.hundred-twenty-percent{
+	width:120%;
+}
+.hundred-thirty-percent{
+	width:130%;
+}
+.hundred-forty-percent{
+	width:140%;
+}
+.hundred-fifty-percent{
+	width:150%;
+}
+
+
+/*----------- Setting-width -----------*/
+.width-50{
+	width:50%;
+}
+.width-60{
+	width:60%;
+}
+.width-70{
+	width:70%;
+}
+.width-80{
+	width:80%;
+}
+.width-90{
+	width:90%;
+}
+.width-100{
+	width:100%;
+}
+.width-110{
+	width:110%;
+}
+.width-120{
+	width:120%;
+}
+.width-130{
+	width:130%;
+}
+.width-140{
+	width:140%;
+}
+
+
+/*----------- No-style-text -----------*/
+.no-transform{
+	text-transform: none;
+}
+.no-margin{
+	margin:0;
+}
+.no-padding{
+	padding:0;
+}
+
+
+/*----------- Border-style -----------*/
+.full-border{
+	border: 1px solid #c0c0c0;
+}
+.full-border-base{
+	border:3px solid #088378;
+}
+.my-radius-50{
+	border-radius:50%;
+}
+.my-radius-20{
+	border-radius:20px;
+}
+.my-top-radius-20{
+	border-radius:20px 20px 0px 0px;
+}
+.border-bottom-black{
+	border-bottom:1px solid black;
+}
+.border-top-black{
+	border-top:1px solid black;
+}
+
+
+
+/*----------- Layouting -----------*/
+.my-menu{
+	border-radius: 0px 20px 0px 0px;
+	margin-top:2%;
+	height:95%;
+}
+.tempel-kanan{
+	float:right;
+}
+.tempel-kiri{
+	float:left;
+}
+
+/*----------- Background Basic-color -----------*/
+.back-abu-terang{
+	background-color:#EEEEEF;
+}
+.back-abu-gelap{
+	background-color:#E6E6E6;
+}
+.back-hijau-basic{
+	background-color:#088378;
+}
+.back-hijau-kedua{
+	background-color:#009B4C;
+}
+.back-hijau-daun{
+	background-color:#7DBB37;
+}
+.back-hijau-muda{
+	background-color:#A2CB38;
+}
+.back-kuning{
+	background-color:#EBDA13;
+}
+.back-orange{
+	background-color:#EBBC0D;
+}
+
+/*----------- Font-Type  -----------*/
+.font-menu{
+	font-family: 'Uni Sans', sans-serif;
+	font-weight:normal;
+	font-size:0.75em;
+	color:#5F5D5D;
+}
+.font-tipis{
+	font-family: 'Uni Sans Light', sans-serif;
+	font-weight:normal;
+}
+.font-standard{
+	font-family: 'Uni Sans Book', sans-serif;
+	font-weight:normal;
+}
+.font-color-standard{
+	color:#5F5D5D;
+}
+.font-color-light{
+	color:#EEEEEF;
+}
+.font-10{
+	font-size:0.667em;
+}
+.font-12{
+	font-size:0.75em;
+}
+.font-white{
+	color:white;
+}
+.font-black{
+	color:black;
+}
+.font-red{
+	color:red;
+}
+.font-basic{
+	color:#088378;
+}
+
+
+
+/*----------- Padding-Style  -----------*/
+.padding-left-5{
+	padding-left:5%;
+}
+.padding-left-10{
+	padding-left:10%;
+}
+.padding-left-20{
+	padding-left:20%;
+}
+.padding-right-5{
+	padding-right:5%;
+}
+.padding-right-10{
+	padding-right:10%;
+}
+.padding-top-5{
+	padding-top:5%;
+}
+.padding-top-10{
+	padding-top:10%;
+}
+.padding-bottom-5{
+	padding-bottom:5%;
+}
+.padding-bottom-10{
+	padding-bottom:10%;
+}
+
+
+/*----------- SVG Icon -----------*/
+.logo-menu-terra{
+	background-image:url('../img/custom/logo_menu_TERRA_gray.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-user-profile{
+	background-image:url('../img/custom/icon_profile_color.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-contact{
+	background-image:url('../img/menu_icon/icon_tab_contact_color.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-favorit{
+	background-image:url('../img/menu_icon/icon_tab_favourite_color.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-last-update{
+	background-image:url('../img/menu_icon/icon_tab_last_update_color.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-galeri-stiker{
+	background-image:url('../img/menu_icon/icon_tab_galery_sticker_color.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-setting{
+	background-image:url('../img/menu_icon/icon_tab_setting_color.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-close{
+	background-image:url('../img/menu_icon/icon_tab_close_color.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-photo{
+	background-image:url('../img/menu_icon/photo_profile_color.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+.icon-mymenu{
+	background:url('../img/menu_icon/icon_tab_menu_color.svg'); 
+	background-size:contain; 
+	background-repeat:no-repeat; 
+}
+
+/*----------- Tool Tip -----------*/
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip-inner {
+    width:100%;
+    max-width:100%;
+}
+
+
+/*----------- Text Style -----------*/
+.my-capitalize{
+	text-transform:capitalize;
+}
+
+/*== ini awal remark david  */
+table{
+	width: 100%;
+}
+table td, table th{
+	color: #888888;
+	padding: 10px;
+}
+table td {
+	text-align: center;
+	vertical-align: middle;
+}
+table td:last-child {
+	font-size: 0.95em;
+	line-height: 1.4;
+	text-align: left;
+}
+table th {
+	background-color: #daeff1;
+	font-weight: 300;
+}
+table tr:nth-child(2n){
+	background-color: white;
+}
+table tr:nth-child(2n+1){
+	background-color: #edf7f8;
+}
+
+@media screen and (max-width: 1500px){
+	tr, td{
+		display: block;
+	}
+	td:not(:first-child){
+		border:0px;
+		clear: both;
+		margin-left: 100px;
+		padding: 4px 20px 4px 90px;
+		position: relative;
+		text-align: left; 
+	}
+	td:not(:first-child):before {
+		color: #888888;
+		content: '';
+		display: block;
+		left: 0;
+		position: absolute;
+	}
+	td:nth-child(2):before{
+		text-align: center;
+		content: 'Working Hours: ';
+	}
+	td:nth-child(3):before{
+		text-align: center;
+		content: 'Jarak Tempuh: ';
+	}
+	td:nth-child(4):before{
+		text-align: center;
+		content: 'Header';
+	}
+	td:nth-child(5):before{
+		text-align: center;
+		content: 'Comments:';
+	}
+	tr{
+		padding: 10px 0;
+		position: relative;
+	}
+	tr:first-child {
+		display: none; 
+	}
+	.own-top{
+		padding-top:15%;
+	}
+	.own-landingpage{
+		padding-top:10%;
+	}
+	.own-signup{
+		padding-top:10%;
+	}
+	.own-profile{
+		margin-top:5%;
+	}
+	.own-bawah{
+		padding-top:20%;
+	}
+}
+/*== ini batas remark david  */
+@media screen and (max-width: 500px) {
+	.header{
+		background-color: transparent;
+		color: white;
+		font-size: 2em;
+		font-weight: 700;
+		padding: 0;
+		text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+	}
+	td:not(:first-child){
+		border:0px;
+		margin: 0;
+		padding: 5px 1em;
+		width: 100%;
+	}
+	td:not(:first-child):before{
+		font-size: .8em;
+		padding-top: 0.3em;
+		position: relative;
+	}
+	td:last-child{
+		padding-bottom: 1rem !important;
+	}
+
+	tr {
+		background-color: white !important;
+		border: 1px solid #c0c0c0;
+		border-radius: 10px;
+		box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+		margin: 0.5rem 0;
+		padding: 0;
+	}
+
+	.table-users {
+		border: none;
+		box-shadow: none;
+		overflow: visible;
+	}
+	.own-top{
+		padding-top:20%;
+	}
+	.own-landingpage{
+		padding-top:15%;
+	}
+	.own-signup{
+		padding-top:15%;
+	}
+	.own-profile{
+		margin-top:10%;
+	}
+	.own-bawah{
+		padding-top:5%;
+	}
+}

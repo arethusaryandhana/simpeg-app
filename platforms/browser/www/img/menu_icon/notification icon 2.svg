@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW 2018 (64-Bit) -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="35px" height="35px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 0.71 0.71"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil0 {fill:none}
+    .fil2 {fill:#FEFEFE}
+    .fil1 {fill:#E62129}
+   ]]>
+  </style>
+    <mask id="id0">
+  <linearGradient id="id1" gradientUnits="userSpaceOnUse" x1="0.86" y1="0.04" x2="0.62" y2="0.12">
+   <stop offset="0" style="stop-opacity:1; stop-color:white"/>
+   <stop offset="1" style="stop-opacity:0; stop-color:white"/>
+  </linearGradient>
+     <rect style="fill:url(#id1)" x="0.6" width="0.11" height="0.19"/>
+    </mask>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <rect class="fil0" width="0.7" height="0.7"/>
+  <g id="_2270024985440">
+   <path class="fil1" d="M0.71 0.09c0,0.06 -0.04,0.1 -0.09,0.1 -0.06,0 -0.1,-0.04 -0.1,-0.1 0,-0.05 0.04,-0.09 0.1,-0.09 0.05,0 0.09,0.04 0.09,0.09z"/>
+   <path class="fil1" d="M0.7 0.09c0,0.05 -0.04,0.08 -0.08,0.08 -0.05,0 -0.09,-0.03 -0.09,-0.08 0,-0.04 0.04,-0.08 0.09,-0.08 0.04,0 0.08,0.04 0.08,0.08z"/>
+   <path class="fil2" style="mask:url(#id0)" d="M0.69 0.09c0,0.05 -0.04,0.08 -0.06,0.08 -0.03,0 0.01,-0.01 0.01,-0.08 0,-0.06 -0.04,-0.07 -0.01,-0.07 0.02,0 0.06,0.03 0.06,0.07z"/>
+  </g>
+ </g>
+</svg>
