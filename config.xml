@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="pttati.simpeg.com" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Simpeg App</name>
-    <icon density="mdpi" height="57" platform="android" src="www/img/favicon.ico" width="57" />
+    <icon density="mdpi" height="57" platform="android" src="img/favicon.ico" width="57" />
     <description>
         Made By Arethusa Aryandhana
     </description>
