@@ -1,0 +1,78 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-app-version": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "cordova-plugin-battery-status": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "cordova-plugin-contacts": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "cordova-plugin-device-motion": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "cordova-plugin-device-orientation": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "cordova-plugin-globalization": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "cordova-plugin-media": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "cordova-plugin-media-capture": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    },
+    "onesignal-cordova-plugin": {
+      "PACKAGE_NAME": "pttati.simpeg.com"
+    }
+  },
+  "dependent_plugins": {}
+}
