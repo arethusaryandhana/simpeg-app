@@ -19,9 +19,9 @@ var hnew = "halaman/";
 //h = 'http://localhost/bahandavid/simpeg-app/simpeg_kutim/'
 
 //var h = 'http://localhost:8080/pemda_kutim/simpeg_android/simpeg-app/simpeg_kutim/'; //master pc hamdi jgn dihapus di comment
-// var h = 'http://localhost:280/simpeg-app/simpeg_kutim/'; //master pc thusa jgn dihapus di comment
+var h = 'http://localhost:280/simpeg-app/simpeg_kutim/'; //master pc thusa jgn dihapus di comment
 //var h = "http://172.18.34.166/";
-var h = 'http://simaku.bkpp.kutaitimurkab.go.id/';
+// var h = 'http://simaku.bkpp.kutaitimurkab.go.id/';
 
 var host = h + "android_webservice/"; //apk code david
 var ws = h + "webservice/"; // memanfaatkan ws yang ada
@@ -328,7 +328,7 @@ myApp.onPageInit('kenaikan_pangkat_reguler', function (page) { //start pageinit 
         console.log('tambah' + totalhalaman); //coba2doang
     }); //end click #biopns_tambahpegawai
 
-    $$(document).on('click','#biopns_refresh',function(e){ //start click #biopns_refresh
+    $$(document).on('click','#kenaikan_pangkat_reguler_refresh',function(e){ //start click #biopns_refresh
         e.stopImmediatePropagation();
         console.log('refresh');
         reset_filter_biodata();
@@ -416,7 +416,7 @@ myApp.onPageInit('kenaikan_pangkat_pilihan', function (page) { //start pageinit 
         console.log('tambah' + totalhalaman); //coba2doang
     }); //end click #biopns_tambahpegawai
 
-    $$(document).on('click','#biopns_refresh',function(e){ //start click #biopns_refresh
+    $$(document).on('click','#kenaikan_pangkat_pilihan_refresh',function(e){ //start click #biopns_refresh
         e.stopImmediatePropagation();
         console.log('refresh');
         reset_filter_biodata();
@@ -504,7 +504,7 @@ myApp.onPageInit('kenaikan_gaji_berkala', function (page) { //start pageinit bio
         console.log('tambah' + totalhalaman); //coba2doang
     }); //end click #biopns_tambahpegawai
 
-    $$(document).on('click','#biopns_refresh',function(e){ //start click #biopns_refresh
+    $$(document).on('click','#kenaikan_gaji_berkala_refresh',function(e){ //start click #biopns_refresh
         e.stopImmediatePropagation();
         console.log('refresh');
         reset_filter_biodata();
@@ -592,7 +592,7 @@ myApp.onPageInit('satyalancana10tahun', function (page) { //start pageinit bioda
         console.log('tambah' + totalhalaman); //coba2doang
     }); //end click #biopns_tambahpegawai
 
-    $$(document).on('click','#biopns_refresh',function(e){ //start click #biopns_refresh
+    $$(document).on('click','#satyalancana10tahun_refresh',function(e){ //start click #biopns_refresh
         e.stopImmediatePropagation();
         console.log('refresh');
         reset_filter_biodata();
@@ -680,7 +680,7 @@ myApp.onPageInit('satyalancana20tahun', function (page) { //start pageinit bioda
         console.log('tambah' + totalhalaman); //coba2doang
     }); //end click #biopns_tambahpegawai
 
-    $$(document).on('click','#biopns_refresh',function(e){ //start click #biopns_refresh
+    $$(document).on('click','#satyalancana20tahun_refresh',function(e){ //start click #biopns_refresh
         e.stopImmediatePropagation();
         console.log('refresh');
         reset_filter_biodata();
@@ -768,7 +768,7 @@ myApp.onPageInit('satyalancana30tahun', function (page) { //start pageinit bioda
         console.log('tambah' + totalhalaman); //coba2doang
     }); //end click #biopns_tambahpegawai
 
-    $$(document).on('click','#biopns_refresh',function(e){ //start click #biopns_refresh
+    $$(document).on('click','#satyalancana30tahun_refresh',function(e){ //start click #biopns_refresh
         e.stopImmediatePropagation();
         console.log('refresh');
         reset_filter_biodata();
@@ -856,7 +856,7 @@ myApp.onPageInit('usia_pensiun', function (page) { //start pageinit biodatapns
         console.log('tambah' + totalhalaman); //coba2doang
     }); //end click #biopns_tambahpegawai
 
-    $$(document).on('click','#biopns_refresh',function(e){ //start click #biopns_refresh
+    $$(document).on('click','#usia_pensiun_refresh',function(e){ //start click #biopns_refresh
         e.stopImmediatePropagation();
         console.log('refresh');
         reset_filter_biodata();
@@ -1067,10 +1067,13 @@ function generate_unitkerja(id){
             async:false,
             success: function (data) {
                var result = JSON.parse(data);
-                var penampung = result['isi'].split(";");
+               console.log(result);
+                var penampung = result['isi'].split(">");
                 for (var i = 0; i < penampung.length ; i++) {
-                    var isi = penampung[i].split(">");
-                    myApp.smartSelectAddOption('#'+ id, '<option value="'+ isi[0] +'">'+ isi[1] +'</option>');
+                    // var isi = penampung[i].split(">");
+                    
+                        myApp.smartSelectAddOption('#'+ id, '<option value="'+ penampung[i] +'">'+ penampung[i] +'</option>');
+                    
                 }
 
             },
@@ -1550,7 +1553,7 @@ myApp.onPageInit('filter-pns', function (page) { //start pageinit filter-pns
     $$(document).on('click','#reset-filter_pns',function(e){ //start #reset-filter_pns
         e.stopImmediatePropagation();
         reset_filter_biodata();
-        act_biodata();
+        // act_biodata();
         get_data_table_ws(sesi("fAct"));
         dialog('Filter Telah Direset');
         refresh();
@@ -1559,7 +1562,7 @@ myApp.onPageInit('filter-pns', function (page) { //start pageinit filter-pns
 
     $$(document).on('click','#apply-filter_pns',function(e){ //start #reset-filter_pns
         e.stopImmediatePropagation();
-        act_biodata();
+        // act_biodata();
         get_data_table_ws(sesi('fAct'));
         back();
         console.log(sesi('fJeniskelamin'));

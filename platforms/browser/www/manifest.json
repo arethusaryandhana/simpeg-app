@@ -1,12 +1,18 @@
 {
   "background_color": "#FFF",
   "display": "standalone",
-  "name": "Simpeg App",
-  "short_name": "Simpeg App",
+  "name": "SIM-AKU",
+  "short_name": "SIM-AKU",
   "version": "pttati.simpeg.com",
   "description": "Made By Arethusa Aryandhana",
   "author": "Arethusa Aryandhana",
-  "icons": [],
+  "icons": [
+    {
+      "src": "www/img/icon_kutim.png",
+      "type": "image/png",
+      "sizes": "57x57"
+    }
+  ],
   "start_url": "index.html",
   "theme_color": "#2196f3"
 }

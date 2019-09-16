@@ -67,7 +67,8 @@
     <feature name="OneSignalPush">
         <param name="android-package" value="com.plugin.gcm.OneSignalPush" />
     </feature>
-    <name>Simpeg App</name>
+    <name>SIM-AKU</name>
+    <icon density="mdpi" height="57" platform="android" src="www/img/icon_kutim.png" width="57" />
     <description>
         Made By Arethusa Aryandhana
     </description>
