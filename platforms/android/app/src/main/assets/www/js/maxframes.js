@@ -19,15 +19,16 @@ var hnew = "halaman/";
 //h = 'http://localhost/bahandavid/simpeg-app/simpeg_kutim/'
 
 //var h = 'http://localhost:8080/pemda_kutim/simpeg_android/simpeg-app/simpeg_kutim/'; //master pc hamdi jgn dihapus di comment
-var h = 'http://localhost:280/simpeg-app/simpeg_kutim/'; //master pc thusa jgn dihapus di comment
+// var h = 'http://localhost:280/simpeg-app/simpeg_kutim/'; //master pc thusa jgn dihapus di comment
 //var h = "http://172.18.34.166/";
-// var h = 'http://simaku.bkpp.kutaitimurkab.go.id/';
+var h = 'http://simaku.bkpp.kutaitimurkab.go.id/';
 
 var host = h + "android_webservice/"; //apk code david
 var ws = h + "webservice/"; // memanfaatkan ws yang ada
 var hfoto = h + "foto/";
 
 var mainView = myApp.addView('.view-main', {});
+mainView.router.load({url: 'view/home.html', reload: true, ignoreCache: true});
 var mySwiper = myApp.swiper('.swiper-container', {
     speed: 400,
     spaceBetween: 100,
@@ -38,7 +39,7 @@ var gcmi = "";
 
 //------------------------------------- halaman index -----------------------------------------------------------
 myApp.onPageInit('index', function (page) { //start pageinit index
-    console.log('haha');
+    console.log('arethusa');
     console.log(sesi('folder'));
     navbar_folder();
     link_biodata();
@@ -172,25 +173,21 @@ myApp.onPageInit('home', function (page) { //start pageinit home'
         $$.post(host+'action/act_chart.php',{act : "chart"}, function (response) { 
 
             var arr=JSON.parse(response);
-            // console.log(arr);
+            // // console.log(arr);
             
             var chart = anychart.column();
 
             var series = chart.column(arr);
             
             chart.title("Jumlah Pegawai Per Dinas");
-
             chart.yAxis().title("Total Pegawai");
             chart.xAxis().title(" ");
 
             chart.xAxis().labels().rotation(-90);
 
             chart.container("container");
-
-            // var dkawpdahw = chart.xAxis().title().rotation(-50);
-
-            console.log(arr);
             chart.draw();
+            
         });
     });
     
@@ -248,7 +245,7 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
         get_data_table_ws(sesi("fAct"));
     }); //end click #biopns_refresh
 
-    $$(document).on('click','#detail_biopns',function(e){ //start click #biopns_refresh
+    $$(document).on('click','.detail_biopns',function(e){ //start click #biopns_refresh
         e.stopImmediatePropagation();
         var nip = $$(this).data('nip');
         console.log('detaila' + nip);
@@ -256,7 +253,7 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
         load_page('view/menu_pegawai/detail_pns.html');
     }); //end click #biopns_refresh
 
-    $$(document).on('click','#paging-biodatapns',function(e){ //start #paging-biodatapns
+    $$(document).on('click','.paging-biodatapns',function(e){ //start #paging-biodatapns
         e.stopImmediatePropagation();
         var angka = $$(this).data('angka');
         var halaman = parseInt(sesi('pagingtabel'));
@@ -741,6 +738,7 @@ myApp.onPageInit('satyalancana30tahun', function (page) { //start pageinit bioda
     $$(".preloader-biodatapns").hide();
     act_penjagaan_satyalancana30tahun();
     get_data_table_ws(sesi('fAct'));
+    console.log("fAct: " + sesi('fAct'));
     //end awalan default
 
     $$(document).on('keypress','#search_pns',function (e){ //start #searchlist
@@ -784,7 +782,7 @@ myApp.onPageInit('satyalancana30tahun', function (page) { //start pageinit bioda
         load_page('view/menu_pegawai/detail_pns.html');
     }); //end click #biopns_refresh
 
-    $$(document).on('click','#paging-biodatapns',function(e){ //start #paging-biodatapns
+    $$(document).on('click','.paging-biodatapns',function(e){ //start #paging-biodatapns
         e.stopImmediatePropagation();
         var angka = $$(this).data('angka');
         var halaman = parseInt(sesi('pagingtabel'));
@@ -822,11 +820,14 @@ myApp.onPageInit('satyalancana30tahun', function (page) { //start pageinit bioda
 myApp.onPageInit('usia_pensiun', function (page) { //start pageinit biodatapns
     //setting awalan default
     console.log("page init biodata_pns");
+    
     navbar_folder();
     setSesi('page','view/menu_penjagaan/kenaikan_gaji_berkala.html');
     setSesi('pagingtabel', '1');
     reset_filter_biodata();
     $$(".preloader-biodatapns").hide();
+    
+    console.log("fAct: " + sesi('fAct'));
     act_penjagaan_usia_pensiun();
     get_data_table_ws(sesi('fAct'));
     //end awalan default
@@ -872,7 +873,7 @@ myApp.onPageInit('usia_pensiun', function (page) { //start pageinit biodatapns
         load_page('view/menu_pegawai/detail_pns.html');
     }); //end click #biopns_refresh
 
-    $$(document).on('click','#paging-biodatapns',function(e){ //start #paging-biodatapns
+    $$(document).on('click','.paging-biodatapns',function(e){ //start #paging-biodatapns
         e.stopImmediatePropagation();
         var angka = $$(this).data('angka');
         var halaman = parseInt(sesi('pagingtabel'));
@@ -1345,7 +1346,7 @@ function get_data_table_ws(_fUnitkerja=''
             // console.log(arr);
             
             setSesi('isi_biodatapns', arr['isi']);
-            tampilkan_isi_tabel();
+            tampilkan_isi_tabel(sesi('fAct'));
            
 
             $$(".total_data").html(arr['jumlah_data']);
@@ -1381,7 +1382,7 @@ function get_data_table_ws(_fUnitkerja=''
             // console.log(arr);
             
             setSesi('isi_biodatapns', arr['isi']);
-            tampilkan_isi_tabel();
+            tampilkan_isi_tabel(sesi('fAct'));
            
 
             $$(".total_data").html(arr['jumlah_data']);
@@ -1395,7 +1396,6 @@ function tampilkan_isi_tabel(){
     var qty_tampil = 10;
     var isitabelfix = "";
 
-    
         var isitabel = sesi('isi_biodatapns');
         var spliter = isitabel.split("@");
         var halaman = parseInt(sesi('pagingtabel'));
@@ -1446,7 +1446,7 @@ function bikin_paging(totaldata,idhtmlpaging){
 
     var angkapaging3= halamansaatini -1;
     //mengisi paging 
-    hasilpaging += "<a href='#' id='paging-biodatapns' data-angka='back'><i class='fa fa-arrow-circle-left dav-cterra'></i></a>";    
+    hasilpaging += "<a href='#' class='paging-biodatapns' data-angka='back'><i class='fa fa-arrow-circle-left dav-cterra'></i></a>";    
     for(var i = mulai; i <= penghitung ; i++){
         if(halamansaatini == angkapaging){
             kelas= "class='active'";
@@ -1457,61 +1457,61 @@ function bikin_paging(totaldata,idhtmlpaging){
         }
         if(totalhalaman<=5){ //awal if totalhalaman<=5
             
-            hasilpaging += "<a href='#' id='paging-biodatapns' "+ kelas +" data-angka='"+ angkapaging +"'>"+ angkapaging +"</a>";
+            hasilpaging += "<a href='#' class='paging-biodatapns' "+ kelas +" data-angka='"+ angkapaging +"'>"+ angkapaging +"</a>";
             angkapaging++;
         }//end if totalhalaman<=5
 
         else if(totalhalaman>5 && halamansaatini <5){ // awal else if(totalhalaman>5 && halamansaatini <5){
             if(  i <=5){
-                hasilpaging += "<a href='#' id='paging-biodatapns' "+ kelas +" data-angka='"+ angkapaging +"'>"+ angkapaging +"</a>";
+                hasilpaging += "<a href='#' class='paging-biodatapns' "+ kelas +" data-angka='"+ angkapaging +"'>"+ angkapaging +"</a>";
                 angkapaging++;
             }
             else if(i == 6){
-                hasilpaging += "<a href='#' id='paging-biodatapns' disabled>...</a>";
+                hasilpaging += "<a href='#' class='paging-biodatapns' disabled>...</a>";
                 angkapaging++;
             }
             else if(i == 7){
-                hasilpaging += "<a href='#' id='paging-biodatapns' "+ kelas +" data-angka='"+ totalhalaman +"'>"+ totalhalaman +"</a>";
+                hasilpaging += "<a href='#' class='paging-biodatapns' "+ kelas +" data-angka='"+ totalhalaman +"'>"+ totalhalaman +"</a>";
                 angkapaging++;
             }
         } //end else if(totalhalaman>5 && halamansaatini <5){ 
         else if(totalhalaman > 5 && penghitungdua >= totalhalaman){  //awal else if c
             if(i == 1){
-                hasilpaging += "<a href='#' id='paging-biodatapns' "+ kelas +" data-angka='"+ angkapaging +"'>"+ angkapaging +"</a>";
+                hasilpaging += "<a href='#' class='paging-biodatapns' "+ kelas +" data-angka='"+ angkapaging +"'>"+ angkapaging +"</a>";
             }
             else if(i == 2){
-                hasilpaging += "<a href='#' id='paging-biodatapns' disabled>...</a>";
+                hasilpaging += "<a href='#' class='paging-biodatapns' disabled>...</a>";
             }
             else if(i>2){
                 if(halamansaatini == angkapagingdua){
                     kelas= "class='active'";
                 }
-                hasilpaging += "<a href='#' id='paging-biodatapns' "+ kelas +" data-angka='"+ angkapagingdua +"'>"+ angkapagingdua +"</a>";
+                hasilpaging += "<a href='#' class='paging-biodatapns' "+ kelas +" data-angka='"+ angkapagingdua +"'>"+ angkapagingdua +"</a>";
                 angkapagingdua++;
             }
         } //end else if c    
         else if(totalhalaman > 5 && penghitungdua < totalhalaman){  //awal else if d
             if(i == 1){
-                hasilpaging += "<a href='#' id='paging-biodatapns' "+ kelas +" data-angka='"+ angkapaging +"'>"+ angkapaging +"</a>";
+                hasilpaging += "<a href='#' class='paging-biodatapns' "+ kelas +" data-angka='"+ angkapaging +"'>"+ angkapaging +"</a>";
             }
             else if(i == 2){
-                hasilpaging += "<a href='#' id='paging-biodatapns' disabled>...</a>";
+                hasilpaging += "<a href='#' class='paging-biodatapns' disabled>...</a>";
             }
             else if(i > 2 && i <= 5){
                 if(halamansaatini == angkapaging3){
                     kelas= "class='active'";
                 }
-                hasilpaging += "<a href='#' id='paging-biodatapns' "+ kelas +" data-angka='"+ angkapaging3 +"'>"+ angkapaging3 +"</a>";
+                hasilpaging += "<a href='#' class='paging-biodatapns' "+ kelas +" data-angka='"+ angkapaging3 +"'>"+ angkapaging3 +"</a>";
                 angkapaging3++;
             }
             else if(i == 6){
-                hasilpaging += "<a href='#' id='paging-biodatapns' disabled>...</a>";
+                hasilpaging += "<a href='#' class='paging-biodatapns' disabled>...</a>";
             }else if(i == 7){
-                hasilpaging += "<a href='#' id='paging-biodatapns' "+ kelas +" data-angka='"+ totalhalaman +"'>"+ totalhalaman +"</a>";
+                hasilpaging += "<a href='#' class='paging-biodatapns' "+ kelas +" data-angka='"+ totalhalaman +"'>"+ totalhalaman +"</a>";
             }
         } //end else if d
     }//end for
-    hasilpaging += "<a href='#' id='paging-biodatapns' data-angka='forward'><i class='fa fa-arrow-circle-right dav-cterra'></i></a>";
+    hasilpaging += "<a href='#' class='paging-biodatapns' data-angka='forward'><i class='fa fa-arrow-circle-right dav-cterra'></i></a>";
     //selesai isi paging
     console.log(penghitung);
     $$("." + idhtmlpaging).html(hasilpaging);     
@@ -1519,6 +1519,8 @@ function bikin_paging(totaldata,idhtmlpaging){
 //------------------------------------- view/menu_pegawai/filter-pns.html -----------------------
 myApp.onPageInit('filter-pns', function (page) { //start pageinit filter-pns
     set_awal_filter();
+    // console.log(sesi('fAct'));
+    // setSesi('fAct', sesi('fAct'));
 
     $$(document).on('click','.chip.chipfilterjasa',function(e){ //start #chipfilterjasa
         var idchip = $$(this).data('urut');
@@ -1554,15 +1556,18 @@ myApp.onPageInit('filter-pns', function (page) { //start pageinit filter-pns
         e.stopImmediatePropagation();
         reset_filter_biodata();
         // act_biodata();
+        setSesi('fAct', sesi('fAct'));
         get_data_table_ws(sesi("fAct"));
         dialog('Filter Telah Direset');
         refresh();
 
         });/* end reset-filter_pns */
 
-    $$(document).on('click','#apply-filter_pns',function(e){ //start #reset-filter_pns
+    $$(document).on('click','.apply-filter_pns',function(e){ //start #reset-filter_pns
         e.stopImmediatePropagation();
         // act_biodata();
+        // act_penjagaan_usia_pensiun();
+        // setSesi('fAct', sesi('fAct'));
         get_data_table_ws(sesi('fAct'));
         back();
         console.log(sesi('fJeniskelamin'));
@@ -1574,6 +1579,7 @@ function act_biodata(){
 }
 
 function act_penjagaan_kenaikan_pangkat_reguler(){
+
     setSesi('fAct', "kenaikan_pangkat_reguler");
 }
 
@@ -1594,10 +1600,12 @@ function act_penjagaan_satyalancana20tahun(){
 }
 
 function act_penjagaan_satyalancana30tahun(){
+    localStorage.removeItem('fAct');
     setSesi('fAct', "satyalancana30tahun");
 }
 
 function act_penjagaan_usia_pensiun(){
+    localStorage.removeItem('fAct');
     setSesi('fAct', "usia_pensiun");
 }
 
@@ -1606,9 +1614,11 @@ function reset_filter_biodata(){
     setSesi('fJeniskelamin', '');
     setSesi('fBanyakData', '20');
     setSesi('fNama', '');
+    setSesi('fAct', '');
 }
 
 function set_awal_filter(){
+    sesi('fAct');
     var mySwiper3 = myApp.swiper('.swiper-3', {
         pagination:'.swiper-3 .swiper-pagination',
         spaceBetween: 20,
