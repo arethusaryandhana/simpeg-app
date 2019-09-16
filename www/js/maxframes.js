@@ -19,9 +19,9 @@ var hnew = "halaman/";
 //h = 'http://localhost/bahandavid/simpeg-app/simpeg_kutim/'
 
 //var h = 'http://localhost:8080/pemda_kutim/simpeg_android/simpeg-app/simpeg_kutim/'; //master pc hamdi jgn dihapus di comment
-// var h = 'http://localhost:280/simpeg-app/simpeg_kutim/'; //master pc thusa jgn dihapus di comment
+var h = 'http://localhost:280/simpeg-app/simpeg_kutim/'; //master pc thusa jgn dihapus di comment
 //var h = "http://172.18.34.166/";
-var h = 'http://simaku.bkpp.kutaitimurkab.go.id/';
+// var h = 'http://simaku.bkpp.kutaitimurkab.go.id/';
 
 var host = h + "android_webservice/"; //apk code david
 var ws = h + "webservice/"; // memanfaatkan ws yang ada
@@ -136,39 +136,8 @@ myApp.onPageInit('sign-in', function (page) { //start pageinit sign-in'
 myApp.onPageInit('home', function (page) { //start pageinit home'
     console.log("page init home");
     navbar_folder();
-    $$.post(h+'android_webservice/action/act_login.php',{act : "index", username: sesi('username')}, function (response) {
-        // console.log(response);
-        var arr=JSON.parse(response);
-        console.log(arr[0]);
-        setSesi('nama', arr[0]['nama'])
-        if(sesi('folder') == 'admin'){
-            $$("#home-font1").html(sesi('username'));
-            $$("#home-font2").html(sesi('no_nip'));
-
-
-            $$("#greeting2").html(sesi('username'));
-            $$("#userlogin").html(sesi('no_nip'));
-        }
-        else if(sesi('folder') == 'opd'){
-            $$("#home-font1").html(arr[0]['username']);
-            $$("#home-font2").html(sesi('no_nip'));
-
-
-            $$("#greeting2").html(arr[0]['username']);
-            $$("#userlogin").html(sesi('no_nip'));
-        }
-        else{
-            $$("#home-font1").html(sesi('nama'));
-            $$("#home-font2").html(sesi('no_nip'));
-
-
-            $$("#greeting2").html(sesi('nama'));
-            $$("#userlogin").html(sesi('no_nip'));
-        }
-    });
+    nama_menu();
     
-    
-
     $$(document).on('deviceready', function () {
         $$.post(host+'action/act_chart.php',{act : "chart"}, function (response) { 
 
@@ -203,6 +172,7 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
     //setting awalan default
     console.log("page init biodata_pns");
     navbar_folder();
+    nama_menu();
     setSesi('page_menu','view/menu_pegawai/biodata_pns.html');
     setSesi('pagingtabel', '1');
     if(sesi('filter_page') != 'ada'){
@@ -212,6 +182,7 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
     $$(".preloader-biodatapns").hide();
     act_biodata();
     get_data_table_ws(sesi('fAct'));
+    // console.log("Unit:" + sesi('fUnitKerja'));
     //end awalan default
 
     $$(document).on('keypress','#search_pns',function (e){ //start #searchlist
@@ -294,6 +265,7 @@ myApp.onPageInit('kenaikan_pangkat_reguler', function (page) { //start pageinit 
     //setting awalan default
     console.log("page init biodata_pns");
     navbar_folder();
+    nama_menu();
     setSesi('page_menu','view/menu_penjagaan/kenaikan_pangkat_reguler.html');
     setSesi('pagingtabel', '1');
     if(sesi('filter_page') != 'ada'){
@@ -304,6 +276,7 @@ myApp.onPageInit('kenaikan_pangkat_reguler', function (page) { //start pageinit 
     act_penjagaan_kenaikan_pangkat_reguler();
     get_data_table_ws(sesi('fAct'));
     //end awalan default
+    // console.log("unit kerja: " + sesi('fUnitKerja'));
 
     $$(document).on('keypress','#search_pns',function (e){ //start #searchlist
         if(e.which === 13){
@@ -385,6 +358,7 @@ myApp.onPageInit('kenaikan_pangkat_pilihan', function (page) { //start pageinit 
     //setting awalan default
     console.log("page init biodata_pns");
     navbar_folder();
+    nama_menu();
     setSesi('page_menu','view/menu_penjagaan/kenaikan_pangkat_pilihan.html');
     setSesi('pagingtabel', '1');
     if(sesi('filter_page') != 'ada'){
@@ -476,6 +450,7 @@ myApp.onPageInit('kenaikan_gaji_berkala', function (page) { //start pageinit bio
     //setting awalan default
     console.log("page init biodata_pns");
     navbar_folder();
+    nama_menu();
     setSesi('page_menu','view/menu_penjagaan/kenaikan_gaji_berkala.html');
     setSesi('pagingtabel', '1');
     if(sesi('filter_page') != 'ada'){
@@ -567,6 +542,7 @@ myApp.onPageInit('satyalancana10tahun', function (page) { //start pageinit bioda
     //setting awalan default
     console.log("page init biodata_pns");
     navbar_folder();
+    nama_menu();
     setSesi('page_menu','view/menu_penjagaan/satyalancana10tahun.html');
     setSesi('pagingtabel', '1');
     if(sesi('filter_page') != 'ada'){
@@ -658,6 +634,7 @@ myApp.onPageInit('satyalancana20tahun', function (page) { //start pageinit bioda
     //setting awalan default
     console.log("page init biodata_pns");
     navbar_folder();
+    nama_menu();
     setSesi('page_menu','view/menu_penjagaan/satyalancana20tahun.html');
     setSesi('pagingtabel', '1');
     if(sesi('filter_page') != 'ada'){
@@ -749,6 +726,7 @@ myApp.onPageInit('satyalancana30tahun', function (page) { //start pageinit bioda
     //setting awalan default
     console.log("page init biodata_pns");
     navbar_folder();
+    nama_menu();
     setSesi('page_menu','view/menu_penjagaan/satyalancana30tahun.html');
     setSesi('pagingtabel', '1');
     if(sesi('filter_page') != 'ada'){
@@ -843,6 +821,7 @@ myApp.onPageInit('usia_pensiun', function (page) { //start pageinit biodatapns
     console.log("page init biodata_pns");
     
     navbar_folder();
+    nama_menu();
     setSesi('page_menu','view/menu_penjagaan/usia_pensiun.html');
     setSesi('pagingtabel', '1');
     
@@ -937,6 +916,7 @@ myApp.onPageInit('usia_pensiun', function (page) { //start pageinit biodatapns
 myApp.onPageInit('detail_pns', function (page) { //start pageinit biodatapns
     console.log("page init detail_pns" + sesi('nip_pns'));
     navbar_folder();
+    nama_menu();
     // setSesi('page','view/menu_pegawai/detail_pns.html');
     setSesi('jenisdata', 'Jabatan');
     detail_pns();
@@ -972,6 +952,7 @@ function detail_pns(){
 
 myApp.onPageInit('biodata_pns_tambah', function (page) { //start pageinit biodatapns
     navbar_folder();
+    nama_menu();
     generate_unitkerja('pnstam_unitkerja');
 
     $$('#pnstam_unitkerja').on('change', function(e){ //start #pnstam_unitkerja
@@ -1003,6 +984,7 @@ myApp.onPageInit('biodata_pns_tambah', function (page) { //start pageinit biodat
 
 myApp.onPageInit('biodata_pns_tambahlanjut', function (page) { //start pageinit biodatapns
     navbar_folder();
+    nama_menu();
     console.log('page init pns tambah lanjut' + sesi('unit_id') +"," + sesi('token') +",");
     calendarpicker('tmb_tgl_lahir');
 
@@ -1090,17 +1072,16 @@ function generate_unitkerja(id){
      $.ajax({
             url: host+'action/act_get_data.php',
             type: "post",
-            data: {act: "get_unit_kerja",username : sesi('username'), level : sesi('level')},
+            data: {act: "get_unit_kerja",username : sesi('username'), level : sesi('level'), unit_id: sesi('unit_id')},
             async:false,
             success: function (data) {
                var result = JSON.parse(data);
-               console.log(result);
+               // console.log(result);
                 var penampung = result['isi'].split(">");
                 for (var i = 0; i < penampung.length ; i++) {
                     // var isi = penampung[i].split(">");
-                    
+                        // setSesi('fUnitkerja', penampung[i]);
                         myApp.smartSelectAddOption('#'+ id, '<option value="'+ penampung[i] +'">'+ penampung[i] +'</option>');
-                    
                 }
 
             },
@@ -1126,7 +1107,7 @@ function get_data_table_ws(_fUnitkerja=''
                 , _fJenisJabatan='' 
                 , f_act){
     
-
+    unitkerja();
     if(sesi('fAct') == 'biodatapns'){
         console.log('hamdi '+sesi('token'));
         $$(".preloader-biodatapns").show();
@@ -1587,7 +1568,8 @@ function bikin_paging(totaldata,idhtmlpaging){
 //------------------------------------- view/menu_pegawai/filter-pns.html -----------------------
 myApp.onPageInit('filter-pns', function (page) { //start pageinit filter-pns
     set_awal_filter();
-    console.log(sesi('fAct'));
+    // console.log($$('#fUnitkerja').val());
+
 
     $$(document).on('click','.chip.chipfilterjasa',function(e){ //start #chipfilterjasa
         var idchip = $$(this).data('urut');
@@ -1614,7 +1596,8 @@ myApp.onPageInit('filter-pns', function (page) { //start pageinit filter-pns
     
     $$('#fUnitkerja').on('change', function(){ //start #aa_area_tam change
         var val = $$(this).val();
-        console.log(val);
+        // console.log(val);
+
         setSesi('fUnitkerja', val);
         // fUnitkerja
     }); //stop #aa_area_tam change
@@ -1817,6 +1800,15 @@ function setStoragePaging(url){
     localStorage.paging = url;
 }
 
+function unitkerja(){
+    if(sesi('folder') == 'opd'){
+        setSesi('fUnitkerja', sesi('unit_id'));
+    }
+    else{
+        setSesi('fUnitkerja', '');
+    }
+}
+
 function navbar_folder(){
     if(sesi('folder') == 'pegawai'){
         $$('#nav_penjagaan').hide();
@@ -1835,7 +1827,7 @@ function navbar_folder(){
 
 function link_biodata(){
     $$('#link-bio').on('click', function(){
-        if(sesi('folder') == 'admin'){
+        if(sesi('folder') == 'admin' || sesi('folder') == 'opd'){
             load_page("view/menu_pegawai/biodata_pns.html");
         }
         else if(sesi('folder') == 'pegawai'){
@@ -1843,6 +1835,39 @@ function link_biodata(){
         }
     })
     
+}
+
+function nama_menu(){
+    $$.post(h+'android_webservice/action/act_login.php',{act : "index", username: sesi('username')}, function (response) {
+        // console.log(response);
+        var arr=JSON.parse(response);
+        // console.log(arr[0]);
+        setSesi('nama', arr[0]['nama'])
+        if(sesi('folder') == 'admin'){
+            $$("#home-font1").html(sesi('username'));
+            $$("#home-font2").html(sesi('no_nip'));
+
+
+            $$("#greeting2").html(sesi('username'));
+            $$("#userlogin").html(sesi('no_nip'));
+        }
+        else if(sesi('folder') == 'opd'){
+            $$("#home-font1").html(arr[0]['username']);
+            $$("#home-font2").html(sesi('no_nip'));
+
+
+            $$("#greeting2").html(arr[0]['username']);
+            $$("#userlogin").html(sesi('no_nip'));
+        }
+        else{
+            $$("#home-font1").html(sesi('nama'));
+            $$("#home-font2").html(sesi('no_nip'));
+
+
+            $$("#greeting2").html(sesi('nama'));
+            $$("#userlogin").html(sesi('no_nip'));
+        }
+    });
 }
 /*
 $$.post(h+'interface/testabelhamdi.php'
