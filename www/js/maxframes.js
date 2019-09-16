@@ -136,40 +136,40 @@ myApp.onPageInit('sign-in', function (page) { //start pageinit sign-in'
 myApp.onPageInit('home', function (page) { //start pageinit home'
     console.log("page init home");
     navbar_folder();
-    $$("#home-font1").html(sesi('username'));
-    $$("#home-font2").html(sesi('no_nip'));
+    $$.post(h+'android_webservice/action/act_login.php',{act : "index", username: sesi('username')}, function (response) {
+        // console.log(response);
+        var arr=JSON.parse(response);
+        console.log(arr[0]);
+        setSesi('nama', arr[0]['nama'])
+        if(sesi('folder') == 'admin'){
+            $$("#home-font1").html(sesi('username'));
+            $$("#home-font2").html(sesi('no_nip'));
 
 
-    $$("#greeting2").html(sesi('username'));
-    $$("#userlogin").html(sesi('no_nip'));
+            $$("#greeting2").html(sesi('username'));
+            $$("#userlogin").html(sesi('no_nip'));
+        }
+        else if(sesi('folder') == 'opd'){
+            $$("#home-font1").html(arr[0]['username']);
+            $$("#home-font2").html(sesi('no_nip'));
+
+
+            $$("#greeting2").html(arr[0]['username']);
+            $$("#userlogin").html(sesi('no_nip'));
+        }
+        else{
+            $$("#home-font1").html(sesi('nama'));
+            $$("#home-font2").html(sesi('no_nip'));
+
+
+            $$("#greeting2").html(sesi('nama'));
+            $$("#userlogin").html(sesi('no_nip'));
+        }
+    });
+    
+    
 
     $$(document).on('deviceready', function () {
-        // var data = [
-        //   {x: "John", value:10000, 
-        //       label:{
-        //           enabled:true, fontColor:"black", fontWeight:900, format:"${%value}"
-        //       },
-        //        normal:   {
-        //            fill: "#5cd65c",
-        //            stroke: null,
-        //            label: {enabled: true}
-        //          },
-        //        hovered:  {
-        //            fill: "#5cd65c",
-        //            stroke: null,
-        //            label: {enabled: true}
-        //          },
-        //        selected: {
-        //            fill: "#5cd65c",
-        //            stroke: null,
-        //            label: {enabled: true}
-        //          }},
-        //   {x: "Jake", value:12000, label:{enabled:true, fontColor:"black", fontWeight:900, format:"${%value}"}},
-        //   {x: "Peter", value:13000, label:{enabled:true, fontColor:"black", fontWeight:900, format:"${%value}"}},
-        //   {x: "James", value:10000, label:{enabled:true, fontColor:"black", fontWeight:900, format:"${%value}"}},
-        //   {x: "Mary", value:9000, label:{enabled:true, fontColor:"black", fontWeight:900, format:"${%value}"}}
-        // ];
-
         $$.post(host+'action/act_chart.php',{act : "chart"}, function (response) { 
 
             var arr=JSON.parse(response);
@@ -178,6 +178,7 @@ myApp.onPageInit('home', function (page) { //start pageinit home'
             var chart = anychart.column();
 
             var series = chart.column(arr);
+            series.name("Jumlah Pegawai");
             
             chart.title("Jumlah Pegawai Per Dinas");
             chart.yAxis().title("Total Pegawai");
@@ -190,12 +191,10 @@ myApp.onPageInit('home', function (page) { //start pageinit home'
             
         });
     });
+
+
     
     setSesi('page','view/home.html');
-    // $$.post(host+'action/act_login.php',{act : "test"}, function (response) {
-    //         console.log(response + localStorage.username);
-    //     });1
-   
 
 });//end pageinit home'1
 
@@ -1822,6 +1821,9 @@ function navbar_folder(){
     if(sesi('folder') == 'pegawai'){
         $$('#nav_penjagaan').hide();
         $$('#nav_proses').hide();
+        $$('#nav_masterdata').hide();
+    }
+    else if(sesi('folder') == 'opd'){
         $$('#nav_masterdata').hide();
     }
     else{
