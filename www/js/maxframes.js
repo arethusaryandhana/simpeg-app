@@ -28,7 +28,13 @@ var ws = h + "webservice/"; // memanfaatkan ws yang ada
 var hfoto = h + "foto/";
 
 var mainView = myApp.addView('.view-main', {});
-mainView.router.load({url: 'view/home.html', reload: true, ignoreCache: true});
+if(sesi('username')){
+    mainView.router.load({url: 'view/home.html', reload: true, ignoreCache: true});
+}
+else{
+    mainView.router.load({url: 'view/sign-in.html', reload: true, ignoreCache: true});
+}
+
 var mySwiper = myApp.swiper('.swiper-container', {
     speed: 400,
     spaceBetween: 100,
@@ -1121,7 +1127,7 @@ function get_data_table_ws(_fUnitkerja=''
     }
     else if(sesi('fAct') == 'kenaikan_pangkat_reguler'){
         console.log('hamdi '+sesi('token'));
-        console.log(localStorage);
+        
         $$(".preloader-biodatapns").show();
         $$.post(host+'action/act_penjagaan.php'
             ,{act : sesi("fAct")
@@ -1232,7 +1238,7 @@ function get_data_table_ws(_fUnitkerja=''
     else if(sesi('fAct') == 'satyalancana10tahun'){
         console.log('hamdi '+sesi('token'));
         $$(".preloader-biodatapns").show();
-        console.log(localStorage);
+        
         $$.post(host+'action/act_penjagaan.php'
             ,{act : sesi("fAct")
             
@@ -1547,7 +1553,7 @@ function bikin_paging(totaldata,idhtmlpaging){
 function generate_unitkerja(id){
     console.log(sesi('level'));
     $$("#" + id).html("");
-
+    setSesi('fUnitkerja', '');
      $.ajax({
             url: host+'action/act_get_data.php',
             type: "post",
@@ -1557,7 +1563,10 @@ function generate_unitkerja(id){
                var result = JSON.parse(data);
                // console.log(result);
                 // var penampung = result['isi'].split(">");
-                myApp.smartSelectAddOption('#'+ id, '<option value="">SEMUA UNIT KERJA</option>');
+                if(sesi('folder') == 'admin'){
+                    myApp.smartSelectAddOption('#'+ id, '<option value="">SEMUA UNIT KERJA</option>');
+                }
+                
                 for (var i = 0; i < result.length ; i++) {
                     // var isi = penampung[i].split(">");
                         setSesi('fUnitkerja', $$("#" + id).val());
@@ -1608,7 +1617,7 @@ function generate_subunitkerja(id, unit_id_change){
 function generate_eselon(id){
      console.log(sesi('level'));
     $$("#" + id).html("");
-
+    setSesi('fEselon', '');
      $.ajax({
             url: host+'action/act_get_data.php',
             type: "post",
@@ -1635,7 +1644,7 @@ function generate_eselon(id){
 function generate_agama(id){
      console.log(sesi('level'));
     $$("#" + id).html("");
-
+    setSesi('fAgama', '');
      $.ajax({
             url: host+'action/act_get_data.php',
             type: "post",
@@ -1662,7 +1671,7 @@ function generate_agama(id){
 function generate_pendidikan(id){
      console.log(sesi('level'));
     $$("#" + id).html("");
-
+    setSesi('fPendidikan', '');
      $.ajax({
             url: host+'action/act_get_data.php',
             type: "post",
@@ -1689,7 +1698,7 @@ function generate_pendidikan(id){
 function generate_pangkat(id){
      console.log(sesi('level'));
     $$("#" + id).html("");
-
+    setSesi('fPangkat', '');
      $.ajax({
             url: host+'action/act_get_data.php',
             type: "post",
@@ -1882,6 +1891,9 @@ function reset_filter_biodata(){
 
 function set_awal_filter(){
     sesi('fAct');
+    if(sesi('filter_page') == 'login'){
+        reset_filter_biodata();
+    }
     var mySwiper3 = myApp.swiper('.swiper-3', {
         pagination:'.swiper-3 .swiper-pagination',
         spaceBetween: 20,
