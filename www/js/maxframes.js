@@ -20,6 +20,7 @@ var hnew = "halaman/";
 
 //var h = 'http://localhost:8080/pemda_kutim/simpeg_android/simpeg-app/simpeg_kutim/'; //master pc hamdi jgn dihapus di comment
 // var h = 'http://localhost:280/simpeg-app/simpeg_kutim/'; //master pc thusa jgn dihapus di comment
+// var h = 'http://localhost/simpeg-app/simpeg_kutim/'; //master pc thusa jgn dihapus di comment
 //var h = "http://172.18.34.166/";
 var h = 'http://simaku.bkpp.kutaitimurkab.go.id/';
 
@@ -32,7 +33,7 @@ if(sesi('username')){
     mainView.router.load({url: 'view/home.html', reload: true, ignoreCache: true});
 }
 else{
-    mainView.router.load({url: 'view/sign-in.html', reload: true, ignoreCache: true});
+    mainView.router.load({url: 'view/index.html', reload: true, ignoreCache: true});
 }
 
 var mySwiper = myApp.swiper('.swiper-container', {
@@ -173,12 +174,38 @@ myApp.onPageInit('home', function (page) { //start pageinit home'
 
 });//end pageinit home'1
 
+myApp.onPageInit('biodata_pns', function (page) {
+    $$.post(host+'action/act_print.php'
+            ,{ domain : 'android'
+                , duk_token : sesi('token')
+                , level : sesi('level')
+                , duk_unit_id : '1.01.01.01'
+                , fUnitkerja : ''
+                , fUnitkerjaSub : ''
+                , fNIP :''
+                , fNama : ''
+                , fEselon : ''
+                , fJeniskelamin : ''
+                , fAgama: ''
+                , fPendidikan : ''
+                , fPangkat : ''
+                , fTipePegawai : ''
+                , fJenisJabatan : ''
+        }, function (response) { 
+          $$('#test').html(response);
+          // $$(document).on('deviceready', function() {
+          //       $$('#example').html(response);
+          //   } );
+        });
+});
+
 //------------------------------------- halaman biodatapns -----------------------------------------------------------
 myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
     //setting awalan default
     console.log("page init biodata_pns");
     navbar_folder();
     nama_menu();
+    console.log(localStorage);
     setSesi('page_menu','view/menu_pegawai/biodata_pns.html');
     setSesi('pagingtabel', '1');
     if(sesi('filter_page') != 'ada'){
@@ -190,6 +217,12 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
     get_data_table_ws(sesi('fAct'));
     // console.log("Unit:" + sesi('fUnitKerja'));
     //end awalan default
+
+    $$(document).on('click','#preview_print',function(e){ //start click #biopns_tambahpegawai
+        e.stopImmediatePropagation();
+        load_page('view/menu_pegawai/cetak.html');
+        
+    }); //end click #biopns_tambahpegawai
 
     $$(document).on('keypress','#search_pns',function (e){ //start #searchlist
         if(e.which === 13){
@@ -933,7 +966,39 @@ myApp.onPageInit('detail_pns', function (page) { //start pageinit biodatapns
         console.log(val);
         setSesi('jenisdata', val);
         detail_pns();
+
+        $$('.edit_bio').on('click', function(e){ //start #pnstam_unitkerja
+           e.stopImmediatePropagation();
+           $$('.form_edit').hide();
+           $$('.edit_bio').hide();
+           $$('.simpan_bio').show();
+           $$('.form_simpan').show();
+        }); 
+
+        $$('.simpan_bio').on('click', function(e){ //start #pnstam_unitkerja
+           e.stopImmediatePropagation();
+           $$('.form_edit').show();
+           $$('.edit_bio').show();
+           $$('.simpan_bio').hide();
+           $$('.form_simpan').hide();
+        }); 
     });  //end #pnstam_unitkerja
+
+    $$('.edit_bio').on('click', function(e){ //start #pnstam_unitkerja
+       e.stopImmediatePropagation();
+       $$('.form_edit').hide();
+       $$('.edit_bio').hide();
+       $$('.simpan_bio').show();
+       $$('.form_simpan').show();
+    }); 
+
+    $$('.simpan_bio').on('click', function(e){ //start #pnstam_unitkerja
+       e.stopImmediatePropagation();
+       $$('.form_edit').show();
+       $$('.edit_bio').show();
+       $$('.simpan_bio').hide();
+       $$('.form_simpan').hide();
+    }); 
 
     
 });

@@ -28,7 +28,13 @@ var ws = h + "webservice/"; // memanfaatkan ws yang ada
 var hfoto = h + "foto/";
 
 var mainView = myApp.addView('.view-main', {});
-mainView.router.load({url: 'view/home.html', reload: true, ignoreCache: true});
+if(sesi('username')){
+    mainView.router.load({url: 'view/home.html', reload: true, ignoreCache: true});
+}
+else{
+    mainView.router.load({url: 'view/sign-in.html', reload: true, ignoreCache: true});
+}
+
 var mySwiper = myApp.swiper('.swiper-container', {
     speed: 400,
     spaceBetween: 100,
@@ -77,7 +83,7 @@ myApp.onPageInit('index', function (page) { //start pageinit index
     });  //end #btnlogout 
     //pindah halaman
     var link = "";
-    link = link + sesi('page');
+    link = link + sesi('page_menu');
     if(link != "undefined") {
         mainView.router.reloadPage(link);
         mainView.router.refreshPage();
@@ -136,40 +142,9 @@ myApp.onPageInit('sign-in', function (page) { //start pageinit sign-in'
 myApp.onPageInit('home', function (page) { //start pageinit home'
     console.log("page init home");
     navbar_folder();
-    $$("#home-font1").html(sesi('username'));
-    $$("#home-font2").html(sesi('no_nip'));
-
-
-    $$("#greeting2").html(sesi('username'));
-    $$("#userlogin").html(sesi('no_nip'));
-
+    nama_menu();
+    
     $$(document).on('deviceready', function () {
-        // var data = [
-        //   {x: "John", value:10000, 
-        //       label:{
-        //           enabled:true, fontColor:"black", fontWeight:900, format:"${%value}"
-        //       },
-        //        normal:   {
-        //            fill: "#5cd65c",
-        //            stroke: null,
-        //            label: {enabled: true}
-        //          },
-        //        hovered:  {
-        //            fill: "#5cd65c",
-        //            stroke: null,
-        //            label: {enabled: true}
-        //          },
-        //        selected: {
-        //            fill: "#5cd65c",
-        //            stroke: null,
-        //            label: {enabled: true}
-        //          }},
-        //   {x: "Jake", value:12000, label:{enabled:true, fontColor:"black", fontWeight:900, format:"${%value}"}},
-        //   {x: "Peter", value:13000, label:{enabled:true, fontColor:"black", fontWeight:900, format:"${%value}"}},
-        //   {x: "James", value:10000, label:{enabled:true, fontColor:"black", fontWeight:900, format:"${%value}"}},
-        //   {x: "Mary", value:9000, label:{enabled:true, fontColor:"black", fontWeight:900, format:"${%value}"}}
-        // ];
-
         $$.post(host+'action/act_chart.php',{act : "chart"}, function (response) { 
 
             var arr=JSON.parse(response);
@@ -178,6 +153,7 @@ myApp.onPageInit('home', function (page) { //start pageinit home'
             var chart = anychart.column();
 
             var series = chart.column(arr);
+            series.name("Jumlah Pegawai");
             
             chart.title("Jumlah Pegawai Per Dinas");
             chart.yAxis().title("Total Pegawai");
@@ -190,12 +166,10 @@ myApp.onPageInit('home', function (page) { //start pageinit home'
             
         });
     });
+
+
     
     setSesi('page','view/home.html');
-    // $$.post(host+'action/act_login.php',{act : "test"}, function (response) {
-    //         console.log(response + localStorage.username);
-    //     });1
-   
 
 });//end pageinit home'1
 
@@ -204,12 +178,17 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
     //setting awalan default
     console.log("page init biodata_pns");
     navbar_folder();
-    setSesi('page','view/menu_pegawai/biodata_pns.html');
+    nama_menu();
+    setSesi('page_menu','view/menu_pegawai/biodata_pns.html');
     setSesi('pagingtabel', '1');
-    reset_filter_biodata();
+    if(sesi('filter_page') != 'ada'){
+        reset_filter_biodata();
+        set_awal_filter();
+    }
     $$(".preloader-biodatapns").hide();
     act_biodata();
     get_data_table_ws(sesi('fAct'));
+    // console.log("Unit:" + sesi('fUnitKerja'));
     //end awalan default
 
     $$(document).on('keypress','#search_pns',function (e){ //start #searchlist
@@ -292,13 +271,18 @@ myApp.onPageInit('kenaikan_pangkat_reguler', function (page) { //start pageinit 
     //setting awalan default
     console.log("page init biodata_pns");
     navbar_folder();
-    setSesi('page','view/menu_penjagaan/kenaikan_pangkat_reguler.html');
+    nama_menu();
+    setSesi('page_menu','view/menu_penjagaan/kenaikan_pangkat_reguler.html');
     setSesi('pagingtabel', '1');
-    reset_filter_biodata();
+    if(sesi('filter_page') != 'ada'){
+        reset_filter_biodata();
+        set_awal_filter();
+    }
     $$(".preloader-biodatapns").hide();
     act_penjagaan_kenaikan_pangkat_reguler();
     get_data_table_ws(sesi('fAct'));
     //end awalan default
+    // console.log("unit kerja: " + sesi('fUnitKerja'));
 
     $$(document).on('keypress','#search_pns',function (e){ //start #searchlist
         if(e.which === 13){
@@ -380,9 +364,13 @@ myApp.onPageInit('kenaikan_pangkat_pilihan', function (page) { //start pageinit 
     //setting awalan default
     console.log("page init biodata_pns");
     navbar_folder();
-    setSesi('page','view/menu_penjagaan/kenaikan_pangkat_pilihan.html');
+    nama_menu();
+    setSesi('page_menu','view/menu_penjagaan/kenaikan_pangkat_pilihan.html');
     setSesi('pagingtabel', '1');
-    reset_filter_biodata();
+    if(sesi('filter_page') != 'ada'){
+        reset_filter_biodata();
+        set_awal_filter();
+    }
     $$(".preloader-biodatapns").hide();
     act_penjagaan_kenaikan_pangkat_pilihan();
     get_data_table_ws(sesi('fAct'));
@@ -468,9 +456,13 @@ myApp.onPageInit('kenaikan_gaji_berkala', function (page) { //start pageinit bio
     //setting awalan default
     console.log("page init biodata_pns");
     navbar_folder();
-    setSesi('page','view/menu_penjagaan/kenaikan_gaji_berkala.html');
+    nama_menu();
+    setSesi('page_menu','view/menu_penjagaan/kenaikan_gaji_berkala.html');
     setSesi('pagingtabel', '1');
-    reset_filter_biodata();
+    if(sesi('filter_page') != 'ada'){
+        reset_filter_biodata();
+        set_awal_filter();
+    }
     $$(".preloader-biodatapns").hide();
     act_penjagaan_kenaikan_gaji_berkala();
     get_data_table_ws(sesi('fAct'));
@@ -556,9 +548,13 @@ myApp.onPageInit('satyalancana10tahun', function (page) { //start pageinit bioda
     //setting awalan default
     console.log("page init biodata_pns");
     navbar_folder();
-    setSesi('page','view/menu_penjagaan/kenaikan_gaji_berkala.html');
+    nama_menu();
+    setSesi('page_menu','view/menu_penjagaan/satyalancana10tahun.html');
     setSesi('pagingtabel', '1');
-    reset_filter_biodata();
+    if(sesi('filter_page') != 'ada'){
+        reset_filter_biodata();
+        set_awal_filter();
+    }
     $$(".preloader-biodatapns").hide();
     act_penjagaan_satyalancana10tahun();
     get_data_table_ws(sesi('fAct'));
@@ -644,9 +640,13 @@ myApp.onPageInit('satyalancana20tahun', function (page) { //start pageinit bioda
     //setting awalan default
     console.log("page init biodata_pns");
     navbar_folder();
-    setSesi('page','view/menu_penjagaan/kenaikan_gaji_berkala.html');
+    nama_menu();
+    setSesi('page_menu','view/menu_penjagaan/satyalancana20tahun.html');
     setSesi('pagingtabel', '1');
-    reset_filter_biodata();
+    if(sesi('filter_page') != 'ada'){
+        reset_filter_biodata();
+        set_awal_filter();
+    }
     $$(".preloader-biodatapns").hide();
     act_penjagaan_satyalancana20tahun();
     get_data_table_ws(sesi('fAct'));
@@ -732,13 +732,18 @@ myApp.onPageInit('satyalancana30tahun', function (page) { //start pageinit bioda
     //setting awalan default
     console.log("page init biodata_pns");
     navbar_folder();
-    setSesi('page','view/menu_penjagaan/kenaikan_gaji_berkala.html');
+    nama_menu();
+    setSesi('page_menu','view/menu_penjagaan/satyalancana30tahun.html');
     setSesi('pagingtabel', '1');
-    reset_filter_biodata();
+    if(sesi('filter_page') != 'ada'){
+        reset_filter_biodata();
+        set_awal_filter();
+    }
     $$(".preloader-biodatapns").hide();
     act_penjagaan_satyalancana30tahun();
     get_data_table_ws(sesi('fAct'));
     console.log("fAct: " + sesi('fAct'));
+    console.log("page: " + sesi('page'));
     //end awalan default
 
     $$(document).on('keypress','#search_pns',function (e){ //start #searchlist
@@ -822,12 +827,18 @@ myApp.onPageInit('usia_pensiun', function (page) { //start pageinit biodatapns
     console.log("page init biodata_pns");
     
     navbar_folder();
-    setSesi('page','view/menu_penjagaan/kenaikan_gaji_berkala.html');
+    nama_menu();
+    setSesi('page_menu','view/menu_penjagaan/usia_pensiun.html');
     setSesi('pagingtabel', '1');
-    reset_filter_biodata();
+    
+    if(sesi('filter_page') != 'ada'){
+        reset_filter_biodata();
+        set_awal_filter();
+    }
     $$(".preloader-biodatapns").hide();
     
     console.log("fAct: " + sesi('fAct'));
+    console.log("page: " + sesi('page'));
     act_penjagaan_usia_pensiun();
     get_data_table_ws(sesi('fAct'));
     //end awalan default
@@ -911,7 +922,8 @@ myApp.onPageInit('usia_pensiun', function (page) { //start pageinit biodatapns
 myApp.onPageInit('detail_pns', function (page) { //start pageinit biodatapns
     console.log("page init detail_pns" + sesi('nip_pns'));
     navbar_folder();
-    setSesi('page','view/menu_pegawai/detail_pns.html');
+    nama_menu();
+    // setSesi('page','view/menu_pegawai/detail_pns.html');
     setSesi('jenisdata', 'Jabatan');
     detail_pns();
 
@@ -946,6 +958,7 @@ function detail_pns(){
 
 myApp.onPageInit('biodata_pns_tambah', function (page) { //start pageinit biodatapns
     navbar_folder();
+    nama_menu();
     generate_unitkerja('pnstam_unitkerja');
 
     $$('#pnstam_unitkerja').on('change', function(e){ //start #pnstam_unitkerja
@@ -977,6 +990,7 @@ myApp.onPageInit('biodata_pns_tambah', function (page) { //start pageinit biodat
 
 myApp.onPageInit('biodata_pns_tambahlanjut', function (page) { //start pageinit biodatapns
     navbar_folder();
+    nama_menu();
     console.log('page init pns tambah lanjut' + sesi('unit_id') +"," + sesi('token') +",");
     calendarpicker('tmb_tgl_lahir');
 
@@ -1057,32 +1071,6 @@ function calendarpicker(id){
         },
     });
 }
-function generate_unitkerja(id){
-    console.log(sesi('level'));
-    $$("#" + id).html("");
-
-     $.ajax({
-            url: host+'action/act_get_data.php',
-            type: "post",
-            data: {act: "get_unit_kerja",username : sesi('username'), level : sesi('level')},
-            async:false,
-            success: function (data) {
-               var result = JSON.parse(data);
-               console.log(result);
-                var penampung = result['isi'].split(">");
-                for (var i = 0; i < penampung.length ; i++) {
-                    // var isi = penampung[i].split(">");
-                    
-                        myApp.smartSelectAddOption('#'+ id, '<option value="'+ penampung[i] +'">'+ penampung[i] +'</option>');
-                    
-                }
-
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-               console.log(textStatus, errorThrown);
-            }
-        });
-}
 
 //seluruh fungsi2 dibawah aj deh =====================
 
@@ -1100,7 +1088,7 @@ function get_data_table_ws(_fUnitkerja=''
                 , _fJenisJabatan='' 
                 , f_act){
     
-
+    unitkerja();
     if(sesi('fAct') == 'biodatapns'){
         console.log('hamdi '+sesi('token'));
         $$(".preloader-biodatapns").show();
@@ -1113,14 +1101,14 @@ function get_data_table_ws(_fUnitkerja=''
                 , a_token : sesi('token')
 
                 , fUnitkerja : sesi('fUnitkerja')
-                , fUnitkerjaSub : _fUnitkerjaSub
-                , fNIP : _fNIP
+                , fUnitkerjaSub : sesi('fSubUnitkerja')
+                , fNIP : sesi('fNip')
                 , fNama : sesi('fNama')
-                , fEselon : _fEselon
+                , fEselon : sesi('fEselon')
                 , fJeniskelamin : sesi('fJeniskelamin')
-                , fAgama: _fAgama
-                , fPendidikan : _fPendidikan
-                , fPangkat : _fPangkat
+                , fAgama: sesi('fAgama')
+                , fPendidikan : sesi('fPendidikan')
+                , fPangkat : sesi('fPangkat')
                 , fBanyakData : sesi('fBanyakData')
                 , fTipePegawai : _fTipePegawai
                 , fJenisJabatan : _fJenisJabatan
@@ -1139,6 +1127,7 @@ function get_data_table_ws(_fUnitkerja=''
     }
     else if(sesi('fAct') == 'kenaikan_pangkat_reguler'){
         console.log('hamdi '+sesi('token'));
+        
         $$(".preloader-biodatapns").show();
         $$.post(host+'action/act_penjagaan.php'
             ,{act : sesi("fAct")
@@ -1149,14 +1138,14 @@ function get_data_table_ws(_fUnitkerja=''
                 , a_token : sesi('token')
 
                 , fUnitkerja : sesi('fUnitkerja')
-                , fUnitkerjaSub : _fUnitkerjaSub
-                , fNIP : _fNIP
+                , fUnitkerjaSub : sesi('fSubUnitkerja')
+                , fNIP : sesi('fNip')
                 , fNama : sesi('fNama')
-                , fEselon : _fEselon
+                , fEselon : sesi('fEselon')
                 , fJeniskelamin : sesi('fJeniskelamin')
-                , fAgama: _fAgama
-                , fPendidikan : _fPendidikan
-                , fPangkat : _fPangkat
+                , fAgama: sesi('fAgama')
+                , fPendidikan : sesi('fPendidikan')
+                , fPangkat : sesi('fPangkat')
                 , fBanyakData : sesi('fBanyakData')
                 , fTipePegawai : _fTipePegawai
                 , fJenisJabatan : _fJenisJabatan
@@ -1175,6 +1164,7 @@ function get_data_table_ws(_fUnitkerja=''
     }
     else if(sesi('fAct') == 'kenaikan_pangkat_pilihan'){
         console.log('hamdi '+sesi('token'));
+        // dialog(sesi('fUnitkerja'));
         $$(".preloader-biodatapns").show();
         $$.post(host+'action/act_penjagaan.php'
             ,{act : sesi("fAct")
@@ -1185,14 +1175,14 @@ function get_data_table_ws(_fUnitkerja=''
                 , a_token : sesi('token')
 
                 , fUnitkerja : sesi('fUnitkerja')
-                , fUnitkerjaSub : _fUnitkerjaSub
-                , fNIP : _fNIP
+                , fUnitkerjaSub : sesi('fSubUnitkerja')
+                , fNIP : sesi('fNip')
                 , fNama : sesi('fNama')
-                , fEselon : _fEselon
+                , fEselon : sesi('fEselon')
                 , fJeniskelamin : sesi('fJeniskelamin')
-                , fAgama: _fAgama
-                , fPendidikan : _fPendidikan
-                , fPangkat : _fPangkat
+                , fAgama: sesi('fAgama')
+                , fPendidikan : sesi('fPendidikan')
+                , fPangkat : sesi('fPangkat')
                 , fBanyakData : sesi('fBanyakData')
                 , fTipePegawai : _fTipePegawai
                 , fJenisJabatan : _fJenisJabatan
@@ -1221,14 +1211,14 @@ function get_data_table_ws(_fUnitkerja=''
                 , a_token : sesi('token')
 
                 , fUnitkerja : sesi('fUnitkerja')
-                , fUnitkerjaSub : _fUnitkerjaSub
-                , fNIP : _fNIP
+                , fUnitkerjaSub : sesi('fSubUnitkerja')
+                , fNIP : sesi('fNip')
                 , fNama : sesi('fNama')
-                , fEselon : _fEselon
+                , fEselon : sesi('fEselon')
                 , fJeniskelamin : sesi('fJeniskelamin')
-                , fAgama: _fAgama
-                , fPendidikan : _fPendidikan
-                , fPangkat : _fPangkat
+                , fAgama: sesi('fAgama')
+                , fPendidikan : sesi('fPendidikan')
+                , fPangkat : sesi('fPangkat')
                 , fBanyakData : sesi('fBanyakData')
                 , fTipePegawai : _fTipePegawai
                 , fJenisJabatan : _fJenisJabatan
@@ -1248,6 +1238,7 @@ function get_data_table_ws(_fUnitkerja=''
     else if(sesi('fAct') == 'satyalancana10tahun'){
         console.log('hamdi '+sesi('token'));
         $$(".preloader-biodatapns").show();
+        
         $$.post(host+'action/act_penjagaan.php'
             ,{act : sesi("fAct")
             
@@ -1257,14 +1248,14 @@ function get_data_table_ws(_fUnitkerja=''
                 , a_token : sesi('token')
 
                 , fUnitkerja : sesi('fUnitkerja')
-                , fUnitkerjaSub : _fUnitkerjaSub
-                , fNIP : _fNIP
+                , fUnitkerjaSub : sesi('fSubUnitkerja')
+                , fNIP : sesi('fNip')
                 , fNama : sesi('fNama')
-                , fEselon : _fEselon
+                , fEselon : sesi('fEselon')
                 , fJeniskelamin : sesi('fJeniskelamin')
-                , fAgama: _fAgama
-                , fPendidikan : _fPendidikan
-                , fPangkat : _fPangkat
+                , fAgama: sesi('fAgama')
+                , fPendidikan : sesi('fPendidikan')
+                , fPangkat : sesi('fPangkat')
                 , fBanyakData : sesi('fBanyakData')
                 , fTipePegawai : _fTipePegawai
                 , fJenisJabatan : _fJenisJabatan
@@ -1293,14 +1284,14 @@ function get_data_table_ws(_fUnitkerja=''
                 , a_token : sesi('token')
 
                 , fUnitkerja : sesi('fUnitkerja')
-                , fUnitkerjaSub : _fUnitkerjaSub
-                , fNIP : _fNIP
+                , fUnitkerjaSub : sesi('fSubUnitkerja')
+                , fNIP : sesi('fNip')
                 , fNama : sesi('fNama')
-                , fEselon : _fEselon
+                , fEselon : sesi('fEselon')
                 , fJeniskelamin : sesi('fJeniskelamin')
-                , fAgama: _fAgama
-                , fPendidikan : _fPendidikan
-                , fPangkat : _fPangkat
+                , fAgama: sesi('fAgama')
+                , fPendidikan : sesi('fPendidikan')
+                , fPangkat : sesi('fPangkat')
                 , fBanyakData : sesi('fBanyakData')
                 , fTipePegawai : _fTipePegawai
                 , fJenisJabatan : _fJenisJabatan
@@ -1329,14 +1320,14 @@ function get_data_table_ws(_fUnitkerja=''
                 , a_token : sesi('token')
 
                 , fUnitkerja : sesi('fUnitkerja')
-                , fUnitkerjaSub : _fUnitkerjaSub
-                , fNIP : _fNIP
+                , fUnitkerjaSub : sesi('fSubUnitkerja')
+                , fNIP : sesi('fNip')
                 , fNama : sesi('fNama')
-                , fEselon : _fEselon
+                , fEselon : sesi('fEselon')
                 , fJeniskelamin : sesi('fJeniskelamin')
-                , fAgama: _fAgama
-                , fPendidikan : _fPendidikan
-                , fPangkat : _fPangkat
+                , fAgama: sesi('fAgama')
+                , fPendidikan : sesi('fPendidikan')
+                , fPangkat : sesi('fPangkat')
                 , fBanyakData : sesi('fBanyakData')
                 , fTipePegawai : _fTipePegawai
                 , fJenisJabatan : _fJenisJabatan
@@ -1365,14 +1356,14 @@ function get_data_table_ws(_fUnitkerja=''
                 , a_token : sesi('token')
 
                 , fUnitkerja : sesi('fUnitkerja')
-                , fUnitkerjaSub : _fUnitkerjaSub
-                , fNIP : _fNIP
+                , fUnitkerjaSub : sesi('fSubUnitkerja')
+                , fNIP : sesi('fNip')
                 , fNama : sesi('fNama')
-                , fEselon : _fEselon
+                , fEselon : sesi('fEselon')
                 , fJeniskelamin : sesi('fJeniskelamin')
-                , fAgama: _fAgama
-                , fPendidikan : _fPendidikan
-                , fPangkat : _fPangkat
+                , fAgama: sesi('fAgama')
+                , fPendidikan : sesi('fPendidikan')
+                , fPangkat : sesi('fPangkat')
                 , fBanyakData : sesi('fBanyakData')
                 , fTipePegawai : _fTipePegawai
                 , fJenisJabatan : _fJenisJabatan
@@ -1392,10 +1383,52 @@ function get_data_table_ws(_fUnitkerja=''
 
     
 }
-function tampilkan_isi_tabel(){
+function tampilkan_isi_tabel(fAct){
     var qty_tampil = 10;
     var isitabelfix = "";
 
+    // if(fAct == 'satyalancana30tahun'){
+    //     var isitabel = sesi('isi_satyalancana30tahun');
+    //     var spliter = isitabel.split("@");
+    //     var halaman = parseInt(sesi('pagingtabel'));
+    //     var awal = (halaman - 1) * qty_tampil;
+    //     var akhir = halaman *qty_tampil;
+    //     var totaldata = spliter.length;
+
+    //     console.log(awal +" l" + akhir);
+    //     var a = isitabel.split("@");
+    //     for(var i = awal; i < akhir ; i++){
+    //         isitabelfix = isitabelfix +   spliter[i];     
+    //         if(i == (totaldata-1)){
+    //             break;
+    //         }    
+    //     }
+    //     $$(".isi-biodatapns").html(isitabelfix);
+    //     //untuk p;aging cuy
+        
+    //     bikin_paging(totaldata, "page_biodatapns");
+    // }
+    // else if(fAct == 'usia_pensiun'){
+    //     var isitabel = sesi('isi_usia_pensiun');
+    //     var spliter = isitabel.split("@");
+    //     var halaman = parseInt(sesi('pagingtabel'));
+    //     var awal = (halaman - 1) * qty_tampil;
+    //     var akhir = halaman *qty_tampil;
+    //     var totaldata = spliter.length;
+
+    //     console.log(awal +" l" + akhir);
+    //     var a = isitabel.split("@");
+    //     for(var i = awal; i < akhir ; i++){
+    //         isitabelfix = isitabelfix +   spliter[i];     
+    //         if(i == (totaldata-1)){
+    //             break;
+    //         }    
+    //     }
+    //     $$(".isi-biodatapns").html(isitabelfix);
+    //     //untuk p;aging cuy
+        
+    //     bikin_paging(totaldata, "page_biodatapns");
+    // }
         var isitabel = sesi('isi_biodatapns');
         var spliter = isitabel.split("@");
         var halaman = parseInt(sesi('pagingtabel'));
@@ -1516,11 +1549,183 @@ function bikin_paging(totaldata,idhtmlpaging){
     console.log(penghitung);
     $$("." + idhtmlpaging).html(hasilpaging);     
 } //end fungsi bkin paging
+
+function generate_unitkerja(id){
+    console.log(sesi('level'));
+    $$("#" + id).html("");
+    setSesi('fUnitkerja', '');
+     $.ajax({
+            url: host+'action/act_get_data.php',
+            type: "post",
+            data: {act: "get_unit_kerja",username : sesi('username'), level : sesi('level'), unit_id: sesi('unit_id')},
+            async:false,
+            success: function (data) {
+               var result = JSON.parse(data);
+               // console.log(result);
+                // var penampung = result['isi'].split(">");
+                if(sesi('folder') == 'admin'){
+                    myApp.smartSelectAddOption('#'+ id, '<option value="">SEMUA UNIT KERJA</option>');
+                }
+                
+                for (var i = 0; i < result.length ; i++) {
+                    // var isi = penampung[i].split(">");
+                        setSesi('fUnitkerja', $$("#" + id).val());
+                        myApp.smartSelectAddOption('#'+ id, '<option value="'+ result[i]['unit_id'] +'">'+ result[i]['isi'] +'</option>');
+                }
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log(textStatus, errorThrown);
+            }
+        });
+}
+
+function generate_subunitkerja(id, unit_id_change){
+    console.log(sesi('level'));
+    $$("#" + id).html("");
+    myApp.smartSelectAddOption('#'+ id, '<option value="">SEMUA SUB UNIT KERJA</option>');
+    if(unit_id_change == ''){
+        setSesi('fSubUnitkerja', '');
+    }
+    else{
+        $.ajax({
+            url: host+'action/act_get_data.php',
+            type: "post",
+            data: {act: "get_sub_unit_kerja", unit_id_atasan: unit_id_change},
+            async:false,
+            success: function (data) {
+               var result = JSON.parse(data);
+               console.log(result);
+                // var penampung = result['isi'].split(">");
+                
+                for (var i = 0; i < result.length ; i++) {
+                    // var isi = penampung[i].split(">");
+                        setSesi('fSubUnitkerja', $$("#" + id).val());
+
+                        myApp.smartSelectAddOption('#'+ id, '<option value="'+ result[i]['unit_id'] +'">'+ result[i]['isi'] +'</option>');
+                }
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log(textStatus, errorThrown);
+            }
+        });
+    }
+     
+}
+
+function generate_eselon(id){
+     console.log(sesi('level'));
+    $$("#" + id).html("");
+    setSesi('fEselon', '');
+     $.ajax({
+            url: host+'action/act_get_data.php',
+            type: "post",
+            data: {act: "get_eselon"},
+            async:false,
+            success: function (data) {
+               var result = JSON.parse(data);
+               // console.log(result);
+                // var penampung = result['isi'].split(">");
+                myApp.smartSelectAddOption('#'+ id, '<option value="">SEMUA ESELON</option>');
+                for (var i = 0; i < result.length ; i++) {
+                    // var isi = penampung[i].split(">");
+                        setSesi('fEselon', $$("#" + id).val());
+                        myApp.smartSelectAddOption('#'+ id, '<option value="'+ result[i]['isi'] +'">'+ result[i]['isi'] +'</option>');
+                }
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log(textStatus, errorThrown);
+            }
+        });
+}
+
+function generate_agama(id){
+     console.log(sesi('level'));
+    $$("#" + id).html("");
+    setSesi('fAgama', '');
+     $.ajax({
+            url: host+'action/act_get_data.php',
+            type: "post",
+            data: {act: "get_agama"},
+            async:false,
+            success: function (data) {
+               var result = JSON.parse(data);
+               // console.log(result);
+                // var penampung = result['isi'].split(">");
+                myApp.smartSelectAddOption('#'+ id, '<option value="">SEMUA AGAMA</option>');
+                for (var i = 0; i < result.length ; i++) {
+                    // var isi = penampung[i].split(">");
+                        setSesi('fAgama', $$("#" + id).val());
+                        myApp.smartSelectAddOption('#'+ id, '<option value="'+ result[i]['isi'] +'">'+ result[i]['isi'] +'</option>');
+                }
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log(textStatus, errorThrown);
+            }
+        });
+}
+
+function generate_pendidikan(id){
+     console.log(sesi('level'));
+    $$("#" + id).html("");
+    setSesi('fPendidikan', '');
+     $.ajax({
+            url: host+'action/act_get_data.php',
+            type: "post",
+            data: {act: "get_pendidikan"},
+            async:false,
+            success: function (data) {
+               var result = JSON.parse(data);
+               // console.log(result);
+                // var penampung = result['isi'].split(">");
+                myApp.smartSelectAddOption('#'+ id, '<option value="">SEMUA PENDIDIKAN</option>');
+                for (var i = 0; i < result.length ; i++) {
+                    // var isi = penampung[i].split(">");
+                        setSesi('fPendidikan', $$("#" + id).val());
+                        myApp.smartSelectAddOption('#'+ id, '<option value="'+ result[i]['isi'] +'">'+ result[i]['isi'] +'</option>');
+                }
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log(textStatus, errorThrown);
+            }
+        });
+}
+
+function generate_pangkat(id){
+     console.log(sesi('level'));
+    $$("#" + id).html("");
+    setSesi('fPangkat', '');
+     $.ajax({
+            url: host+'action/act_get_data.php',
+            type: "post",
+            data: {act: "get_pangkat"},
+            async:false,
+            success: function (data) {
+               var result = JSON.parse(data);
+               // console.log(result);
+                // var penampung = result['isi'].split(">");
+                myApp.smartSelectAddOption('#'+ id, '<option value="">SEMUA PANGKAT</option>');
+                for (var i = 0; i < result.length ; i++) {
+                    // var isi = penampung[i].split(">");
+                        setSesi('fPangkat', $$("#" + id).val());
+                        myApp.smartSelectAddOption('#'+ id, '<option value="'+ result[i]['kode'] +'">'+ result[i]['isi'] +'</option>');
+                }
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log(textStatus, errorThrown);
+            }
+        });
+}
+
 //------------------------------------- view/menu_pegawai/filter-pns.html -----------------------
 myApp.onPageInit('filter-pns', function (page) { //start pageinit filter-pns
     set_awal_filter();
-    // console.log(sesi('fAct'));
-    // setSesi('fAct', sesi('fAct'));
+    // dialog($$('#fSubUnitkerja').val());
 
     $$(document).on('click','.chip.chipfilterjasa',function(e){ //start #chipfilterjasa
         var idchip = $$(this).data('urut');
@@ -1547,30 +1752,91 @@ myApp.onPageInit('filter-pns', function (page) { //start pageinit filter-pns
     
     $$('#fUnitkerja').on('change', function(){ //start #aa_area_tam change
         var val = $$(this).val();
-        console.log(val);
+        // console.log(val);
+
         setSesi('fUnitkerja', val);
+        generate_subunitkerja('fSubUnitkerja', val);
         // fUnitkerja
     }); //stop #aa_area_tam change
+
+    $$('#fSubUnitkerja').on('change', function(){ //start #aa_area_tam change
+        var val = $$(this).val();
+        // console.log(val);
+
+        setSesi('fSubUnitkerja', val);
+        // generate_subunitkerja('fSubUnitkerja', $$('#fUnitkerja').val());
+        // fUnitkerja
+    });
+
+    $$('#fAgama').on('change', function(){ //start #aa_area_tam change
+        var val = $$(this).val();
+        // console.log(val);
+
+        setSesi('fAgama', val);
+        // generate_subunitkerja('fSubUnitkerja', $$('#fUnitkerja').val());
+        // fUnitkerja
+    });
+
+    $$('#fEselon').on('change', function(){ //start #aa_area_tam change
+        var val = $$(this).val();
+        // console.log(val);
+
+        setSesi('fEselon', val);
+        // generate_subunitkerja('fSubUnitkerja', $$('#fUnitkerja').val());
+        // fUnitkerja
+    });
+
+    $$('#fPendidikan').on('change', function(){ //start #aa_area_tam change
+        var val = $$(this).val();
+        // console.log(val);
+
+        setSesi('fPendidikan', val);
+        // generate_subunitkerja('fSubUnitkerja', $$('#fUnitkerja').val());
+        // fUnitkerja
+    });
+
+    $$('#fPangkat').on('change', function(){ //start #aa_area_tam change
+        var val = $$(this).val();
+        // console.log(val);
+
+        setSesi('fPangkat', val);
+        // generate_subunitkerja('fSubUnitkerja', $$('#fUnitkerja').val());
+        // fUnitkerja
+    });
   
     $$(document).on('click','#reset-filter_pns',function(e){ //start #reset-filter_pns
         e.stopImmediatePropagation();
         reset_filter_biodata();
         // act_biodata();
-        setSesi('fAct', sesi('fAct'));
+        // setSesi('fAct', sesi('fAct'));
         get_data_table_ws(sesi("fAct"));
         dialog('Filter Telah Direset');
         refresh();
 
         });/* end reset-filter_pns */
 
-    $$(document).on('click','.apply-filter_pns',function(e){ //start #reset-filter_pns
+    $$(document).on('click','#back',function(e){ //start #reset-filter_pns
+        e.stopImmediatePropagation();
+        reset_filter_biodata();
+        // act_biodata();
+        // setSesi('fAct', sesi('fAct'));
+        get_data_table_ws(sesi("fAct"));
+        refresh();
+
+        });
+
+    $$(document).on('click','#apply-filter_pns',function(e){ //start #reset-filter_pns
         e.stopImmediatePropagation();
         // act_biodata();
         // act_penjagaan_usia_pensiun();
         // setSesi('fAct', sesi('fAct'));
         get_data_table_ws(sesi('fAct'));
-        back();
+        load_page(sesi('page_menu'));
+        // back();
         console.log(sesi('fJeniskelamin'));
+        setSesi('filter_page', 'ada');
+        setSesi('fNip', $$('#fNIP').val());
+        setSesi('fNama', $$('#fNama').val());
         });/* end reset-filter_pns */
 }); //end pageinit filter-pns
 
@@ -1611,14 +1877,23 @@ function act_penjagaan_usia_pensiun(){
 
 function reset_filter_biodata(){
     setSesi('fUnitkerja', '');
+    setSesi('fSubUnitkerja', '');
     setSesi('fJeniskelamin', '');
     setSesi('fBanyakData', '20');
-    setSesi('fNama', '');
+    setSesi('fNama', '');    
+    setSesi('fNip', '');    
+    setSesi('fEselon', '');    
+    setSesi('fAgama', '');    
+    setSesi('fPendidikan', '');    
+    setSesi('fPangkat', '');    
     setSesi('fAct', '');
 }
 
 function set_awal_filter(){
     sesi('fAct');
+    if(sesi('filter_page') == 'login'){
+        reset_filter_biodata();
+    }
     var mySwiper3 = myApp.swiper('.swiper-3', {
         pagination:'.swiper-3 .swiper-pagination',
         spaceBetween: 20,
@@ -1647,6 +1922,11 @@ function set_awal_filter(){
     var bnykdata =sesi("fBanyakData"); $$("#total"+bnykdata).addClass("dav-chipfilter_selected");
 
 generate_unitkerja('fUnitkerja');
+generate_subunitkerja('fSubUnitkerja', sesi('fUnitkerja'));
+generate_eselon('fEselon');
+generate_agama('fAgama');
+generate_pendidikan('fPendidikan');
+generate_pangkat('fPangkat');
     //
 
 }
@@ -1655,10 +1935,14 @@ function refresh(){
     mainView.router.refreshPage();
 }
 function back(){
+    // mainView.router.loadPage(urlP);
     mainView.router.back();
 }
 function load_page(url){
     mainView.router.loadPage(url);
+}
+function loadUrl(urlP){
+    mainView.router.load({url: urlP, reload: false, ignoreCache: false});
 }
 function setSesi(nama,value){
     localStorage.setItem(nama, value);
@@ -1744,10 +2028,19 @@ function setStoragePaging(url){
     localStorage.paging = url;
 }
 
+function unitkerja(){
+    if(sesi('folder') == 'opd'){
+        setSesi('fUnitkerja', sesi('unit_id'));
+    }
+}
+
 function navbar_folder(){
     if(sesi('folder') == 'pegawai'){
         $$('#nav_penjagaan').hide();
         $$('#nav_proses').hide();
+        $$('#nav_masterdata').hide();
+    }
+    else if(sesi('folder') == 'opd'){
         $$('#nav_masterdata').hide();
     }
     else{
@@ -1759,7 +2052,7 @@ function navbar_folder(){
 
 function link_biodata(){
     $$('#link-bio').on('click', function(){
-        if(sesi('folder') == 'admin'){
+        if(sesi('folder') == 'admin' || sesi('folder') == 'opd'){
             load_page("view/menu_pegawai/biodata_pns.html");
         }
         else if(sesi('folder') == 'pegawai'){
@@ -1767,6 +2060,39 @@ function link_biodata(){
         }
     })
     
+}
+
+function nama_menu(){
+    $$.post(h+'android_webservice/action/act_login.php',{act : "index", username: sesi('username')}, function (response) {
+        // console.log(response);
+        var arr=JSON.parse(response);
+        // console.log(arr[0]);
+        setSesi('nama', arr[0]['nama'])
+        if(sesi('folder') == 'admin'){
+            $$("#home-font1").html(sesi('username'));
+            $$("#home-font2").html(sesi('no_nip'));
+
+
+            $$("#greeting2").html(sesi('username'));
+            $$("#userlogin").html(sesi('no_nip'));
+        }
+        else if(sesi('folder') == 'opd'){
+            $$("#home-font1").html(arr[0]['username']);
+            $$("#home-font2").html(sesi('no_nip'));
+
+
+            $$("#greeting2").html(arr[0]['username']);
+            $$("#userlogin").html(sesi('no_nip'));
+        }
+        else{
+            $$("#home-font1").html(sesi('nama'));
+            $$("#home-font2").html(sesi('no_nip'));
+
+
+            $$("#greeting2").html(sesi('nama'));
+            $$("#userlogin").html(sesi('no_nip'));
+        }
+    });
 }
 /*
 $$.post(h+'interface/testabelhamdi.php'
