@@ -193,19 +193,10 @@ myApp.onPageInit('cetak', function (page) {
                 , fJenisJabatan : ''
         }, function (response) { 
           $$('#test').html(response);
-          // $$(document).on('deviceready', function() {
-          //       $$('#example').html(response);
-          //   } );
-          $$.get(host+'action/fPrint.php'
-                , function (response) { 
-              // $$(document).on('deviceready', function() {
-              //       $$('#example').html(response);
-              //   } );
-              dialog('kwadaw');
-            });
+          $$(document).on('deviceready', function() {
+                $$('#example').html(response);
+            } );
         });
-
-
 });
 
 //------------------------------------- halaman biodatapns -----------------------------------------------------------
@@ -227,7 +218,9 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
     // console.log("Unit:" + sesi('fUnitKerja'));
     //end awalan default
 
-
+    $$(document).on('click','#preview_print',function(e){ //start #searchlist
+        load_page('view/menu_pegawai/cetak.html');
+    });
 
     $$(document).on('keypress','#search_pns',function (e){ //start #searchlist
         if(e.which === 13){
