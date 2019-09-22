@@ -200,8 +200,8 @@ myApp.onPageInit('cetak', function (page) {
                     $$('#example').html(response);
                 } );
             });
-            window.open = cordova.InAppBrowser.open;
-            var ref = cordova.InAppBrowser.open(host + "action/act_print.php");
+            // window.open(host + "action/act_print.php");
+            // var ref = cordova.InAppBrowser.open(host + "action/act_print.php");
         });
     })
 });
@@ -250,8 +250,8 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
                         $$('#example').html(response);
                     } );
                 });
-                window.open = cordova.InAppBrowser.open;
-                var ref = cordova.InAppBrowser.open(host + "action/act_print.php");
+                // window.open = cordova.InAppBrowser.open;
+                // var ref = cordova.InAppBrowser.open(host + "action/act_print.php");
             });
         
     });
