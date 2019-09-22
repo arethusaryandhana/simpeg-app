@@ -175,7 +175,11 @@ myApp.onPageInit('home', function (page) { //start pageinit home'
         $$('#home_pegawai').show();
         $$('#home_super').hide();
         $$('#link-profile').hide();
-        detail_pns();
+        $$('.bio_pegawaiku').on('click',function(){
+            load_page("view/menu_pegawai/detail_pns.html");
+            setSesi('nip_pns', sesi('username'));
+        })
+        
     }
 
     setSesi('page','view/home.html');
