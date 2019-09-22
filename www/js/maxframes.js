@@ -205,7 +205,6 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
     console.log("page init biodata_pns");
     navbar_folder();
     nama_menu();
-    console.log(localStorage);
     setSesi('page_menu','view/menu_pegawai/biodata_pns.html');
     setSesi('pagingtabel', '1');
     if(sesi('filter_page') != 'ada'){
@@ -955,12 +954,7 @@ myApp.onPageInit('detail_pns', function (page) { //start pageinit biodatapns
     navbar_folder();
     nama_menu();
     // setSesi('page','view/menu_pegawai/detail_pns.html');
-    if(sesi('jenisdata') == "" || sesi('jenisdata') == undefined){
-        setSesi('jenisdata', "0");
-    }
-    else{
-        sesi('jenisdata');
-    }    
+    setSesi('jenisdata', "0");   
 
     detail_pns();
 
@@ -1031,13 +1025,11 @@ myApp.onPageInit('detail_pns', function (page) { //start pageinit biodatapns
                 else if (data == 'success'){ 
                     
                     dialog('Data Bagian 1 berhasil tersimpan!');
-                    setSesi('jenisdata', 'Jabatan');
-                    $$('#detail_pnsdata').val(sesi('jenisdata'));
                     refresh();
                 }
                 else 
                 {
-                    dialog('warning ', data);
+                    dialog('warning: ' + data);
                 }
                 $$('#simpan_bio_1').hide();
                 $$('.form_simpan').hide();
@@ -1046,21 +1038,508 @@ myApp.onPageInit('detail_pns', function (page) { //start pageinit biodatapns
             });
         }); 
 
-         $$('#edit_bio_2').on('click', function(e){ //start #pnstam_unitkerja
+        $$('#edit_bio_2').on('click', function(e){ //start #pnstam_unitkerja
            e.stopImmediatePropagation();
            $$('.form_edit').hide();
            $$('#edit_bio_2').hide();
            $$('#simpan_bio_2').show();
-           $$('.form_simpan').show();
+           $$('.form_simpan').show();           
         }); 
 
         $$('#simpan_bio_2').on('click', function(e){ //start #pnstam_unitkerja
            e.stopImmediatePropagation();
-           $$('.form_edit').show();
-           $$('#edit_bio_2').show();
-           $$('#simpan_bio_2').hide();
-           $$('.form_simpan').hide();
+           
+           var nip_awal = $$('#'+sesi('nip_pns')+'_f_nip_awal').val(); 
+            var nip = $$('#'+sesi('nip_pns')+'_f_nip').val(); 
+            var gelar_depan = $$('#'+sesi('nip_pns')+'_f_gelar_depan').val(); 
+            var nama = $$('#'+sesi('nip_pns')+'_f_nama').val();
+            var gelar_belakang = $$('#'+sesi('nip_pns')+'_f_gelar_belakang').val(); 
+            var tempat_lahir = $$('#'+sesi('nip_pns')+'_f_tempat_lahir').val(); 
+            var kota_lahir = $$('#'+sesi('nip_pns')+'_f_kota_lahir').val();
+            var propinsi_lahir = $$('#'+sesi('nip_pns')+'_f_propinsi_lahir').val(); 
+            var tgl_lahir = $$('#'+sesi('nip_pns')+'_f_tgl_lahir').val(); 
+            var alamat = $$('#'+sesi('nip_pns')+'_f_alamat').val(); 
+            var kota = $$('#'+sesi('nip_pns')+'_f_kota').val();  
+            var propinsi = $$('#'+sesi('nip_pns')+'_f_propinsi').val(); 
+            var jenis_kelamin = $$('#'+sesi('nip_pns')+'_f_jenis_kelamin').val();  
+            var agama = $$('#'+sesi('nip_pns')+'_f_agama').val();  
+            var status_perkawinan = $$('#'+sesi('nip_pns')+'_f_status_perkawinan').val(); 
+            var gol_darah = $$('#'+sesi('nip_pns')+'_f_gol_darah').val(); 
+
+            $$.post(h+'/webservice/ws_simpan_data_edit_pns_bag_2.php', { 
+                token: sesi('token') 
+                , nip_awal: nip_awal 
+                , nip: nip
+                , gelar_depan: gelar_depan 
+                , nama: nama 
+                , gelar_belakang: gelar_belakang 
+                , tempat_lahir: tempat_lahir 
+                , kota_lahir: kota_lahir 
+                , propinsi_lahir: propinsi_lahir 
+                , tgl_lahir: tgl_lahir 
+                , alamat: alamat 
+                , kota: kota  
+                , propinsi: propinsi 
+                , jenis_kelamin: jenis_kelamin 
+                , agama: agama 
+                , status_perkawinan: status_perkawinan
+                , gol_darah: gol_darah  
+            }, 
+            function (data) {    
+                // alert("hamdi " + data);
+                console.log(data);
+                if(data=="xxxxxxxxxxx")
+                {
+                    dialog("token salah atau habis masa berlaku. Silakan login lagi");
+                    load_page("view/sign-in.html");
+                }
+                else if (data == 'success'){ 
+                    
+                    dialog('Data Bagian 2 berhasil tersimpan!');
+                    refresh();
+                }
+                else 
+                {
+                    dialog('warning: ' + data);
+                }
+                $$('.form_edit').show();
+               $$('#edit_bio_2').show();
+               $$('#simpan_bio_2').hide();
+               $$('.form_simpan').hide();
+            });
         }); 
+
+        $$('#edit_bio_3').on('click', function(e){ //start #pnstam_unitkerja
+           e.stopImmediatePropagation();
+           $$('.form_edit').hide();
+           $$('#edit_bio_3').hide();
+           $$('#simpan_bio_3').show();
+           $$('.form_simpan').show();           
+        }); 
+
+        $$('#simpan_bio_3').on('click', function(e){ //start #pnstam_unitkerja
+           e.stopImmediatePropagation();
+           
+           var pendidikan = $$('#'+sesi('nip_pns')+'_f_pendidikan').val(); 
+            var jurusan = $$('#'+sesi('nip_pns')+'_f_jurusan').val(); 
+            var tgl_lulus = $$('#'+sesi('nip_pns')+'_f_tgl_lulus').val(); 
+
+            $$.post(h+'/webservice/ws_simpan_data_edit_pns_bag_3.php', { 
+                token: sesi('token') 
+                , nip: sesi('nip_pns')  
+                , pendidikan: pendidikan 
+                , jurusan: jurusan 
+                , tgl_lulus: tgl_lulus    
+            }, 
+            function (data) {    
+                // alert("hamdi " + data);
+                console.log(data);
+                if(data=="xxxxxxxxxxx")
+                {
+                    dialog("token salah atau habis masa berlaku. Silakan login lagi");
+                    load_page("view/sign-in.html");
+                }
+                else if (data == 'success'){ 
+                    
+                    dialog('Data Bagian 3 berhasil tersimpan!');
+                    refresh();
+                }
+                else 
+                {
+                    dialog('warning: ' + data);
+                }
+                $$('.form_edit').show();
+               $$('#edit_bio_3').show();
+               $$('#simpan_bio_3').hide();
+               $$('.form_simpan').hide();
+            });
+        }); 
+
+        $$('#edit_bio_4').on('click', function(e){ //start #pnstam_unitkerja
+           e.stopImmediatePropagation();
+           $$('.form_edit').hide();
+           $$('#edit_bio_4').hide();
+           $$('#simpan_bio_4').show();
+           $$('.form_simpan').show();           
+        }); 
+
+        $$('#simpan_bio_4').on('click', function(e){ //start #pnstam_unitkerja
+           e.stopImmediatePropagation();
+           
+           var statpeg = $$('#'+sesi('nip_pns')+'_f_statpeg').val(); 
+            var no_karpeg = $$('#'+sesi('nip_pns')+'_f_no_karpeg').val(); 
+            var no_taspen = $$('#'+sesi('nip_pns')+'_f_no_taspen').val();
+            var no_npwp = $$('#'+sesi('nip_pns')+'_f_no_npwp').val(); 
+            var no_askes = $$('#'+sesi('nip_pns')+'_f_no_askes').val(); 
+            var no_kariskarsu = $$('#'+sesi('nip_pns')+'_f_no_kariskarsu').val(); 
+
+            $$.post(h+'/webservice/ws_simpan_data_edit_pns_bag_4.php', { 
+                token: sesi('token') 
+                , nip: sesi('nip_pns')  
+                , statpeg: statpeg 
+                , no_karpeg: no_karpeg 
+                , no_taspen: no_taspen  
+                , no_npwp: no_npwp 
+                , no_askes: no_askes 
+                , no_kariskarsu: no_kariskarsu   
+            }, 
+            function (data) {    
+                // alert("hamdi " + data);
+                console.log(data);
+                if(data=="xxxxxxxxxxx")
+                {
+                    dialog("token salah atau habis masa berlaku. Silakan login lagi");
+                    load_page("view/sign-in.html");
+                }
+                else if (data == 'success'){ 
+                    
+                    dialog('Data Bagian 4 berhasil tersimpan!');
+                    refresh();
+                }
+                else 
+                {
+                    dialog('warning: ' + data);
+                }
+                $$('.form_edit').show();
+               $$('#edit_bio_4').show();
+               $$('#simpan_bio_4').hide();
+               $$('.form_simpan').hide();
+            });
+        }); 
+
+        $$('#edit_bio_5').on('click', function(e){ //start #pnstam_unitkerja
+           e.stopImmediatePropagation();
+           $$('.form_edit').hide();
+           $$('#edit_bio_5').hide();
+           $$('#simpan_bio_5').show();
+           $$('.form_simpan').show();           
+        }); 
+
+        $$('#simpan_bio_5').on('click', function(e){ //start #pnstam_unitkerja
+           e.stopImmediatePropagation();
+           
+           var nobkn_cpns = $$('#'+sesi('nip_pns')+'_f_nobkn_cpns').val(); 
+            var tglbkn_cpns = $$('#'+sesi('nip_pns')+'_f_tglbkn_cpns').val(); 
+            var pejabat_penetap_cpns = $$('#'+sesi('nip_pns')+'_f_pejabat_penetap_cpns').val();
+            var pangkat_cpns = $$('#'+sesi('nip_pns')+'_f_pangkat_cpns').val(); 
+            var nosk_cpns = $$('#'+sesi('nip_pns')+'_f_nosk_cpns').val(); 
+            var tglsk_cpns = $$('#'+sesi('nip_pns')+'_f_tglsk_cpns').val();  
+            var tmt_cpns = $$('#'+sesi('nip_pns')+'_f_tmt_cpns').val();  
+
+            $$.post(h+'/webservice/ws_simpan_data_edit_pns_bag_5.php', { 
+                token: sesi('token') 
+                , nip: sesi('nip_pns')  
+                , nobkn_cpns: nobkn_cpns 
+                , tglbkn_cpns: tglbkn_cpns 
+                , pejabat_penetap_cpns: pejabat_penetap_cpns  
+                , pangkat_cpns: pangkat_cpns 
+                , nosk_cpns: nosk_cpns 
+                , tglsk_cpns: tglsk_cpns  
+                , tmt_cpns: tmt_cpns  
+            }, 
+            function (data) {    
+                // alert("hamdi " + data);
+                console.log(data);
+                if(data=="xxxxxxxxxxx")
+                {
+                    dialog("token salah atau habis masa berlaku. Silakan login lagi");
+                    load_page("view/sign-in.html");
+                }
+                else if (data == 'success'){ 
+                    
+                    dialog('Data Bagian 5 berhasil tersimpan!');
+                    refresh();
+                }
+                else 
+                {
+                    dialog('warning: ' + data);
+                }
+                $$('.form_edit').show();
+               $$('#edit_bio_5').show();
+               $$('#simpan_bio_5').hide();
+               $$('.form_simpan').hide();
+            });
+        });
+
+        $$('#edit_bio_6').on('click', function(e){ //start #pnstam_unitkerja
+           e.stopImmediatePropagation();
+           $$('.form_edit').hide();
+           $$('#edit_bio_6').hide();
+           $$('#simpan_bio_6').show();
+           $$('.form_simpan').show();           
+        }); 
+
+        $$('#simpan_bio_6').on('click', function(e){ //start #pnstam_unitkerja
+           e.stopImmediatePropagation();
+           
+           var nosk_pns = $$('#'+sesi('nip_pns') +'_f_nosk_pns').val(); 
+            var pejabat_penetap_pns = $$('#'+sesi('nip_pns') +'_f_pejabat_penetap_pns').val(); 
+            var pangkat_pns = $$('#'+sesi('nip_pns') +'_f_pangkat_pns').val();
+            var tglsk_pns = $$('#'+sesi('nip_pns') +'_f_tglsk_pns').val(); 
+            var tmt_pns = $$('#'+sesi('nip_pns') +'_f_tmt_pns').val(); 
+            var sumpah_pns = $$('#'+sesi('nip_pns') +'_f_sumpah_pns').val();  
+
+            $$.post(h+'/webservice/ws_simpan_data_edit_pns_bag_6.php', { 
+                token: sesi('token') 
+                , nip: sesi('nip_pns')  
+                , nosk_pns: nosk_pns 
+                , pejabat_penetap_pns: pejabat_penetap_pns 
+                , pangkat_pns: pangkat_pns  
+                , tglsk_pns: tglsk_pns 
+                , tmt_pns: tmt_pns 
+                , sumpah_pns: sumpah_pns
+            }, 
+            function (data) {    
+                // alert("hamdi " + data);
+                console.log(data);
+                if(data=="xxxxxxxxxxx")
+                {
+                    dialog("token salah atau habis masa berlaku. Silakan login lagi");
+                    load_page("view/sign-in.html");
+                }
+                else if (data == 'success'){ 
+                    
+                    dialog('Data Bagian 6 berhasil tersimpan!');
+                    refresh();
+                }
+                else 
+                {
+                    dialog('warning: ' + data);
+                }
+                $$('.form_edit').show();
+               $$('#edit_bio_6').show();
+               $$('#simpan_bio_6').hide();
+               $$('.form_simpan').hide();
+            });
+        });
+
+        $$('#edit_bio_7').on('click', function(e){ //start #pnstam_unitkerja
+           e.stopImmediatePropagation();
+           $$('.form_edit').hide();
+           $$('#edit_bio_7').hide();
+           $$('#simpan_bio_7').show();
+           $$('.form_simpan').show();           
+        }); 
+
+        $$('#simpan_bio_7').on('click', function(e){ //start #pnstam_unitkerja
+           e.stopImmediatePropagation();
+           
+           var nosk_pangkat = $$('#'+sesi('nip_pns')+'_f_nosk_pangkat').val(); 
+            var pejabat_penetap_pangkat = $$('#'+sesi('nip_pns')+'_f_pejabat_penetap_pangkat').val(); 
+            var pangkat = $$('#'+sesi('nip_pns')+'_f_pangkat').val(); 
+            var masakerja_tahun = $$('#'+sesi('nip_pns')+'_f_masakerja_tahun').val(); 
+            var masakerja_bulan = $$('#'+sesi('nip_pns')+'_f_masakerja_bulan').val(); 
+            var tglsk_pangkat = $$('#'+sesi('nip_pns')+'_f_tglsk_pangkat').val();
+            var tmt_pangkat = $$('#'+sesi('nip_pns')+'_f_tmt_pangkat').val(); 
+
+            $$.post(h+'/webservice/ws_simpan_data_edit_pns_bag_7.php', { 
+                token: sesi('token') 
+                , nip: sesi('nip_pns')  
+                , nosk_pangkat: nosk_pangkat 
+                , pejabat_penetap_pangkat: pejabat_penetap_pangkat 
+                , pangkat: pangkat  
+                , masakerja_tahun: masakerja_tahun 
+                , masakerja_bulan: masakerja_bulan 
+                , tglsk_pangkat: tglsk_pangkat 
+                , tmt_pangkat: tmt_pangkat 
+            }, 
+            function (data) {    
+                // alert("hamdi " + data);
+                console.log(data);
+                if(data=="xxxxxxxxxxx")
+                {
+                    dialog("token salah atau habis masa berlaku. Silakan login lagi");
+                    load_page("view/sign-in.html");
+                }
+                else if (data == 'success'){ 
+                    
+                    dialog('Data Bagian 7 berhasil tersimpan!');
+                    refresh();
+                }
+                else 
+                {
+                    dialog('warning: ' + data);
+                }
+                $$('.form_edit').show();
+               $$('#edit_bio_7').show();
+               $$('#simpan_bio_7').hide();
+               $$('.form_simpan').hide();
+            });
+        });
+
+        $$('#edit_bio_8').on('click', function(e){ //start #pnstam_unitkerja
+           e.stopImmediatePropagation();
+           $$('.form_edit').hide();
+           $$('#edit_bio_8').hide();
+           $$('#simpan_bio_8').show();
+           $$('.form_simpan').show();           
+        }); 
+
+        $$('#simpan_bio_8').on('click', function(e){ //start #pnstam_unitkerja
+           e.stopImmediatePropagation();
+           
+           var skgaji_no = $$('#'+sesi('nip_pns')+'_f_skgaji_no').val(); 
+            var pejabat_penetap_gaji = $$('#'+sesi('nip_pns')+'_f_pejabat_penetap_gaji').val(); 
+            var skgaji_masakerja = $$('#'+sesi('nip_pns')+'_f_skgaji_masakerja').val(); 
+            var skgaji_tgl = $$('#'+sesi('nip_pns')+'_f_skgaji_tgl').val(); 
+            var tmt_kgb = $$('#'+sesi('nip_pns')+'_f_tmt_kgb').val();
+
+            $$.post(h+'/webservice/ws_simpan_data_edit_pns_bag_8.php', { 
+                token: sesi('token') 
+                , nip: sesi('nip_pns')  
+                , skgaji_no: skgaji_no 
+                , pejabat_penetap_gaji: pejabat_penetap_gaji 
+                , skgaji_masakerja: skgaji_masakerja  
+                , skgaji_tgl: skgaji_tgl 
+                , tmt_kgb: tmt_kgb
+            }, 
+            function (data) {    
+                // alert("hamdi " + data);
+                console.log(data);
+                if(data=="xxxxxxxxxxx")
+                {
+                    dialog("token salah atau habis masa berlaku. Silakan login lagi");
+                    load_page("view/sign-in.html");
+                }
+                else if (data == 'success'){ 
+                    
+                    dialog('Data Bagian 8 berhasil tersimpan!');
+                    refresh();
+                }
+                else 
+                {
+                    dialog('warning: ' + data);
+                }
+                $$('.form_edit').show();
+               $$('#edit_bio_8').show();
+               $$('#simpan_bio_8').hide();
+               $$('.form_simpan').hide();
+            });
+        });
+
+        $$('#edit_bio_9').on('click', function(e){ //start #pnstam_unitkerja
+           e.stopImmediatePropagation();
+           $$('.form_edit').hide();
+           $$('#edit_bio_9').hide();
+           $$('#simpan_bio_9').show();
+           $$('.form_simpan').show();           
+        }); 
+
+        $$('#simpan_bio_9').on('click', function(e){ //start #pnstam_unitkerja
+           e.stopImmediatePropagation();
+           
+           var ayah_nama = $$('#'+sesi('nip_pns')+'_f_ayah_nama').val(); 
+            var ayah_tempat_lahir = $$('#'+sesi('nip_pns')+'_f_ayah_tempat_lahir').val(); 
+            var ayah_tgl_lahir = $$('#'+sesi('nip_pns')+'_f_ayah_tgl_lahir').val();
+            var ayah_pekerjaan = $$('#'+sesi('nip_pns')+'_f_ayah_pekerjaan').val(); 
+            var ayah_alamat = $$('#'+sesi('nip_pns')+'_f_ayah_alamat').val(); 
+            var ayah_kabupaten = $$('#'+sesi('nip_pns')+'_f_ayah_kabupaten').val();  
+            var ayah_propinsi = $$('#'+sesi('nip_pns')+'_f_ayah_propinsi').val(); 
+            var ibu_nama = $$('#'+sesi('nip_pns')+'_f_ibu_nama').val(); 
+            var ibu_tempat_lahir = $$('#'+sesi('nip_pns')+'_f_ibu_tempat_lahir').val(); 
+            var ibu_tgl_lahir = $$('#'+sesi('nip_pns')+'_f_ibu_tgl_lahir').val();
+            var ibu_pekerjaan = $$('#'+sesi('nip_pns')+'_f_ibu_pekerjaan').val(); 
+            var ibu_alamat = $$('#'+sesi('nip_pns')+'_f_ibu_alamat').val(); 
+            var ibu_kabupaten = $$('#'+sesi('nip_pns')+'_f_ibu_kabupaten').val();  
+            var ibu_propinsi = $$('#'+sesi('nip_pns')+'_f_ibu_propinsi').val(); 
+
+            $$.post(h+'/webservice/ws_simpan_data_edit_pns_bag_9.php', { 
+                token: sesi('token') 
+                , nip: sesi('nip_pns')  
+                , ayah_nama: ayah_nama 
+                , ayah_tempat_lahir: ayah_tempat_lahir 
+                , ayah_tgl_lahir: ayah_tgl_lahir  
+                , ayah_pekerjaan: ayah_pekerjaan 
+                , ayah_alamat: ayah_alamat 
+                , ayah_kabupaten: ayah_kabupaten 
+                , ayah_propinsi: ayah_propinsi   
+                , ibu_nama: ibu_nama 
+                , ibu_tempat_lahir: ibu_tempat_lahir 
+                , ibu_tgl_lahir: ibu_tgl_lahir  
+                , ibu_pekerjaan: ibu_pekerjaan 
+                , ibu_alamat: ibu_alamat 
+                , ibu_kabupaten: ibu_kabupaten 
+                , ibu_propinsi: ibu_propinsi 
+            }, 
+            function (data) {    
+                // alert("hamdi " + data);
+                console.log(data);
+                if(data=="xxxxxxxxxxx")
+                {
+                    dialog("token salah atau habis masa berlaku. Silakan login lagi");
+                    load_page("view/sign-in.html");
+                }
+                else if (data == 'success'){ 
+                    
+                    dialog('Data Bagian 9 berhasil tersimpan!');
+                    refresh();
+                }
+                else 
+                {
+                    dialog('warning: ' + data);
+                }
+                $$('.form_edit').show();
+               $$('#edit_bio_9').show();
+               $$('#simpan_bio_9').hide();
+               $$('.form_simpan').hide();
+            });
+        });
+
+        $$('#edit_bio_10').on('click', function(e){ //start #pnstam_unitkerja
+           e.stopImmediatePropagation();
+           $$('.form_edit').hide();
+           $$('#edit_bio_10').hide();
+           $$('#simpan_bio_10').show();
+           $$('.form_simpan').show();           
+        }); 
+
+        $$('#simpan_bio_10').on('click', function(e){ //start #pnstam_unitkerja
+           e.stopImmediatePropagation();
+           
+           var pasangan_nip = $$('#'+sesi('nip_pns')+'_f_pasangan_sesi_nip').val(); 
+            var pasangan_nama = $$('#'+sesi('nip_pns')+'_f_pasangan_nama').val(); 
+            var pasangan_tempat_lahir = $$('#'+sesi('nip_pns')+'_f_pasangan_tempat_lahir').val(); 
+            var pasangan_tgl_lahir = $$('#'+sesi('nip_pns')+'_f_pasangan_tgl_lahir').val();
+            var pasangan_pendidikan = $$('#'+sesi('nip_pns')+'_f_pasangan_pendidikan').val(); 
+            var pasangan_pekerjaan = $$('#'+sesi('nip_pns')+'_f_pasangan_pekerjaan').val(); 
+            var tgl_kawin = $$('#'+sesi('nip_pns')+'_f_tgl_kawin').val();  
+            var pasangan_status_tunjangan = $$('#'+sesi('nip_pns')+'_f_pasangan_status_tunjangan').val(); 
+
+            $$.post(h+'/webservice/ws_simpan_data_edit_pns_bag_10.php', { 
+                token: sesi('token') 
+                , nip: sesi('nip_pns')  
+                , pasangan_nip: pasangan_nip
+                , pasangan_nama: pasangan_nama 
+                , pasangan_tempat_lahir: pasangan_tempat_lahir 
+                , pasangan_tgl_lahir: pasangan_tgl_lahir  
+                , pasangan_pendidikan: pasangan_pendidikan 
+                , pasangan_pekerjaan: pasangan_pekerjaan 
+                , tgl_kawin: tgl_kawin 
+                , pasangan_status_tunjangan: pasangan_status_tunjangan
+            }, 
+            function (data) {    
+                // alert("hamdi " + data);
+                console.log(data);
+                if(data=="xxxxxxxxxxx")
+                {
+                    dialog("token salah atau habis masa berlaku. Silakan login lagi");
+                    load_page("view/sign-in.html");
+                }
+                else if (data == 'success'){ 
+                    
+                    dialog('Data Bagian 10 berhasil tersimpan!');
+                    refresh();
+                }
+                else 
+                {
+                    dialog('warning: ' + data);
+                }
+                $$('.form_edit').show();
+               $$('#edit_bio_10').show();
+               $$('#simpan_bio_10').hide();
+               $$('.form_simpan').hide();
+            });
+        });
 
         if($$('#'+sesi('nip_pns')+'_f_sumpah_pns').val() == 'PNS'){
             $$("#f_pasangan_nip").show();
@@ -2221,6 +2700,7 @@ function link_biodata(){
         }
         else if(sesi('folder') == 'pegawai'){
             load_page("view/menu_pegawai/detail_pns.html");
+            setSesi('nip_pns', sesi('username'));
         }
     })
     
