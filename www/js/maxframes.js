@@ -144,67 +144,75 @@ myApp.onPageInit('home', function (page) { //start pageinit home'
     console.log("page init home");
     navbar_folder();
     nama_menu();
-    
-    $$(document).on('deviceready', function () {
-        $$.post(host+'action/act_chart.php',{act : "chart"}, function (response) { 
 
-            var arr=JSON.parse(response);
-            // // console.log(arr);
-            
-            var chart = anychart.column();
+    if(sesi('folder') == 'admin' || sesi('folder') == 'opd'){
+        $$('#home_pegawai').hide();
+        $$('#home_super').show();
+        $$(document).on('deviceready', function () {
+            $$.post(host+'action/act_chart.php',{act : "chart"}, function (response) { 
 
-            var series = chart.column(arr);
-            series.name("Jumlah Pegawai");
-            
-            chart.title("Jumlah Pegawai Per Dinas");
-            chart.yAxis().title("Total Pegawai");
-            chart.xAxis().title(" ");
+                var arr=JSON.parse(response);
+                // // console.log(arr);
+                
+                var chart = anychart.column();
 
-            chart.xAxis().labels().rotation(-90);
+                var series = chart.column(arr);
+                series.name("Jumlah Pegawai");
+                
+                chart.title("Jumlah Pegawai Per Dinas");
+                chart.yAxis().title("Total Pegawai");
+                chart.xAxis().title(" ");
 
-            chart.container("container");
-            chart.draw();
-            
+                chart.xAxis().labels().rotation(-90);
+
+                chart.container("container");
+                chart.draw();
+                
+            });
         });
-    });
+    }
+    else{
+        $$('#home_pegawai').show();
+        $$('#home_super').hide();
+        $$('#link-profile').hide();
+        detail_pns();
+    }
 
-
-    
     setSesi('page','view/home.html');
 
 });//end pageinit home'1
 
-myApp.onPageInit('cetak', function (page) {
+// myApp.onPageInit('cetak', function (page) {
     
-    $$("#print").on('click', function(){
-        $$(document).on('deviceready', function() {
-            $$.post(host+'action/act_print.php'
-                ,{ domain : 'android'
-                    , duk_token : sesi('token')
-                    , level : sesi('level')
-                    , duk_unit_id : '1.01.01.01'
-                    , fUnitkerja : ''
-                    , fUnitkerjaSub : ''
-                    , fNIP :''
-                    , fNama : ''
-                    , fEselon : ''
-                    , fJeniskelamin : ''
-                    , fAgama: ''
-                    , fPendidikan : ''
-                    , fPangkat : ''
-                    , fTipePegawai : ''
-                    , fJenisJabatan : ''
-            }, function (response) { 
-              $$('#test').html(response);
-              $$(document).on('deviceready', function() {
-                    $$('#example').html(response);
-                } );
-            });
-            // window.open(host + "action/act_print.php");
-            // var ref = cordova.InAppBrowser.open(host + "action/act_print.php");
-        });
-    })
-});
+//     $$("#print").on('click', function(){
+//         $$(document).on('deviceready', function() {
+//             $$.post(host+'action/act_print.php'
+//                 ,{ domain : 'android'
+//                     , duk_token : sesi('token')
+//                     , level : sesi('level')
+//                     , duk_unit_id : sesi('username')
+//                     , fUnitkerja : ''
+//                     , fUnitkerjaSub : ''
+//                     , fNIP :''
+//                     , fNama : ''
+//                     , fEselon : ''
+//                     , fJeniskelamin : ''
+//                     , fAgama: ''
+//                     , fPendidikan : ''
+//                     , fPangkat : ''
+//                     , fTipePegawai : ''
+//                     , fJenisJabatan : ''
+//             }, function (response) { 
+//               $$('#test').html(response);
+//               $$(document).on('deviceready', function() {
+//                     $$('#example').html(response);
+//                 } );
+//             });
+//             // window.open(host + "action/act_print.php");
+//             // var ref = cordova.InAppBrowser.open(host + "action/act_print.php");
+//         });
+//     })
+// });
 
 //------------------------------------- halaman biodatapns -----------------------------------------------------------
 myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
@@ -223,38 +231,71 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
     get_data_table_ws(sesi('fAct'));
     // console.log("Unit:" + sesi('fUnitKerja'));
     //end awalan default
-
-    $$(document).on('click','#preview_print',function(e){ //start #searchlist
-        // load_page('view/menu_pegawai/cetak.html');
-
-            $$(document).on('deviceready', function() {
+    if(sesi('folder') == 'opd'){
+        $$('#print').html('<a href="http://simaku.bkpp.kutaitimurkab.go.id/android_webservice/action/act_print.php" width="25%" alt="" class="link external" style="vertical-align:middle;margin-right: 10px;"><img id="preview_print" src="img/menu_icon/icon printer.png" /></a>')
+        $$('#preview_print').on('click',function(e){ //start #searchlist
+            // load_page('view/menu_pegawai/cetak.html');
                 $$.post(host+'action/act_print.php'
-                    ,{ domain : 'android'
-                        , duk_token : sesi('token')
-                        , level : sesi('level')
-                        , duk_unit_id : '1.01.01.01'
-                        , fUnitkerja : ''
-                        , fUnitkerjaSub : ''
-                        , fNIP :''
-                        , fNama : ''
-                        , fEselon : ''
-                        , fJeniskelamin : ''
-                        , fAgama: ''
-                        , fPendidikan : ''
-                        , fPangkat : ''
-                        , fTipePegawai : ''
-                        , fJenisJabatan : ''
-                }, function (response) { 
-                  $$('#test').html(response);
-                  $$(document).on('deviceready', function() {
-                        $$('#example').html(response);
-                    } );
+                        ,{                        
+                             unit_id : '1.01.01.01'
+                            , fUnitkerja : sesi('fUnitkerja')
+                            , fUnitkerjaSub : sesi('fSubUnitkerja')
+                            , fNIP : sesi('fNip')
+                            , fNama : sesi('fNama')
+                            , fEselon : sesi('fEselon')
+                            , fJeniskelamin : sesi('fJeniskelamin')
+                            , fAgama: sesi('fAgama')
+                            , fPendidikan : sesi('fPendidikan')
+                            , fPangkat : sesi('fPangkat')
+                            , fTipePegawai : ''
+                            , fJenisJabatan : ''
+                    }, function (response) { 
+                    });
+                // $$(document).on('deviceready', function() {
+                    
+                //     // window.open = cordova.InAppBrowser.open;
+                //     // var ref = cordova.InAppBrowser.open(host + "action/act_print.php");
+                // });
+            
+        });
+    }
+    else if(sesi('folder') == 'admin'){
+        $$('#print').html('<a href="http://simaku.bkpp.kutaitimurkab.go.id/android_webservice/action/act_print_admin.php" width="25%" alt="" class="link external" style="vertical-align:middle;margin-right: 10px;"><img id="preview_print" src="img/menu_icon/icon printer.png" /></a>')
+        $$(document).on('click','#preview_print',function(e){ //start #searchlist
+            // load_page('view/menu_pegawai/cetak.html');
+                
+                $$(document).on('deviceready', function() {
+                    $$.post(host+'action/act_print_admin.php'
+                        ,{ 
+                             domain : 'android'
+                            , duk_token : sesi('token')                        
+                            , duk_unit_id : '1.01.01.01'
+                            , fUnitkerja : sesi('fUnitkerja')
+                            , fUnitkerjaSub : sesi('fSubUnitkerja')
+                            , fNIP : sesi('fNip')
+                            , fNama : sesi('fNama')
+                            , fEselon : sesi('fEselon')
+                            , fJeniskelamin : sesi('fJeniskelamin')
+                            , fAgama: sesi('fAgama')
+                            , fPendidikan : sesi('fPendidikan')
+                            , fPangkat : sesi('fPangkat')
+                            , fTipePegawai : ''
+                            , fJenisJabatan : ''
+                    }, function (response) { 
+                      $$('#test').html(response);
+                      $$(document).on('deviceready', function() {
+                            $$('#example').html(response);
+                        } );
+                    });
+                    // window.open = cordova.InAppBrowser.open;
+                    // var ref = cordova.InAppBrowser.open(host + "action/act_print.php");
                 });
-                // window.open = cordova.InAppBrowser.open;
-                // var ref = cordova.InAppBrowser.open(host + "action/act_print.php");
-            });
-        
-    });
+            
+        });
+    }
+    
+    
+    
 
     $$(document).on('keypress','#search_pns',function (e){ //start #searchlist
         if(e.which === 13){
@@ -1005,6 +1046,10 @@ myApp.onPageInit('detail_pns', function (page) { //start pageinit biodatapns
         setSesi('jenisdata', val);
 
         detail_pns();
+
+        if(sesi('folder') == 'pegawai'){
+            $$('.edit_bio').hide();
+        }
 
         $$('#edit_bio_1').on('click', function(e){ //start #pnstam_unitkerja
            e.stopImmediatePropagation();
