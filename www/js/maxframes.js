@@ -197,6 +197,12 @@ myApp.onPageInit('cetak', function (page) {
                 $$('#example').html(response);
             } );
         });
+    $$("#coba").on('click', function(){
+        $$(document).on('deviceready', function() {
+            window.open = cordova.InAppBrowser.open;
+            var ref = cordova.InAppBrowser.open('https://login.live.com/login.srf?wa=wsignin1.0&rpsnv=13&ct=1563387088&rver=7.1.6819.0&wp=MBI_SSL&wreply=https%3A%2F%2Flw.skype.com%2Flogin%2Foauth%2Fproxy%3Fclient_id%3D572381%26redirect_uri%3Dhttps%253A%252F%252Fweb.skype.com%252FAuth%252FPostHandler%26state%3D80dee5c8-0eb5-4316-9839-b94424852536%26site_name%3Dlw.skype.com&lc=1033&id=293290&mkt=id-ID&psi=skype&lw=1&cobrandid=2befc4b5-19e3-46e8-8347-77317a16a5a5&client_flight=ReservedFlight33%2CReservedFlight67', '_blank', 'location=yes');
+        });
+    })
 });
 
 //------------------------------------- halaman biodatapns -----------------------------------------------------------
@@ -1590,7 +1596,6 @@ function detail_pns(){
             async:false,
             success: function (data) {
                var result = JSON.parse(data);
-               console.log('respon=' + data);
                $$("#main_detail").html(result['isi']);
             },
             error: function(jqXHR, textStatus, errorThrown) {
