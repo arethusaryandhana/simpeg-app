@@ -219,36 +219,15 @@ myApp.onPageInit('home', function (page) { //start pageinit home'
 // });
 myApp.onPageInit('cetak', function (page) {
     cetak_duk();
-    // $$.post(host+'action/act_print.php'
-    //         ,{ domain : 'android'
-    //             , duk_token : sesi('token')
-    //             , level : sesi('level')
-    //             , duk_unit_id : '1.01.01.01'
-    //             , fUnitkerja : ''
-    //             , fUnitkerjaSub : ''
-    //             , fNIP :''
-    //             , fNama : ''
-    //             , fEselon : ''
-    //             , fJeniskelamin : ''
-    //             , fAgama: ''
-    //             , fPendidikan : ''
-    //             , fPangkat : ''
-    //             , fTipePegawai : ''
-    //             , fJenisJabatan : ''
-    //     }, function (response) { 
-    //       $$('#test').html(response);
-    //       $$(document).on('deviceready', function() {
-    //             $$('#example').html(response);
-    //         } );
-    //     });
 });
 
 function cetak_duk(){
-
+    $$('.test').html("loading..");
     $$.post(host+'action/act_print.php'
             ,{ domain : 'android'
+                , act: sesi('view_duk')
                 , duk_token : sesi('token')                        
-                , duk_unit_id : sesi('fUnitkerja')
+                , duk_unit_id : sesi('unit_id')
                 , fUnitkerja : sesi('fUnitkerja')
                 , fUnitkerjaSub : sesi('fSubUnitkerja')
                 , fNIP : sesi('fNip')
@@ -261,10 +240,11 @@ function cetak_duk(){
                 , fTipePegawai : ''
                 , fJenisJabatan : ''
         }, function (response) { 
-            $$('#test').html("loading..");
+            $$('.test').html("");
+            $$('.judul_duk').html("View DUK " + sesi('view_duk'));
             var arr = JSON.parse(response);
             var spliter = arr['isi'].split("@");
-          $$('#test').html(arr['isi']);
+          $$('.test').html(arr['isi']);
         });
 }
 
@@ -286,64 +266,26 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
     // console.log("Unit:" + sesi('fUnitKerja'));
     //end awalan default
     if(sesi('folder') == 'opd'){
-        // $$('#print').html('<a href="http://simaku.bkpp.kutaitimurkab.go.id/android_webservice/action/act_print.php" width="25%" alt="" class="link external" style="vertical-align:middle;margin-right: 10px;"><img id="preview_print" src="img/menu_icon/icon printer.png" /></a>')
-        $$('#preview_print').on('click',function(e){ //start #searchlist
-            load_page('view/menu_pegawai/cetak.html');
-                // $$.post(host+'action/act_print.php'
-                //         ,{                        
-                //              unit_id : '1.01.01.01'
-                //             , fUnitkerja : sesi('fUnitkerja')
-                //             , fUnitkerjaSub : sesi('fSubUnitkerja')
-                //             , fNIP : sesi('fNip')
-                //             , fNama : sesi('fNama')
-                //             , fEselon : sesi('fEselon')
-                //             , fJeniskelamin : sesi('fJeniskelamin')
-                //             , fAgama: sesi('fAgama')
-                //             , fPendidikan : sesi('fPendidikan')
-                //             , fPangkat : sesi('fPangkat')
-                //             , fTipePegawai : ''
-                //             , fJenisJabatan : ''
-                //     }, function (response) { 
-                //     });
-                // $$(document).on('deviceready', function() {
-                    
-                //     // window.open = cordova.InAppBrowser.open;
-                //     // var ref = cordova.InAppBrowser.open(host + "action/act_print.php");
-                // });
-            
-        });
-    }
-    else if(sesi('folder') == 'admin'){
         
-        // $$('#print').html('<a href="http://simaku.bkpp.kutaitimurkab.go.id/android_webservice/action/act_print_admin.php" width="25%" alt="" class="link external" style="vertical-align:middle;margin-right: 10px;"><img id="preview_print" src="img/menu_icon/icon printer.png" /></a>')
-        $$(document).on('click','#preview_print',function(e){ //start #searchlist
-            // load_page('view/menu_pegawai/cetak.html');
+        $$('#duk_opd').on('click',function(e){ //start #searchlist
+            load_page('view/menu_pegawai/cetak.html');
+            setSesi('view_duk', 'OPD');
                 
-                // $$(document).on('deviceready', function() {
-                //     $$.post(host+'action/act_print_admin.php'
-                //         ,{ 
-                //              domain : 'android'
-                //             , duk_token : sesi('token')                        
-                //             , duk_unit_id : '1.01.01.01'
-                //             , fUnitkerja : sesi('fUnitkerja')
-                //             , fUnitkerjaSub : sesi('fSubUnitkerja')
-                //             , fNIP : sesi('fNip')
-                //             , fNama : sesi('fNama')
-                //             , fEselon : sesi('fEselon')
-                //             , fJeniskelamin : sesi('fJeniskelamin')
-                //             , fAgama: sesi('fAgama')
-                //             , fPendidikan : sesi('fPendidikan')
-                //             , fPangkat : sesi('fPangkat')
-                //             , fTipePegawai : ''
-                //             , fJenisJabatan : ''
-                //     }, function (response) { 
-                //       $$('#test').html(response);
-                //     });
-                //     // window.open = cordova.InAppBrowser.open;
-                //     // var ref = cordova.InAppBrowser.open(host + "action/act_print.php");
-                // });
-            
         });
+        $$('#duk_struktural').hide();
+        $$('#duk_fungsional').hide();
+    }
+    else if(sesi('folder') == 'admin'){      
+        
+        $$('#duk_struktural').on('click',function(e){ //start #searchlist
+            load_page('view/menu_pegawai/cetak.html');            
+            setSesi('view_duk', 'Struktural');
+        });
+        $$('#duk_fungsional').on('click',function(e){ //start #searchlist
+            load_page('view/menu_pegawai/cetak.html');  
+            setSesi('view_duk', 'Fungsional');          
+        });
+        $$('#duk_opd').hide();
     }
     
     
