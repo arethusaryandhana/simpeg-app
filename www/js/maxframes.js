@@ -250,8 +250,8 @@ function cetak_duk(url){
                 // var arr = JSON.parse(response);
                 // var spliter = arr['isi'].split("@");
                 // $$('.test').html(arr['isi']);
-                            window.open(host + url);
-                // $$('.link').attr('href', host+url_page);
+                            // window.open(host + url);
+                $$('.link').attr('href', host+url_page);
         });
     });
 }
