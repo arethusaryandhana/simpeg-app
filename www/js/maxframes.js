@@ -226,8 +226,8 @@ myApp.onPageInit('cetak', function (page) {
 
 function cetak_duk(url){
     $$(document).on('deviceready', function() {
-        $$('.test').html("loading..");
-        $$.post(h+url
+        // $$('.test').html("loading..");
+        $$.post(host+url
                 ,{ domain : 'android'
                     , act: sesi('view_duk')
                     , duk_token : sesi('token')                        
@@ -250,7 +250,8 @@ function cetak_duk(url){
                 // var arr = JSON.parse(response);
                 // var spliter = arr['isi'].split("@");
                 // $$('.test').html(arr['isi']);
-                            window.open(h + url);
+                            window.open(host + url);
+                // $$('.link').attr('href', host+url_page);
         });
     });
 }
@@ -277,7 +278,7 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
         $$('#duk_opd').on('click',function(e){ //start #searchlist
             // load_page('view/menu_pegawai/cetak.html');
             // setSesi('view_duk', 'OPD');
-            cetak_duk('print/duk_pegawai_kab_strutural.php');
+            cetak_duk('action/duk_pegawai_kab_strutural.php');
                 
         });
         $$('#duk_struktural').hide();
@@ -287,7 +288,7 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
         
         $$('#duk_struktural').on('click',function(e){ //start #searchlist
             // load_page('view/menu_pegawai/cetak.html');   
-            cetak_duk('print/duk_pegawai_kab_struktural.php');         
+            cetak_duk('action/duk_pegawai_kab_struktural.php');         
             setSesi('view_duk', 'Struktural');
         });
         $$('#duk_fungsional').on('click',function(e){ //start #searchlist
