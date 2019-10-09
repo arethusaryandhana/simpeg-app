@@ -227,6 +227,7 @@ myApp.onPageInit('cetak', function (page) {
 function cetak_duk(url){
     $$(document).on('deviceready', function() {
         // $$('.test').html("loading..");
+        $$('.link').attr('href', host+url);
         $$.post(host+url
                 ,{ domain : 'android'
                     , act: sesi('view_duk')
@@ -251,7 +252,7 @@ function cetak_duk(url){
                 // var spliter = arr['isi'].split("@");
                 // $$('.test').html(arr['isi']);
                             // window.open(host + url);
-                $$('.link').attr('href', host+url_page);
+                
         });
     });
 }
@@ -278,21 +279,79 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
         $$('#duk_opd').on('click',function(e){ //start #searchlist
             // load_page('view/menu_pegawai/cetak.html');
             // setSesi('view_duk', 'OPD');
-            cetak_duk('action/duk_pegawai_kab_strutural.php');
+            cetak_duk('action/duk_pegawai.php');
                 
         });
         $$('#duk_struktural').hide();
         $$('#duk_fungsional').hide();
     }
     else if(sesi('folder') == 'admin'){      
-        
+        $$('#duk_struktural').attr('href', host+'action/duk_pegawai_kab_struktural.php');
         $$('#duk_struktural').on('click',function(e){ //start #searchlist
             // load_page('view/menu_pegawai/cetak.html');   
-            cetak_duk('action/duk_pegawai_kab_struktural.php');         
+            // cetak_duk('action/duk_pegawai_kab_struktural.php');   
+                // $$('.test').html("loading..");
+                
+                $$.post(host+'action/duk_pegawai_kab_struktural.php'
+                        ,{ domain : 'android'
+                            , act: sesi('view_duk')
+                            , duk_token : sesi('token')                        
+                            , duk_unit_id : sesi('unit_id')
+                            , fUnitkerja : sesi('fUnitkerja')
+                            , fUnitkerjaSub : sesi('fSubUnitkerja')
+                            , fNIP : sesi('fNip')
+                            , fNama : sesi('fNama')
+                            , fEselon : sesi('fEselon')
+                            , fJeniskelamin : sesi('fJeniskelamin')
+                            , fAgama: sesi('fAgama')
+                            , fPendidikan : sesi('fPendidikan')
+                            , fPangkat : sesi('fPangkat')
+                            , fBanyakData : '10'
+                            , fTipePegawai : ''
+                            , fJenisJabatan : ''
+                    }, function (response) { 
+                        // $$('.test').html("");
+                        // $$('.judul_duk').html("View DUK " + sesi('view_duk'));
+                        // var arr = JSON.parse(response);
+                        // var spliter = arr['isi'].split("@");
+                        // $$('.test').html(arr['isi']);
+                                    // window.open(host + url);
+                        
+                });
             setSesi('view_duk', 'Struktural');
         });
+        
+        $$('#duk_fungsional').attr('href', host+'action/duk_pegawai_kab_fungsional.php');
         $$('#duk_fungsional').on('click',function(e){ //start #searchlist
-            load_page('view/menu_pegawai/cetak.html');  
+            // cetak_duk('action/duk_pegawai_kab_fungsional.php'); 
+                // $$('.test').html("loading..");
+                
+                $$.post(host+'action/duk_pegawai_kab_fungsional.php'
+                        ,{ domain : 'android'
+                            , act: sesi('view_duk')
+                            , duk_token : sesi('token')                        
+                            , duk_unit_id : sesi('unit_id')
+                            , fUnitkerja : sesi('fUnitkerja')
+                            , fUnitkerjaSub : sesi('fSubUnitkerja')
+                            , fNIP : sesi('fNip')
+                            , fNama : sesi('fNama')
+                            , fEselon : sesi('fEselon')
+                            , fJeniskelamin : sesi('fJeniskelamin')
+                            , fAgama: sesi('fAgama')
+                            , fPendidikan : sesi('fPendidikan')
+                            , fPangkat : sesi('fPangkat')
+                            , fBanyakData : '10'
+                            , fTipePegawai : ''
+                            , fJenisJabatan : ''
+                    }, function (response) { 
+                        // $$('.test').html("");
+                        // $$('.judul_duk').html("View DUK " + sesi('view_duk'));
+                        // var arr = JSON.parse(response);
+                        // var spliter = arr['isi'].split("@");
+                        // $$('.test').html(arr['isi']);
+                                    // window.open(host + url);
+                        
+                });
             setSesi('view_duk', 'Fungsional');  
         });
         $$('#duk_opd').hide();
