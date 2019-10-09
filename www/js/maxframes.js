@@ -219,33 +219,40 @@ myApp.onPageInit('home', function (page) { //start pageinit home'
 // });
 myApp.onPageInit('cetak', function (page) {
     cetak_duk();
+    navbar_folder();
+    nama_menu();
+    
 });
 
-function cetak_duk(){
-    $$('.test').html("loading..");
-    $$.post(host+'action/act_print.php'
-            ,{ domain : 'android'
-                , act: sesi('view_duk')
-                , duk_token : sesi('token')                        
-                , duk_unit_id : sesi('unit_id')
-                , fUnitkerja : sesi('fUnitkerja')
-                , fUnitkerjaSub : sesi('fSubUnitkerja')
-                , fNIP : sesi('fNip')
-                , fNama : sesi('fNama')
-                , fEselon : sesi('fEselon')
-                , fJeniskelamin : sesi('fJeniskelamin')
-                , fAgama: sesi('fAgama')
-                , fPendidikan : sesi('fPendidikan')
-                , fPangkat : sesi('fPangkat')
-                , fTipePegawai : ''
-                , fJenisJabatan : ''
-        }, function (response) { 
-            $$('.test').html("");
-            $$('.judul_duk').html("View DUK " + sesi('view_duk'));
-            var arr = JSON.parse(response);
-            var spliter = arr['isi'].split("@");
-          $$('.test').html(arr['isi']);
+function cetak_duk(url){
+    $$(document).on('deviceready', function() {
+        $$('.test').html("loading..");
+        $$.post(h+url
+                ,{ domain : 'android'
+                    , act: sesi('view_duk')
+                    , duk_token : sesi('token')                        
+                    , duk_unit_id : sesi('unit_id')
+                    , fUnitkerja : sesi('fUnitkerja')
+                    , fUnitkerjaSub : sesi('fSubUnitkerja')
+                    , fNIP : sesi('fNip')
+                    , fNama : sesi('fNama')
+                    , fEselon : sesi('fEselon')
+                    , fJeniskelamin : sesi('fJeniskelamin')
+                    , fAgama: sesi('fAgama')
+                    , fPendidikan : sesi('fPendidikan')
+                    , fPangkat : sesi('fPangkat')
+                    , fBanyakData : '10'
+                    , fTipePegawai : ''
+                    , fJenisJabatan : ''
+            }, function (response) { 
+                // $$('.test').html("");
+                // $$('.judul_duk').html("View DUK " + sesi('view_duk'));
+                // var arr = JSON.parse(response);
+                // var spliter = arr['isi'].split("@");
+                // $$('.test').html(arr['isi']);
+                            window.open(h + url);
         });
+    });
 }
 
 //------------------------------------- halaman biodatapns -----------------------------------------------------------
@@ -268,8 +275,9 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
     if(sesi('folder') == 'opd'){
         
         $$('#duk_opd').on('click',function(e){ //start #searchlist
-            load_page('view/menu_pegawai/cetak.html');
-            setSesi('view_duk', 'OPD');
+            // load_page('view/menu_pegawai/cetak.html');
+            // setSesi('view_duk', 'OPD');
+            cetak_duk('print/duk_pegawai_kab_strutural.php');
                 
         });
         $$('#duk_struktural').hide();
@@ -278,12 +286,13 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
     else if(sesi('folder') == 'admin'){      
         
         $$('#duk_struktural').on('click',function(e){ //start #searchlist
-            load_page('view/menu_pegawai/cetak.html');            
+            // load_page('view/menu_pegawai/cetak.html');   
+            cetak_duk('print/duk_pegawai_kab_struktural.php');         
             setSesi('view_duk', 'Struktural');
         });
         $$('#duk_fungsional').on('click',function(e){ //start #searchlist
             load_page('view/menu_pegawai/cetak.html');  
-            setSesi('view_duk', 'Fungsional');          
+            setSesi('view_duk', 'Fungsional');  
         });
         $$('#duk_opd').hide();
     }
@@ -2102,68 +2111,25 @@ function get_data_table_ws(_fUnitkerja=''
 function tampilkan_isi_tabel(fAct){
     var qty_tampil = 10;
     var isitabelfix = "";
+    var isitabel = sesi('isi_biodatapns');
+    var spliter = isitabel.split("@");
+    var halaman = parseInt(sesi('pagingtabel'));
+    var awal = (halaman - 1) * qty_tampil;
+    var akhir = halaman *qty_tampil;
+    var totaldata = spliter.length;
 
-    // if(fAct == 'satyalancana30tahun'){
-    //     var isitabel = sesi('isi_satyalancana30tahun');
-    //     var spliter = isitabel.split("@");
-    //     var halaman = parseInt(sesi('pagingtabel'));
-    //     var awal = (halaman - 1) * qty_tampil;
-    //     var akhir = halaman *qty_tampil;
-    //     var totaldata = spliter.length;
-
-        // console.log(awal +" l" + akhir);
-    //     var a = isitabel.split("@");
-    //     for(var i = awal; i < akhir ; i++){
-    //         isitabelfix = isitabelfix +   spliter[i];     
-    //         if(i == (totaldata-1)){
-    //             break;
-    //         }    
-    //     }
-    //     $$(".isi-biodatapns").html(isitabelfix);
-    //     //untuk p;aging cuy
-        
-    //     bikin_paging(totaldata, "page_biodatapns");
-    // }
-    // else if(fAct == 'usia_pensiun'){
-    //     var isitabel = sesi('isi_usia_pensiun');
-    //     var spliter = isitabel.split("@");
-    //     var halaman = parseInt(sesi('pagingtabel'));
-    //     var awal = (halaman - 1) * qty_tampil;
-    //     var akhir = halaman *qty_tampil;
-    //     var totaldata = spliter.length;
-
-        // console.log(awal +" l" + akhir);
-    //     var a = isitabel.split("@");
-    //     for(var i = awal; i < akhir ; i++){
-    //         isitabelfix = isitabelfix +   spliter[i];     
-    //         if(i == (totaldata-1)){
-    //             break;
-    //         }    
-    //     }
-    //     $$(".isi-biodatapns").html(isitabelfix);
-    //     //untuk p;aging cuy
-        
-    //     bikin_paging(totaldata, "page_biodatapns");
-    // }
-        var isitabel = sesi('isi_biodatapns');
-        var spliter = isitabel.split("@");
-        var halaman = parseInt(sesi('pagingtabel'));
-        var awal = (halaman - 1) * qty_tampil;
-        var akhir = halaman *qty_tampil;
-        var totaldata = spliter.length;
-
-        // console.log(awal +" l" + akhir);
-        var a = isitabel.split("@");
-        for(var i = awal; i < akhir ; i++){
-            isitabelfix = isitabelfix +   spliter[i];     
-            if(i == (totaldata-1)){
-                break;
-            }    
-        }
-        $$(".isi-biodatapns").html(isitabelfix);
-        //untuk p;aging cuy
-        
-        bikin_paging(totaldata, "page_biodatapns");
+    // console.log(awal +" l" + akhir);
+    var a = isitabel.split("@");
+    for(var i = awal; i < akhir ; i++){
+        isitabelfix = isitabelfix +   spliter[i];     
+        if(i == (totaldata-1)){
+            break;
+        }    
+    }
+    $$(".isi-biodatapns").html(isitabelfix);
+    //untuk p;aging cuy
+    
+    bikin_paging(totaldata, "page_biodatapns");
     
     //
 }
@@ -2555,6 +2521,10 @@ myApp.onPageInit('filter-pns', function (page) { //start pageinit filter-pns
         setSesi('fNama', $$('#fNama').val());
         });/* end reset-filter_pns */
 }); //end pageinit filter-pns
+
+function act_view_duk(){
+    setSesi('fAct', "view");
+}
 
 function act_biodata(){
     setSesi('fAct', "biodatapns");
