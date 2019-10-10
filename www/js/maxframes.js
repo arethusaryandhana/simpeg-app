@@ -272,7 +272,6 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
     $$(".preloader-biodatapns").hide();
     act_biodata();
     get_data_table_ws(sesi('fAct'));
-    console.log(localStorage);
     //end awalan default
     if(sesi('folder') == 'opd'){
         
