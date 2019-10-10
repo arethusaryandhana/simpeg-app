@@ -8,10 +8,10 @@
                 Biodata PNS
             </div>
             <div class="right sliding">
-                <img id="biopns_tambahpegawai" src="img/menu_icon/icon_menu_plus_light.svg" width="40%" alt=""
-                     style="vertical-align:middle;margin-right: 0.5em;"/>
-                <img id="biopns_refresh" src="img/menu_icon/icon refresh light.svg" width="40%" alt=""
-                     style="vertical-align:middle;margin-right: 0.3em"/>
+                <img id="biopns_tambahpegawai" src="img/menu_icon/icon_menu_plus_light.svg" width="45%" alt="" style="vertical-align:middle;margin-right: 0.5em;"/>
+                <img id="biopns_refresh" src="img/menu_icon/icon refresh light.svg" width="45%" alt=""
+                     style="vertical-align:middle;margin-right: 0.5em"/>
+                
             </div>
         </div>
     </div>
@@ -34,9 +34,89 @@
     <style></style>
     
     <div class="page-content">
-        <div class="content-block-title">
+        <div style="padding-top:5%; margin-left: 10px">
+            <form method="POST" action="http://simaku.bkpp.kutaitimurkab.go.id/android_webservice/action/duk_pegawai.php" id="form_duk_opd"  class="link external">
+                <input type="hidden" name="domain" class="domain">
+                <input type="hidden" name="duk_token" class="duk_token">
+                <input type="hidden" name="duk_unit_id" class="duk_unit_id">
+                <input type="hidden" name="fUnitkerja" class="fUnitkerja_duk">
+                <input type="hidden" name="fUnitkerjaSub" class="fUnitkerjaSub_duk">
+                <input type="hidden" name="fNIP" class="fNIP_duk">
+                <input type="hidden" name="fNama" class="fNama_duk">
+                <input type="hidden" name="fEselon" class="fEselon_duk">
+                <input type="hidden" name="fJeniskelamin" class="fJeniskelamin_duk">
+                <input type="hidden" name="fAgama" class="fAgama_duk">
+                <input type="hidden" name="fPendidikan" class="fPendidikan_duk">
+                <input type="hidden" name="fPangkat" class="fPangkat_duk">
+                <input type="hidden" name="fBanyakData" class="fBanyakData_duk">
+                <input type="hidden" name="fTipePegawai" class="fTipePegawai_duk">
+                <input type="hidden" name="fJenisJabatan" class="fJenisJabatan_duk">
+                <input type="submit" name="btnSubmit" value="View DUK OPD" id="duk_opd" class="button button-fill button-raised my-bold" style="font-size:14px;background-color:#088378;border-radius:25px;color:white;">
+
+                <!-- <a id="duk_struktural" class="button button-fill button-raised my-bold link external"
+                   style="font-size:14px;background-color:#088378;border-radius:25px;color:white;">View DUK Struktural</a> -->
+            </form>
+            
+                <!-- <a id="duk_opd" class="button button-fill button-raised my-bold link external"
+                   style="float: left; font-size:14px; width: 50%; background-color:#088378;border-radius:25px;color:white;">View DUK OPD</a> -->
+            
+        </div>
+        <div style="padding-top:5%; float: left; width:45%; margin-left: 10px">
+            <form method="POST" action="http://simaku.bkpp.kutaitimurkab.go.id/android_webservice/action/duk_pegawai_kab_struktural.php" id="form_duk_struktural" class="link external">
+                <input type="hidden" name="domain" class="domain">
+                <input type="hidden" name="duk_token" class="duk_token">
+                <input type="hidden" name="duk_unit_id" class="duk_unit_id">
+                <input type="hidden" name="fUnitkerja" class="fUnitkerja_duk">
+                <input type="hidden" name="fUnitkerjaSub" class="fUnitkerjaSub_duk">
+                <input type="hidden" name="fNIP" class="fNIP_duk">
+                <input type="hidden" name="fNama" class="fNama_duk">
+                <input type="hidden" name="fEselon" class="fEselon_duk">
+                <input type="hidden" name="fJeniskelamin" class="fJeniskelamin_duk">
+                <input type="hidden" name="fAgama" class="fAgama_duk">
+                <input type="hidden" name="fPendidikan" class="fPendidikan_duk">
+                <input type="hidden" name="fPangkat" class="fPangkat_duk">
+                <input type="hidden" name="fBanyakData" class="fBanyakData_duk">
+                <input type="hidden" name="fTipePegawai" class="fTipePegawai_duk">
+                <input type="hidden" name="fJenisJabatan" class="fJenisJabatan_duk">
+                <input type="submit" name="btnSubmit" value="View DUK Struktural" id="duk_struktural" class="button button-fill button-raised my-bold" style="font-size:14px;background-color:#088378;border-radius:25px;color:white;">
+
+                <!-- <a id="duk_struktural" class="button button-fill button-raised my-bold link external"
+                   style="font-size:14px;background-color:#088378;border-radius:25px;color:white;">View DUK Struktural</a> -->
+            </form>
+            
+            
+        </div>
+        <div style="padding-top:5%; float: right; width:45%; margin-right: 10px">
+            <form method="POST" action="http://simaku.bkpp.kutaitimurkab.go.id/android_webservice/action/duk_pegawai_kab_fungsional.php" id="form_duk_fungsional" class="link external">
+                <input type="hidden" name="domain" class="domain">
+                <input type="hidden" name="duk_token" class="duk_token">
+                <input type="hidden" name="duk_unit_id" class="duk_unit_id">
+                <input type="hidden" name="fUnitkerja" class="fUnitkerja_duk">
+                <input type="hidden" name="fUnitkerjaSub" class="fUnitkerjaSub_duk">
+                <input type="hidden" name="fNIP" class="fNIP_duk">
+                <input type="hidden" name="fNama" class="fNama_duk">
+                <input type="hidden" name="fEselon" class="fEselon_duk">
+                <input type="hidden" name="fJeniskelamin" class="fJeniskelamin_duk">
+                <input type="hidden" name="fAgama" class="fAgama_duk">
+                <input type="hidden" name="fPendidikan" class="fPendidikan_duk">
+                <input type="hidden" name="fPangkat" class="fPangkat_duk">
+                <input type="hidden" name="fBanyakData" class="fBanyakData_duk">
+                <input type="hidden" name="fTipePegawai" class="fTipePegawai_duk">
+                <input type="hidden" name="fJenisJabatan" class="fJenisJabatan_duk">
+                <input type="submit" name="btnSubmit" value="View DUK Fungsional" id="duk_fungsional" class="button button-fill button-raised my-bold" style="font-size:14px;background-color:#088378;border-radius:25px;color:white;">
+
+                <!-- <a id="duk_struktural" class="button button-fill button-raised my-bold link external"
+                   style="font-size:14px;background-color:#088378;border-radius:25px;color:white;">View DUK Struktural</a> -->
+            </form>
+                <!-- <a id="duk_fungsional" class="button button-fill button-raised my-bold link external"
+                   style="font-size:14px;background-color:#088378;border-radius:25px;color:white;">View DUK Fungsional</p></a> -->
+            
+            
+        </div>
+        <div class="content-block-title" style="width:100%">
             <div id="cap-market_contructor">Total Data <span id="total_data" class="total_data">0</span> Data.</div>
         </div>  
+        
         <div id="testabelhamdi"></div>
 
         <!-- <div class="content-block"> -->

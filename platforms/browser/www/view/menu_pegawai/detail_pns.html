@@ -1,7 +1,7 @@
 <div data-page="detail_pns" class="page navbar-fixed ">
     <div class="navbar" style="background-color:#088378;">
         <div class="navbar-inner">
-            <div class="left sliding"><a href="#" class="link back icon-only"><i class="icon icon-back"></i></a></div>
+            <div class="left sliding"><a href="#" class="link back icon-only" id="back_detail"><i class="icon icon-back"></i></a></div>
             <div class="center"><b>Detail PNS</b></div>
             <div class="right sliding">
                 <a href="view/home.html"><img id="biopns_tambahpegawai" src="img/menu_icon/icon_tab_home.png" width="70%" alt=""
@@ -20,6 +20,7 @@
                 <!-- Smart select, will be opened in Picker -->
                 <a href="#" class="item-link smart-select" data-open-in="picker">
                 <select name="detail_pnsdata" id="detail_pnsdata">
+                    <option value="0">-- Pilih --</option>
                     <option value="Jabatan">Jabatan Saat Ini</option>
                     <option value="Identitas">Identitas</option>
                     <option value="Pendidikan">Pendidikan</option>

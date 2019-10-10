@@ -18,7 +18,9 @@
     <link rel="stylesheet" href="css/framework7.material.min.css">
     <link rel="stylesheet" href="css/framework7.material.colors.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
+    
     <link rel="stylesheet" href="css/swipebox.min.css">
+    <link rel="stylesheet" href="css/table.css">
     <link rel="stylesheet" href="css/maxframes.css">
     <link rel="stylesheet" href="css/cssku.css">
     <link rel="stylesheet" href="css/own.css">
@@ -294,10 +296,10 @@
         <script type="text/javascript"> 
             // START SCRIPT TABEL
             $.extend( $.fn.dataTable.defaults, {
-                autoWidth: false,
+                autoWidth: true,
                 columnDefs: [{ 
-                    orderable: false,
-                    width: '100px' 
+                    orderable: true,
+                    width: '100%' 
                 }], 
                 dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
                 language: {
