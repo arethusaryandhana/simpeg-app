@@ -284,6 +284,7 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
         $$('#duk_struktural').hide();
         $$('#duk_fungsional').hide();
         $$('#duk_opd').show();
+        $$('#form_duk_opd').attr('action', host+'action/duk_pegawai.php');
         $$('.domain').val('android');
         $$('.duk_token').val(sesi('duk_token'));
         $$('.duk_unit_id').val(sesi('fUnitkerja'));
@@ -307,12 +308,15 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
         if(sesi('fUnitkerja') == "undefined"){
             $$('#duk_struktural').show();
             $$('#duk_fungsional').show();
+            $$('#form_duk_struktural').attr('action', host+'action/duk_pegawai_kab_struktural.php');
+            $$('#form_duk_fungsional').attr('action', host+'action/duk_pegawai_kab_fungsional.php');
             $$('#duk_opd').hide();
         }
         else if(sesi('fUnitkerja') != ''){
             $$('#duk_struktural').hide();
             $$('#duk_fungsional').hide();
             $$('#duk_opd').show();
+            $$('#form_duk_opd').attr('action', host+'action/duk_pegawai.php');
             $$('.domain').val('android');
             $$('.duk_token').val(sesi('duk_token'));
             $$('.duk_unit_id').val(sesi('fUnitkerja'));
@@ -333,6 +337,8 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
             $$('#duk_struktural').show();
             $$('#duk_fungsional').show();
             $$('#duk_opd').hide();
+            $$('#form_duk_struktural').attr('action', host+'action/duk_pegawai_kab_struktural.php');
+            $$('#form_duk_fungsional').attr('action', host+'action/duk_pegawai_kab_fungsional.php');
             $$('.domain').val('android');
             $$('.duk_token').val(sesi('duk_token'));
             $$('.duk_unit_id').val(sesi('fUnitkerja'));
