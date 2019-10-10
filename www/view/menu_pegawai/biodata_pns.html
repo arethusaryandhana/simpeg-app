@@ -35,22 +35,81 @@
     
     <div class="page-content">
         <div style="padding-top:5%; margin-left: 10px">
+            <form method="POST" action="http://localhost/simpeg-app/simpeg_kutim/android_webservice/action/duk_pegawai.php" id="form_duk_opd">
+                <input type="hidden" name="domain" id="domain">
+                <input type="hidden" name="duk_token" id="duk_token">
+                <input type="hidden" name="duk_unit_id" id="duk_unit_id">
+                <input type="hidden" name="fUnitkerja" id="fUnitkerja_duk">
+                <input type="hidden" name="fUnitkerjaSub" id="fUnitkerjaSub_duk">
+                <input type="hidden" name="fNIP" id="fNIP_duk">
+                <input type="hidden" name="fNama" id="fNama_duk">
+                <input type="hidden" name="fEselon" id="fEselon_duk">
+                <input type="hidden" name="fJeniskelamin" id="fJeniskelamin_duk">
+                <input type="hidden" name="fAgama" id="fAgama_duk">
+                <input type="hidden" name="fPendidikan" id="fPendidikan_duk">
+                <input type="hidden" name="fPangkat" id="fPangkat_duk">
+                <input type="hidden" name="fBanyakData" id="fBanyakData_duk">
+                <input type="hidden" name="fTipePegawai" id="fTipePegawai_duk">
+                <input type="hidden" name="fJenisJabatan" id="fJenisJabatan_duk">
+                <input type="submit" name="btnSubmit" value="View DUK OPD" id="duk_opd" class="button button-fill button-raised my-bold link external" style="font-size:14px;background-color:#088378;border-radius:25px;color:white;">
+
+                <!-- <a id="duk_struktural" class="button button-fill button-raised my-bold link external"
+                   style="font-size:14px;background-color:#088378;border-radius:25px;color:white;">View DUK Struktural</a> -->
+            </form>
             
-                <a id="duk_opd" class="button button-fill button-raised my-bold link external"
-                   style="float: left; font-size:14px; width: 50%; background-color:#088378;border-radius:25px;color:white;">View DUK OPD</a>
+                <!-- <a id="duk_opd" class="button button-fill button-raised my-bold link external"
+                   style="float: left; font-size:14px; width: 50%; background-color:#088378;border-radius:25px;color:white;">View DUK OPD</a> -->
             
         </div>
         <div style="padding-top:5%; float: left; width:45%; margin-left: 10px">
-            
-                <a id="duk_struktural" class="button button-fill button-raised my-bold link external"
-                   style="font-size:14px;background-color:#088378;border-radius:25px;color:white;">View DUK Struktural</a>
+            <form method="POST" action="http://localhost/simpeg-app/simpeg_kutim/android_webservice/action/duk_pegawai_kab_struktural.php" id="form_duk_struktural">
+                <input type="hidden" name="domain" id="domain">
+                <input type="hidden" name="duk_token" id="duk_token">
+                <input type="hidden" name="duk_unit_id" id="duk_unit_id">
+                <input type="hidden" name="fUnitkerja" id="fUnitkerja_duk">
+                <input type="hidden" name="fUnitkerjaSub" id="fUnitkerjaSub_duk">
+                <input type="hidden" name="fNIP" id="fNIP_duk">
+                <input type="hidden" name="fNama" id="fNama_duk">
+                <input type="hidden" name="fEselon" id="fEselon_duk">
+                <input type="hidden" name="fJeniskelamin" id="fJeniskelamin_duk">
+                <input type="hidden" name="fAgama" id="fAgama_duk">
+                <input type="hidden" name="fPendidikan" id="fPendidikan_duk">
+                <input type="hidden" name="fPangkat" id="fPangkat_duk">
+                <input type="hidden" name="fBanyakData" id="fBanyakData_duk">
+                <input type="hidden" name="fTipePegawai" id="fTipePegawai_duk">
+                <input type="hidden" name="fJenisJabatan" id="fJenisJabatan_duk">
+                <input type="submit" name="btnSubmit" value="View DUK Struktural" id="duk_struktural" class="button button-fill button-raised my-bold link external" style="font-size:14px;background-color:#088378;border-radius:25px;color:white;">
+
+                <!-- <a id="duk_struktural" class="button button-fill button-raised my-bold link external"
+                   style="font-size:14px;background-color:#088378;border-radius:25px;color:white;">View DUK Struktural</a> -->
+            </form>
             
             
         </div>
         <div style="padding-top:5%; float: right; width:45%; margin-right: 10px">
-            
-                <a id="duk_fungsional" class="button button-fill button-raised my-bold link external"
-                   style="font-size:14px;background-color:#088378;border-radius:25px;color:white;">View DUK Fungsional</p></a>
+            <form method="POST" action="http://localhost/simpeg-app/simpeg_kutim/android_webservice/action/duk_pegawai_kab_fungsional.php" id="form_duk_fungsional">
+                <input type="hidden" name="domain" id="domain">
+                <input type="hidden" name="duk_token" id="duk_token">
+                <input type="hidden" name="duk_unit_id" id="duk_unit_id">
+                <input type="hidden" name="fUnitkerja" id="fUnitkerja_duk">
+                <input type="hidden" name="fUnitkerjaSub" id="fUnitkerjaSub_duk">
+                <input type="hidden" name="fNIP" id="fNIP_duk">
+                <input type="hidden" name="fNama" id="fNama_duk">
+                <input type="hidden" name="fEselon" id="fEselon_duk">
+                <input type="hidden" name="fJeniskelamin" id="fJeniskelamin_duk">
+                <input type="hidden" name="fAgama" id="fAgama_duk">
+                <input type="hidden" name="fPendidikan" id="fPendidikan_duk">
+                <input type="hidden" name="fPangkat" id="fPangkat_duk">
+                <input type="hidden" name="fBanyakData" id="fBanyakData_duk">
+                <input type="hidden" name="fTipePegawai" id="fTipePegawai_duk">
+                <input type="hidden" name="fJenisJabatan" id="fJenisJabatan_duk">
+                <input type="submit" name="btnSubmit" value="View DUK Fungsional" id="duk_fungsional" class="button button-fill button-raised my-bold link external" style="font-size:14px;background-color:#088378;border-radius:25px;color:white;">
+
+                <!-- <a id="duk_struktural" class="button button-fill button-raised my-bold link external"
+                   style="font-size:14px;background-color:#088378;border-radius:25px;color:white;">View DUK Struktural</a> -->
+            </form>
+                <!-- <a id="duk_fungsional" class="button button-fill button-raised my-bold link external"
+                   style="font-size:14px;background-color:#088378;border-radius:25px;color:white;">View DUK Fungsional</p></a> -->
             
             
         </div>
