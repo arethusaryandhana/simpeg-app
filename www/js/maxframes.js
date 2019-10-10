@@ -274,95 +274,6 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
     get_data_table_ws(sesi('fAct'));
     // console.log("Unit:" + sesi('fUnitKerja'));
     //end awalan default
-    
-    
-    $$(document).on('keypress','#search_pns',function (e){ //start #searchlist
-        if(e.which === 13){
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            var inputtext = $$(this).val();
-            //localStorage.keyword = inputtext;
-            // console.log(inputtext);  
-            setSesi('fNama', inputtext);
-            $$('.fNama_duk').val(sesi('fNama'));
-            act_biodata();
-            get_data_table_ws(sesi("fAct"));
-        }
-    }); //stop #searchlist
-
-    $$(document).on('click','#biopns_tambahpegawai',function(e){ //start click #biopns_tambahpegawai
-        e.stopImmediatePropagation();
-        var totaldata = 32;
-        var totalhalaman = parseInt(totaldata / 10);
-        var a = totaldata%10;
-        if(a >0){
-            totalhalaman++;
-        }
-        load_page("view/menu_pegawai/biodata_pns_tambah.html");
-        // console.log('tambah' + totalhalaman); //coba2doang
-    }); //end click #biopns_tambahpegawai
-
-    $$(document).on('click','#biopns_refresh',function(e){ //start click #biopns_refresh
-        e.stopImmediatePropagation();
-        // console.log('refresh');
-        if(sesi('fUnitkerja') != ''){
-            $$('#duk_struktural').hide();
-            $$('#duk_fungsional').hide();
-            $$('#duk_opd').show();
-        }
-        else{
-            $$('#duk_struktural').show();
-            $$('#duk_fungsional').show();
-            $$('#duk_opd').hide();
-        }
-        reset_filter_biodata();
-        $$('.fNama_duk').val('');
-        act_biodata();
-        get_data_table_ws(sesi("fAct"));
-        
-    }); //end click #biopns_refresh
-
-    $$(document).on('click','.detail_biopns',function(e){ //start click #biopns_refresh
-        e.stopImmediatePropagation();
-        var nip = $$(this).data('nip');
-        // console.log('detaila' + nip);
-        setSesi('nip_pns', nip);
-        load_page('view/menu_pegawai/detail_pns.html');
-    }); //end click #biopns_refresh
-
-    $$(document).on('click','.paging-biodatapns',function(e){ //start #paging-biodatapns
-        e.stopImmediatePropagation();
-        var angka = $$(this).data('angka');
-        var halaman = parseInt(sesi('pagingtabel'));
-        var batasatas = parseInt(sesi('totalhalaman'));
-        if(angka == "back"){ 
-            var halfix = halaman -1;
-            // console.log(halfix);
-            if(halfix<=0){
-                return false;
-            }else{
-                setSesi('pagingtabel',halfix);
-                tampilkan_isi_tabel();
-            }
-
-        }else if(angka == "forward"){
-            var halfix = halaman+1;
-            // console.log(halfix);
-            if(halfix>batasatas){
-                return false;
-            }else{
-                setSesi('pagingtabel',halfix);
-                tampilkan_isi_tabel();
-            }
-
-        }else{
-            setSesi('pagingtabel',angka);
-            tampilkan_isi_tabel();
-            // console.log(angka); 
-        }
-        
-    });
-
     if(sesi('folder') == 'opd'){
         
         // $$('#duk_opd').on('click',function(e){ //start #searchlist
@@ -468,7 +379,98 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
         //     // setSesi('view_duk', 'Fungsional');  
         // });
         // $$('#duk_opd').hide();
-    } 
+    }
+    
+    $$(document).on('keypress','#search_pns',function (e){ //start #searchlist
+        if(e.which === 13){
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            var inputtext = $$(this).val();
+            //localStorage.keyword = inputtext;
+            // console.log(inputtext);  
+            setSesi('fNama', inputtext);
+            $$('.fNama_duk').val(sesi('fNama'));
+            act_biodata();
+            get_data_table_ws(sesi("fAct"));
+        }
+    }); //stop #searchlist
+
+    $$(document).on('click','#biopns_tambahpegawai',function(e){ //start click #biopns_tambahpegawai
+        e.stopImmediatePropagation();
+        var totaldata = 32;
+        var totalhalaman = parseInt(totaldata / 10);
+        var a = totaldata%10;
+        if(a >0){
+            totalhalaman++;
+        }
+        load_page("view/menu_pegawai/biodata_pns_tambah.html");
+        // console.log('tambah' + totalhalaman); //coba2doang
+    }); //end click #biopns_tambahpegawai
+
+    $$(document).on('click','#biopns_refresh',function(e){ //start click #biopns_refresh
+        e.stopImmediatePropagation();
+        // console.log('refresh');
+
+        
+        reset_filter_biodata();
+        if(sesi('fUnitkerja') != ''){
+            $$('#duk_struktural').hide();
+            $$('#duk_fungsional').hide();
+            $$('#duk_opd').show();
+        }
+        else{
+            $$('#duk_struktural').show();
+            $$('#duk_fungsional').show();
+            $$('#duk_opd').hide();
+        }
+        
+        $$('.fNama_duk').val('');
+        act_biodata();
+        get_data_table_ws(sesi("fAct"));
+        
+    }); //end click #biopns_refresh
+
+    $$(document).on('click','.detail_biopns',function(e){ //start click #biopns_refresh
+        e.stopImmediatePropagation();
+        var nip = $$(this).data('nip');
+        // console.log('detaila' + nip);
+        setSesi('nip_pns', nip);
+        load_page('view/menu_pegawai/detail_pns.html');
+    }); //end click #biopns_refresh
+
+    $$(document).on('click','.paging-biodatapns',function(e){ //start #paging-biodatapns
+        e.stopImmediatePropagation();
+        var angka = $$(this).data('angka');
+        var halaman = parseInt(sesi('pagingtabel'));
+        var batasatas = parseInt(sesi('totalhalaman'));
+        if(angka == "back"){ 
+            var halfix = halaman -1;
+            // console.log(halfix);
+            if(halfix<=0){
+                return false;
+            }else{
+                setSesi('pagingtabel',halfix);
+                tampilkan_isi_tabel();
+            }
+
+        }else if(angka == "forward"){
+            var halfix = halaman+1;
+            // console.log(halfix);
+            if(halfix>batasatas){
+                return false;
+            }else{
+                setSesi('pagingtabel',halfix);
+                tampilkan_isi_tabel();
+            }
+
+        }else{
+            setSesi('pagingtabel',angka);
+            tampilkan_isi_tabel();
+            // console.log(angka); 
+        }
+        
+    });
+     
 
 });//end pageinit biodatapns'
 
