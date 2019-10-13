@@ -16,6 +16,12 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <allow-intent action="http://*/*" />
+    <allow-intent action="https://*/*" />
+    <allow-intent action="tel:*" />
+    <allow-intent action="sms:*" />
+    <allow-intent action="mailto:*" />
+    <allow-intent action="geo:*" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="21" />
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />

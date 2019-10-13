@@ -19,10 +19,10 @@ var hnew = "halaman/";
 //h = 'http://localhost/bahandavid/simpeg-app/simpeg_kutim/'
 
 //var h = 'http://localhost:8080/pemda_kutim/simpeg_android/simpeg-app/simpeg_kutim/'; //master pc hamdi jgn dihapus di comment
-// var h = 'http://localhost:280/simpeg-app/simpeg_kutim/'; //master pc thusa jgn dihapus di comment
+var h = 'http://localhost:280/simpeg-app/simpeg_kutim/'; //master pc thusa jgn dihapus di comment
 // var h = 'http://localhost/simpeg-app/simpeg_kutim/'; //master pc thusa jgn dihapus di comment
 //var h = "http://172.18.34.166/";
-var h = 'http://simaku.bkpp.kutaitimurkab.go.id/';
+// var h = 'http://simaku.bkpp.kutaitimurkab.go.id/';
 
 var host = h + "android_webservice/"; //apk code david
 var ws = h + "webservice/"; // memanfaatkan ws yang ada
@@ -224,28 +224,13 @@ myApp.onPageInit('cetak', function (page) {
     
 });
 
-function cetak_duk(url){
+function cetak_duk(){
     $$(document).on('deviceready', function() {
         // $$('.test').html("loading..");
-        $$('.link').attr('href', host+url);
-        $$.post(host+url
-                ,{ domain : 'android'
-                    , act: sesi('view_duk')
-                    , duk_token : sesi('token')                        
-                    , duk_unit_id : sesi('unit_id')
-                    , fUnitkerja : sesi('fUnitkerja')
-                    , fUnitkerjaSub : sesi('fSubUnitkerja')
-                    , fNIP : sesi('fNip')
-                    , fNama : sesi('fNama')
-                    , fEselon : sesi('fEselon')
-                    , fJeniskelamin : sesi('fJeniskelamin')
-                    , fAgama: sesi('fAgama')
-                    , fPendidikan : sesi('fPendidikan')
-                    , fPangkat : sesi('fPangkat')
-                    , fBanyakData : '10'
-                    , fTipePegawai : ''
-                    , fJenisJabatan : ''
-            }, function (response) { 
+        // $$('#duk_opd').attr('action', host+'action/duk_pegawai.php');
+        var formData = myApp.formToData('#form_duk_opd');
+        $$.post(host+'action/duk_pegawai.php'
+                ,{formData}, function (response) { 
                 // $$('.test').html("");
                 // $$('.judul_duk').html("View DUK " + sesi('view_duk'));
                 // var arr = JSON.parse(response);
@@ -300,6 +285,14 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
         $$('.fBanyakData_duk').val('10');
         $$('.fTipePegawai_duk').val('');
         $$('.fJenisJabatan_duk').val('');
+        
+        
+        $$('#duk_opd').on('click',function(e){ //start #searchlist
+            // load_page('view/menu_pegawai/cetak.html');
+            // setSesi('view_duk', 'OPD');
+            cetak_duk();
+                
+        });
     }
     else if(sesi('folder') == 'admin'){  
         $$('#duk_struktural').show();
