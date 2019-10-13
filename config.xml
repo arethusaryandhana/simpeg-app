@@ -27,12 +27,21 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <allow-intent action="http://*/*" />
+    <allow-intent action="https://*/*" />
+    <allow-intent action="tel:*" />
+    <allow-intent action="sms:*" />
+    <allow-intent action="mailto:*" />
+    <allow-intent action="geo:*" />
     <platform name="android">
         <allow-intent href="market:*" />
+        <allow-intent action="market:*" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+        <allow-intent action="itms:*" />
+        <allow-intent action="itms-apps:*" />
     </platform>
     <engine name="android" spec="^8.0.0" />
     <plugin name="cordova-plugin-battery-status" spec="~1.2.4" />
