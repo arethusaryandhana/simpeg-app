@@ -19,10 +19,10 @@ var hnew = "halaman/";
 //h = 'http://localhost/bahandavid/simpeg-app/simpeg_kutim/'
 
 //var h = 'http://localhost:8080/pemda_kutim/simpeg_android/simpeg-app/simpeg_kutim/'; //master pc hamdi jgn dihapus di comment
-// var h = 'http://localhost:280/simpeg-app/simpeg_kutim/'; //master pc thusa jgn dihapus di comment
+var h = 'http://localhost:280/simpeg-app/simpeg_kutim/'; //master pc thusa jgn dihapus di comment
 // var h = 'http://localhost/simpeg-app/simpeg_kutim/'; //master pc thusa jgn dihapus di comment
 //var h = "http://172.18.34.166/";
-var h = 'http://simaku.bkpp.kutaitimurkab.go.id/';
+// var h = 'http://simaku.bkpp.kutaitimurkab.go.id/';
 
 var host = h + "android_webservice/"; //apk code david
 var ws = h + "webservice/"; // memanfaatkan ws yang ada
@@ -229,8 +229,24 @@ function cetak_duk(){
         // $$('.test').html("loading..");
         // $$('#duk_opd').attr('action', host+'action/duk_pegawai.php');
         var formData = myApp.formToData('#form_duk_opd');
+        $$('#duk_opd').attr('href', host+'action/duk_pegawai.php?duk_unit_id='+ sesi('unit_id') + '&fUnitkerja='+ sesi('fUnitkerja') + '&fUnitkerjaSub='+ sesi('fUnitkerjaSub') + '&fNIP='+ sesi('fNIP') +'&fNama='+ sesi('fNama') +'&fEselon='+ sesi('fEselon') +'&fJeniskelamin='+ sesi('fJeniskelamin') +'&fAgama='+ sesi('fAgama') +'&fPendidikan='+ sesi('fPendidikan') +'&fPangkat='+ sesi('fPangkat'));
         $$.post(host+'action/duk_pegawai.php'
-                ,{formData}, function (response) { 
+                ,{domain : 'android'
+                , act: sesi('view_duk')
+                , duk_token : sesi('token')                        
+                , duk_unit_id : sesi('unit_id')
+                , fUnitkerja : sesi('fUnitkerja')
+                , fUnitkerjaSub : sesi('fSubUnitkerja')
+                , fNIP : sesi('fNip')
+                , fNama : sesi('fNama')
+                , fEselon : sesi('fEselon')
+                , fJeniskelamin : sesi('fJeniskelamin')
+                , fAgama: sesi('fAgama')
+                , fPendidikan : sesi('fPendidikan')
+                , fPangkat : sesi('fPangkat')
+                , fBanyakData : '10'
+                , fTipePegawai : ''
+                , fJenisJabatan : ''}, function (response) { 
                 // $$('.test').html("");
                 // $$('.judul_duk').html("View DUK " + sesi('view_duk'));
                 // var arr = JSON.parse(response);
@@ -269,7 +285,8 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
         $$('#duk_struktural').hide();
         $$('#duk_fungsional').hide();
         $$('#duk_opd').show();
-        $$('#form_duk_opd').attr('action', host+'action/duk_pegawai.php');
+        
+        // $$('#form_duk_opd').attr('action', host+'action/duk_pegawai.php');
         $$('.domain').val('android');
         $$('.duk_token').val(sesi('duk_token'));
         $$('.duk_unit_id').val(sesi('fUnitkerja'));
@@ -285,14 +302,16 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
         $$('.fBanyakData_duk').val('10');
         $$('.fTipePegawai_duk').val('');
         $$('.fJenisJabatan_duk').val('');
+        $$('#duk_opd').attr('href', host+'action/duk_pegawai.php?duk_unit_id='+ $$('.duk_unit_id').val() + '&fUnitkerja='+ $$('.fUnitkerja_duk').val() + '&fUnitkerjaSub='+ $$('.fUnitkerjaSub_duk').val() + '&fNIP='+ $$('.fNIP_duk').val() +'&fNama='+  $$('.fNama_duk').val() +'&fEselon='+ $$('.fEselon_duk').val() +'&fJeniskelamin='+ $$('.fJeniskelamin_duk').val() +'&fAgama='+ $$('.fAgama_duk').val() +'&fPendidikan='+ $$('.fPendidikan_duk').val() +'&fPangkat='+ $$('.fPangkat_duk').val() +'&fTipePegawai='+ $$('.fTipePegawai_duk').val() +'&fJenisJabatan='+ $$('.fJenisJabatan_duk').val());
+
         
         
-        $$('#duk_opd').on('click',function(e){ //start #searchlist
-            // load_page('view/menu_pegawai/cetak.html');
-            // setSesi('view_duk', 'OPD');
-            cetak_duk();
+        // $$('#duk_opd').on('click',function(e){ //start #searchlist
+        //     // load_page('view/menu_pegawai/cetak.html');
+        //     // setSesi('view_duk', 'OPD');
+        //     cetak_duk();
                 
-        });
+        // });
     }
     else if(sesi('folder') == 'admin'){  
         $$('#duk_struktural').show();
@@ -301,52 +320,56 @@ myApp.onPageInit('biodata_pns', function (page) { //start pageinit biodatapns
         if(sesi('fUnitkerja') == "undefined"){
             $$('#duk_struktural').show();
             $$('#duk_fungsional').show();
-            $$('#form_duk_struktural').attr('action', host+'action/duk_pegawai_kab_struktural.php');
-            $$('#form_duk_fungsional').attr('action', host+'action/duk_pegawai_kab_fungsional.php');
+            // $$('#form_duk_struktural').attr('action', host+'action/duk_pegawai_kab_struktural.php');
+            // $$('#form_duk_fungsional').attr('action', host+'action/duk_pegawai_kab_fungsional.php');
+            $$('#duk_opd').attr('href', host+'action/duk_pegawai_kab_struktural.php?duk_unit_id='+ sesi('unit_id') + '&fUnitkerja='+ sesi('fUnitkerja') + '&fUnitkerjaSub='+ sesi('fUnitkerjaSub') + '&fNIP='+ sesi('fNIP') +'&fNama='+ sesi('fNama') +'&fEselon='+ sesi('fEselon') +'&fJeniskelamin='+ sesi('fJeniskelamin') +'&fAgama='+ sesi('fAgama') +'&fPendidikan='+ sesi('fPendidikan') +'&fPangkat='+ sesi('fPangkat'));
+            $$('#duk_opd').attr('href', host+'action/duk_pegawai_kab_fungsional.php?duk_unit_id='+ sesi('unit_id') + '&fUnitkerja='+ sesi('fUnitkerja') + '&fUnitkerjaSub='+ sesi('fUnitkerjaSub') + '&fNIP='+ sesi('fNIP') +'&fNama='+ sesi('fNama') +'&fEselon='+ sesi('fEselon') +'&fJeniskelamin='+ sesi('fJeniskelamin') +'&fAgama='+ sesi('fAgama') +'&fPendidikan='+ sesi('fPendidikan') +'&fPangkat='+ sesi('fPangkat'));
             $$('#duk_opd').hide();
         }
         else if(sesi('fUnitkerja') != ''){
             $$('#duk_struktural').hide();
             $$('#duk_fungsional').hide();
             $$('#duk_opd').show();
-            $$('#form_duk_opd').attr('action', host+'action/duk_pegawai.php');
-            $$('.domain').val('android');
-            $$('.duk_token').val(sesi('duk_token'));
-            $$('.duk_unit_id').val(sesi('fUnitkerja'));
-            $$('.fUnitkerja_duk').val(sesi('fUnitkerja'));
-            $$('.fUnitkerjaSub_duk').val(sesi('fUnitkerja'));
-            $$('.fNIP_duk').val(sesi('fNIP'));
-            $$('.fNama_duk').val(sesi('fNama'));
-            $$('.fEselon_duk').val(sesi('fEselon'));
-            $$('.fJeniskelamin_duk').val(sesi('fJeniskelamin'));
-            $$('.fAgama_duk').val(sesi('fAgama'));
-            $$('.fPendidikan_duk').val(sesi('fPendidikan'));
-            $$('.fPangkat_duk').val(sesi('fPangkat'));
-            $$('.fBanyakData_duk').val('10');
-            $$('.fTipePegawai_duk').val('');
-            $$('.fJenisJabatan_duk').val('');
+            $$('#duk_opd').attr('href', host+'action/duk_pegawai.php?duk_unit_id='+ sesi('unit_id') + '&fUnitkerja='+ sesi('fUnitkerja') + '&fUnitkerjaSub='+ sesi('fUnitkerjaSub') + '&fNIP='+ sesi('fNIP') +'&fNama='+ sesi('fNama') +'&fEselon='+ sesi('fEselon') +'&fJeniskelamin='+ sesi('fJeniskelamin') +'&fAgama='+ sesi('fAgama') +'&fPendidikan='+ sesi('fPendidikan') +'&fPangkat='+ sesi('fPangkat'));
+            // $$('.domain').val('android');
+            // $$('.duk_token').val(sesi('duk_token'));
+            // $$('.duk_unit_id').val(sesi('fUnitkerja'));
+            // $$('.fUnitkerja_duk').val(sesi('fUnitkerja'));
+            // $$('.fUnitkerjaSub_duk').val(sesi('fUnitkerja'));
+            // $$('.fNIP_duk').val(sesi('fNIP'));
+            // $$('.fNama_duk').val(sesi('fNama'));
+            // $$('.fEselon_duk').val(sesi('fEselon'));
+            // $$('.fJeniskelamin_duk').val(sesi('fJeniskelamin'));
+            // $$('.fAgama_duk').val(sesi('fAgama'));
+            // $$('.fPendidikan_duk').val(sesi('fPendidikan'));
+            // $$('.fPangkat_duk').val(sesi('fPangkat'));
+            // $$('.fBanyakData_duk').val('10');
+            // $$('.fTipePegawai_duk').val('');
+            // $$('.fJenisJabatan_duk').val('');
         }
         else{
             $$('#duk_struktural').show();
             $$('#duk_fungsional').show();
             $$('#duk_opd').hide();
-            $$('#form_duk_struktural').attr('action', host+'action/duk_pegawai_kab_struktural.php');
-            $$('#form_duk_fungsional').attr('action', host+'action/duk_pegawai_kab_fungsional.php');
-            $$('.domain').val('android');
-            $$('.duk_token').val(sesi('duk_token'));
-            $$('.duk_unit_id').val(sesi('fUnitkerja'));
-            $$('.fUnitkerja_duk').val(sesi('fUnitkerja'));
-            $$('.fUnitkerjaSub_duk').val(sesi('fUnitkerja'));
-            $$('.fNIP_duk').val(sesi('fNIP'));
-            $$('.fNama_duk').val(sesi('fNama'));
-            $$('.fEselon_duk').val(sesi('fEselon'));
-            $$('.fJeniskelamin_duk').val(sesi('fJeniskelamin'));
-            $$('.fAgama_duk').val(sesi('fAgama'));
-            $$('.fPendidikan_duk').val(sesi('fPendidikan'));
-            $$('.fPangkat_duk').val(sesi('fPangkat'));
-            $$('.fBanyakData_duk').val('10');
-            $$('.fTipePegawai_duk').val('');
-            $$('.fJenisJabatan_duk').val('');
+            // $$('#form_duk_struktural').attr('action', host+'action/duk_pegawai_kab_struktural.php');
+            // $$('#form_duk_fungsional').attr('action', host+'action/duk_pegawai_kab_fungsional.php');
+            $$('#duk_opd').attr('href', host+'action/duk_pegawai_kab_struktural.php?duk_unit_id='+ sesi('unit_id') + '&fUnitkerja='+ sesi('fUnitkerja') + '&fUnitkerjaSub='+ sesi('fUnitkerjaSub') + '&fNIP='+ sesi('fNIP') +'&fNama='+ sesi('fNama') +'&fEselon='+ sesi('fEselon') +'&fJeniskelamin='+ sesi('fJeniskelamin') +'&fAgama='+ sesi('fAgama') +'&fPendidikan='+ sesi('fPendidikan') +'&fPangkat='+ sesi('fPangkat'));
+            $$('#duk_opd').attr('href', host+'action/duk_pegawai_kab_fungsional.php?duk_unit_id='+ sesi('unit_id') + '&fUnitkerja='+ sesi('fUnitkerja') + '&fUnitkerjaSub='+ sesi('fUnitkerjaSub') + '&fNIP='+ sesi('fNIP') +'&fNama='+ sesi('fNama') +'&fEselon='+ sesi('fEselon') +'&fJeniskelamin='+ sesi('fJeniskelamin') +'&fAgama='+ sesi('fAgama') +'&fPendidikan='+ sesi('fPendidikan') +'&fPangkat='+ sesi('fPangkat'));
+            // $$('.domain').val('android');
+            // $$('.duk_token').val(sesi('duk_token'));
+            // $$('.duk_unit_id').val(sesi('fUnitkerja'));
+            // $$('.fUnitkerja_duk').val(sesi('fUnitkerja'));
+            // $$('.fUnitkerjaSub_duk').val(sesi('fUnitkerja'));
+            // $$('.fNIP_duk').val(sesi('fNIP'));
+            // $$('.fNama_duk').val(sesi('fNama'));
+            // $$('.fEselon_duk').val(sesi('fEselon'));
+            // $$('.fJeniskelamin_duk').val(sesi('fJeniskelamin'));
+            // $$('.fAgama_duk').val(sesi('fAgama'));
+            // $$('.fPendidikan_duk').val(sesi('fPendidikan'));
+            // $$('.fPangkat_duk').val(sesi('fPangkat'));
+            // $$('.fBanyakData_duk').val('10');
+            // $$('.fTipePegawai_duk').val('');
+            // $$('.fJenisJabatan_duk').val('');
         }
         
         // $$('#form_duk_struktural').attr('action', host+'action/duk_pegawai_kab_struktural.php');
