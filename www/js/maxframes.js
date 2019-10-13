@@ -19,10 +19,10 @@ var hnew = "halaman/";
 //h = 'http://localhost/bahandavid/simpeg-app/simpeg_kutim/'
 
 //var h = 'http://localhost:8080/pemda_kutim/simpeg_android/simpeg-app/simpeg_kutim/'; //master pc hamdi jgn dihapus di comment
-var h = 'http://localhost:280/simpeg-app/simpeg_kutim/'; //master pc thusa jgn dihapus di comment
+// var h = 'http://localhost:280/simpeg-app/simpeg_kutim/'; //master pc thusa jgn dihapus di comment
 // var h = 'http://localhost/simpeg-app/simpeg_kutim/'; //master pc thusa jgn dihapus di comment
 //var h = "http://172.18.34.166/";
-// var h = 'http://simaku.bkpp.kutaitimurkab.go.id/';
+var h = 'http://simaku.bkpp.kutaitimurkab.go.id/';
 
 var host = h + "android_webservice/"; //apk code david
 var ws = h + "webservice/"; // memanfaatkan ws yang ada
