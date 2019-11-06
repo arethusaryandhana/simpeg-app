@@ -2581,7 +2581,7 @@ myApp.onPageInit('filter-pns', function (page) { //start pageinit filter-pns
         // console.log(fBanyakData);
         setSesi('fBanyakData', fBanyakData);
     }); //end #chipfilterjasa
-    
+    generate_subunitkerja('fSubUnitkerja', sesi('unit_id'));
     $$('#fUnitkerja').on('change', function(){ //start #aa_area_tam change
         var val = $$(this).val();
         // console.log(val);
